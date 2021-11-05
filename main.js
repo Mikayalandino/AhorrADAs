@@ -5,6 +5,7 @@ const seccionCategorias = document.getElementById("seccion-categorias");
 const listadoDeCategorias = document.getElementById("listado-categorias");
 const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const selectCategorias = document.getElementById("select-categorias")
+const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
 //
 const botonNuevaOperacion = document.getElementById("boton-operacion");
 const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
@@ -15,6 +16,8 @@ const botonBalance = document.getElementById("boton-balance");
 // botones categorías
 const botonNavCategorias = document.getElementById("boton-nav-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
+const botonEditarCategoria = document.getElementById("boton-editar-categoria");
+const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 //
 const formularioFiltros = document.getElementById("formulario-filtros");
 
@@ -49,59 +52,74 @@ botonBalance.onclick = () => {
 
 // seccion categorías
 
-                                // botón categorías
+                                // botón nav categorías
 
 botonNavCategorias.onclick = () => {
   seccionCategorias.classList.remove("is-hidden");
+  seccionEditarCategorias.classList.add("is-hidden")
   seccionBalance.classList.add("is-hidden")
   seccionNuevaOperacion.classList.add("is-hidden")
 }
-// Lista de categorías
 
-// const categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
+botonEditarCategoria.onclick = () => {
+  seccionEditarCategorias.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionBalance.classList.add("is-hidden")
+  seccionNuevaOperacion.classList.add("is-hidden")
+}
 
-// const obtenerCategorias = () => {
-//   const categoriasEnLocalStorage = localStorage.getItem("categorias")
-//   if (categoriasEnLocalStorage === null) {
-//     return categorias
-//   } 
-//   else {
-//     return JSON.parse(categoriasEnLocalStorage)
-//   }
-// }
+botonCancelarEditarCategoria.onclick = () => {
+  seccionEditarCategorias.classList.add("is-hidden");
+  seccionCategorias.classList.remove("is-hidden")
 
-// const agregarCategoriasAlSelect = () => {
-//   const categorias = obtenerCategorias()
-//   const select = document.querySelector("#categoria-select")
+}
+                                // Lista de categorías
 
-//   const categoriasString = categorias.reduce((acc, elemento) => {
-//     return acc + `<option value="${elemento}">${elemento}</option>`
-//   }, "")
+ const categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
+
+const obtenerCategorias = () => {
+  const categoriasEnLocalStorage = localStorage.getItem("categorias")
+   if (categoriasEnLocalStorage === null) {
+    return categorias
+   } 
+   else {
+    return JSON.parse(categoriasEnLocalStorage)
+  }
+ }
+
+ /* const agregarCategoriasAlSelect = () => {
+  const categorias = obtenerCategorias()
+  const selectCategorias = document.getElementById("categoria-select")
+  const categoriasString = categorias.reduce((acc, elemento) => {
+    return acc + `<option value="${elemento}">${elemento}</option>`
+   }, "")
   
-//   select.innerHTML = categoriasString
-// }
+   selectCategorias.innerHTML = categoriasString
+ } */
 
-// const agregarCategoriasAHTML = () => {
-//   const categorias = obtenerCategorias()
+  const agregarCategoriasAHTML = () => {
+  const categorias = obtenerCategorias()
 
-//   const categoriasString = categorias.reduce((acc, elemento, index) => {
-//     return acc + `<div>${elemento} <button id="eliminar-${index}" class="boton-eliminar delete-link">Eliminar</button></div>`
-//   }, "")
+  const categoriasString = categorias.reduce((acc, elemento, index) => {
+  return acc + `<div>${elemento} <button id="eliminar-${index}" class="boton-eliminar delete-link">Eliminar</button></div>`
+}, "")
   
-//   listadoDeCategorias.innerHTML = categoriasString
-// }
+  listadoDeCategorias.innerHTML = categoriasString
+}
 
-// agregarCategoriasAHTML()
+  agregarCategoriasAHTML()
 
-// botonAgregarCategoria.onclick = () => {
-//   const nuevaCategoria = listadoDeCategorias.value
-//   const categorias = obtenerCategorias()
-//   categorias.push(nuevaCategoria)
-//   listadoDeCategorias.value = ""
+  botonAgregarCategoria.onclick = () => {
+  const nuevaCategoria = listadoDeCategorias.value
+  const categorias = obtenerCategorias()
+  categorias.push(nuevaCategoria)
+  listadoDeCategorias.value = ""
 
-//   const categoriasAJSON = JSON.stringify(categorias)
-//   localStorage.setItem("categorias", categoriasAJSON)
+  const categoriasAJSON = JSON.stringify(categorias)
+  localStorage.setItem("categorias", categoriasAJSON)
 
-//   agregarCategoriasAlSelect()
-//   agregarCategoriasAHTML()
-// }
+ /*  agregarCategoriasAlSelect() */
+  agregarCategoriasAHTML()
+}
+
+                                // 

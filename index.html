@@ -205,7 +205,7 @@
                 </div>
 
         </section>
-
+      
         <!-- Nueva Operación-->
 
         <section class="section mt-5 is-hidden" id="seccion-nueva-operacion">
@@ -281,8 +281,6 @@
 
                 </div>
 
-
-
         </section>
 
         <!-- Sección Categorías -->
@@ -302,7 +300,7 @@
                             </div>
                         </div>
                         <div class="" id="listado-categorias">
-                            <div class="columns">
+                            <!-- <div class="columns">
                                 <div class="column">
                                     <div class="tag is-primary is-light" id="">Comida</div>
                                 </div>
@@ -343,7 +341,35 @@
                                 </div>
                                 <button class="button is-ghost is-small mr-2 mt-2">Editar</button>
                                 <button class="button is-ghost is-small mr-4 mt-2">Eliminar</button>
+                            </div> -->
+                        </div>
+                        <button id="boton-editar-categoria">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seccion editar categorías -->
+
+        <section class="section mt-5 is-hidden " id="seccion-editar-categorias">
+            <div class="container">
+                <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+                    <div class="box">
+                        <h3 class="title is-size-2 has-text-weight-medium has-text-weight-bold mb-6">Editar categoría</h3>
+                        <label class="label">Nombre</label>
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <input class="input mb-4" type="text">
                             </div>
+                        </div>
+                        <div class="columns">
+                            <div class="">
+                                <button type="button" class="button is-light mr-2" id="boton-cancelar-editar-categoria">Cancelar</button>
+                            </div>
+                            <div class="">
+                                <button type="button" class="button is-success" id="boton-agregar-categoria">Editar</button>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -351,7 +377,6 @@
         </section>
 
     </main>
-
 
     <script src="main.js"></script>
 
