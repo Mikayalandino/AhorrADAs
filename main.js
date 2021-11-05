@@ -54,6 +54,7 @@ botonBalance.onclick = () => {
 botonNavCategorias.onclick = () => {
   seccionCategorias.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden")
+  seccionNuevaOperacion.classList.add("is-hidden")
 }
 // Lista de categorías
 
