@@ -16,8 +16,9 @@ const botonBalance = document.getElementById("boton-balance");
 // botones categorías
 const botonNavCategorias = document.getElementById("boton-nav-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
-const botonEditarCategoria = document.getElementById("boton-editar-categoria");
+const botonEditarCategoriaLista = document.getElementById("boton-editar-categoria-lista");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
+const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 //
 const formularioFiltros = document.getElementById("formulario-filtros");
 
@@ -44,11 +45,11 @@ botonCambiarFiltros.onclick = (event) => {
     }
   };
 
-// botón balance
+/* // botón balance
 
 botonBalance.onclick = () => {
   
-}
+} */
 
 // seccion categorías
 
@@ -61,21 +62,9 @@ botonNavCategorias.onclick = () => {
   seccionNuevaOperacion.classList.add("is-hidden")
 }
 
-botonEditarCategoria.onclick = () => {
-  seccionEditarCategorias.classList.remove("is-hidden");
-  seccionCategorias.classList.add("is-hidden");
-  seccionBalance.classList.add("is-hidden")
-  seccionNuevaOperacion.classList.add("is-hidden")
-}
-
-botonCancelarEditarCategoria.onclick = () => {
-  seccionEditarCategorias.classList.add("is-hidden");
-  seccionCategorias.classList.remove("is-hidden")
-
-}
                                 // Lista de categorías
 
- const categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
+/*  const categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
 const obtenerCategorias = () => {
   const categoriasEnLocalStorage = localStorage.getItem("categorias")
@@ -85,7 +74,7 @@ const obtenerCategorias = () => {
    else {
     return JSON.parse(categoriasEnLocalStorage)
   }
- }
+ } */
 
  /* const agregarCategoriasAlSelect = () => {
   const categorias = obtenerCategorias()
@@ -97,19 +86,20 @@ const obtenerCategorias = () => {
    selectCategorias.innerHTML = categoriasString
  } */
 
-  const agregarCategoriasAHTML = () => {
+/* const agregarCategoriasAHTML = () => {
   const categorias = obtenerCategorias()
 
   const categoriasString = categorias.reduce((acc, elemento, index) => {
   return acc + `<div>${elemento} <button id="eliminar-${index}" class="boton-eliminar delete-link">Eliminar</button></div>`
-}, "")
-  
+  }, "")
+
   listadoDeCategorias.innerHTML = categoriasString
-}
-
+  
   agregarCategoriasAHTML()
+} */
 
-  botonAgregarCategoria.onclick = () => {
+
+botonAgregarCategoria.onclick = () => {
   const nuevaCategoria = listadoDeCategorias.value
   const categorias = obtenerCategorias()
   categorias.push(nuevaCategoria)
@@ -122,4 +112,17 @@ const obtenerCategorias = () => {
   agregarCategoriasAHTML()
 }
 
-                                // 
+                                // editar categorías
+
+  botonEditarCategoriaLista.onclick = () => {
+    seccionEditarCategorias.classList.remove("is-hidden");
+    seccionCategorias.classList.add("is-hidden");
+    seccionBalance.classList.add("is-hidden")
+    seccionNuevaOperacion.classList.add("is-hidden")
+  }
+  
+  botonCancelarEditarCategoria.onclick = () => {
+    seccionEditarCategorias.classList.add("is-hidden");
+    seccionCategorias.classList.remove("is-hidden")
+  
+  }
