@@ -6,6 +6,9 @@ const botonNuevaOperacion = document.getElementById("boton-operacion");
 const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
 const botonCambiarFiltros = document.getElementById("boton-cambiar-filtros");
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
+
+const botonBalance = document.getElementById("boton-balance")
+
 const botonCategorias = document.getElementById("boton-categorias")
 const botonAgregarNombreCategoria = document.getElementById("boton-agregar-categoria")
 
@@ -32,6 +35,12 @@ botonCambiarFiltros.onclick = (event) => {
       botonCambiarFiltros.textContent = "Ocultar filtros";
     }
   };
+
+// botón balance
+
+botonBalance.onclick = () => {
+  
+}
 
 // seccion categorías
 
