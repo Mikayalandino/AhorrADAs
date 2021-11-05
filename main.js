@@ -16,12 +16,13 @@ const botonBalance = document.getElementById("boton-balance");
 // botones categorías
 const botonNavCategorias = document.getElementById("boton-nav-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
-const botonEditarCategoriaLista = document.getElementById("boton-editar-categoria-lista");
+const botonEditarCategoriaLista = document.querySelectorAll("#boton-editar-categoria-lista");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 //
 const formularioFiltros = document.getElementById("formulario-filtros");
 
+console.log(botonEditarCategoriaLista)
 
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
@@ -114,15 +115,19 @@ botonAgregarCategoria.onclick = () => {
 
                                 // editar categorías
 
-  botonEditarCategoriaLista.onclick = () => {
-    seccionEditarCategorias.classList.remove("is-hidden");
-    seccionCategorias.classList.add("is-hidden");
-    seccionBalance.classList.add("is-hidden")
-    seccionNuevaOperacion.classList.add("is-hidden")
-  }
+ 
   
   botonCancelarEditarCategoria.onclick = () => {
     seccionEditarCategorias.classList.add("is-hidden");
     seccionCategorias.classList.remove("is-hidden")
   
+  }
+
+  for (let i = 0; i < botonEditarCategoriaLista.length; i++) {
+    botonEditarCategoriaLista[i].onclick = () => {
+      seccionEditarCategorias.classList.remove("is-hidden");
+      seccionCategorias.classList.add("is-hidden");
+      seccionBalance.classList.add("is-hidden")
+      seccionNuevaOperacion.classList.add("is-hidden")
+    }
   }
