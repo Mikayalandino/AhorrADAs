@@ -1,29 +1,30 @@
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
-//categorías
+
+// Categorías
 const seccionCategorias = document.getElementById("seccion-categorias");
 const listadoDeCategorias = document.getElementById("listado-categorias");
 const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const selectCategorias = document.getElementById("select-categorias")
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
 //
+
 const botonNuevaOperacion = document.getElementById("boton-operacion");
 const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
 const botonCambiarFiltros = document.getElementById("boton-cambiar-filtros");
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
 
 const botonBalance = document.getElementById("boton-balance");
-// botones categorías
+
+// Botones categorías
 const botonNavCategorias = document.getElementById("boton-nav-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
-const botonEditarCategoriaLista = document.querySelectorAll("#boton-editar-categoria-lista");
+const listaDeBotonesEditarCategoria = document.querySelectorAll("#boton-editar-categoria-lista");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 //
+
 const formularioFiltros = document.getElementById("formulario-filtros");
-
-console.log(botonEditarCategoriaLista)
-
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
   boton.onclick = () => {
@@ -37,22 +38,22 @@ modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBal
 
 
 botonCambiarFiltros.onclick = (event) => {
-    event.preventDefault();
-    contenedorFiltros.classList.toggle("is-hidden");
-    if (botonCambiarFiltros.textContent === "Ocultar filtros") {
-      botonCambiarFiltros.textContent = "Mostrar filtros";
-    } else {
-      botonCambiarFiltros.textContent = "Ocultar filtros";
-    }
-  };
+  event.preventDefault();
+  contenedorFiltros.classList.toggle("is-hidden");
+  if (botonCambiarFiltros.textContent === "Ocultar filtros") {
+    botonCambiarFiltros.textContent = "Mostrar filtros";
+  } else {
+    botonCambiarFiltros.textContent = "Ocultar filtros";
+  }
+};
 
-/* // botón balance
+/* // Botón balance
 
 botonBalance.onclick = () => {
   
 } */
 
-// seccion categorías
+// Sección categorías
 
                                 // botón nav categorías
 
@@ -65,40 +66,46 @@ botonNavCategorias.onclick = () => {
 
                                 // Lista de categorías
 
-/*  const categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
+const categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
 const obtenerCategorias = () => {
   const categoriasEnLocalStorage = localStorage.getItem("categorias")
-   if (categoriasEnLocalStorage === null) {
+  if (categoriasEnLocalStorage === null) {
     return categorias
-   } 
-   else {
+  } 
+  else {
     return JSON.parse(categoriasEnLocalStorage)
   }
- } */
+}
 
- /* const agregarCategoriasAlSelect = () => {
+/* const agregarCategoriasAlSelect = () => {
   const categorias = obtenerCategorias()
-  const selectCategorias = document.getElementById("categoria-select")
+  const select = document.querySelector("#categoria-select")
+
   const categoriasString = categorias.reduce((acc, elemento) => {
     return acc + `<option value="${elemento}">${elemento}</option>`
-   }, "")
-  
-   selectCategorias.innerHTML = categoriasString
- } */
+  }, "")
 
-/* const agregarCategoriasAHTML = () => {
+  select.innerHTML = categoriasString
+} */
+
+const agregarCategoriasAHTML = () => {
   const categorias = obtenerCategorias()
 
   const categoriasString = categorias.reduce((acc, elemento, index) => {
-  return acc + `<div>${elemento} <button id="eliminar-${index}" class="boton-eliminar delete-link">Eliminar</button></div>`
+    return acc + `<div class="columns">
+    <div class="column">
+        <div class="tag is-primary is-light">${elemento}</div>
+    </div>
+    <button id="editar-${index}" class=" button is-ghost is-small mr-2 mt-2">Editar</button> 
+    <button id="eliminar-${index}" class="button is-ghost is-small mr-1 mt-2">Eliminar</button>
+    </div>`
   }, "")
 
   listadoDeCategorias.innerHTML = categoriasString
-  
-  agregarCategoriasAHTML()
-} */
+}
 
+agregarCategoriasAHTML()
 
 botonAgregarCategoria.onclick = () => {
   const nuevaCategoria = listadoDeCategorias.value
@@ -109,25 +116,45 @@ botonAgregarCategoria.onclick = () => {
   const categoriasAJSON = JSON.stringify(categorias)
   localStorage.setItem("categorias", categoriasAJSON)
 
- /*  agregarCategoriasAlSelect() */
+/*   agregarCategoriasAlSelect() */
   agregarCategoriasAHTML()
 }
 
-                                // editar categorías
 
+
+
+                                // Editar lista categorías
+                                //Corregir y hacer de 0 
+
+  
+ for (let i = 0; i < listaDeBotonesEditarCategoria.length; i++) {
+  listaDeBotonesEditarCategoria[i].onclick = () => {
+    seccionEditarCategorias.classList.remove("is-hidden");
+    seccionCategorias.classList.add("is-hidden");
+    seccionBalance.classList.add("is-hidden")
+    seccionNuevaOperacion.classList.add("is-hidden")
+  }
+}
  
-  
-  botonCancelarEditarCategoria.onclick = () => {
-    seccionEditarCategorias.classList.add("is-hidden");
-    seccionCategorias.classList.remove("is-hidden")
-  
-  }
 
-  for (let i = 0; i < botonEditarCategoriaLista.length; i++) {
-    botonEditarCategoriaLista[i].onclick = () => {
-      seccionEditarCategorias.classList.remove("is-hidden");
-      seccionCategorias.classList.add("is-hidden");
-      seccionBalance.classList.add("is-hidden")
-      seccionNuevaOperacion.classList.add("is-hidden")
-    }
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+botonCancelarEditarCategoria.onclick = () => {
+  seccionEditarCategorias.classList.add("is-hidden");
+  seccionCategorias.classList.remove("is-hidden")
+
+}
+
