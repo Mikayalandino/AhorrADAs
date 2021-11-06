@@ -120,7 +120,6 @@ botonAgregarCategoria.onclick = () => {
 }
 
                                 // Editar lista categorías
-                                //Corregir y hacer de 0 
 
 // Lista de botones editar-eliminar
 
