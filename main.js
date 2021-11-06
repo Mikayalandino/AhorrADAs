@@ -19,7 +19,6 @@ const botonBalance = document.getElementById("boton-balance");
 // Botones categorías
 const botonNavCategorias = document.getElementById("boton-nav-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
-const listaDeBotonesEditarCategoria = document.querySelectorAll("#boton-editar-categoria-lista");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 //
@@ -97,8 +96,8 @@ const agregarCategoriasAHTML = () => {
     <div class="column">
         <div class="tag is-primary is-light">${elemento}</div>
     </div>
-    <button id="editar-${index}" class=" button is-ghost is-small mr-2 mt-2">Editar</button> 
-    <button id="eliminar-${index}" class="button is-ghost is-small mr-1 mt-2">Eliminar</button>
+    <button id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small mr-2 mt-2">Editar</button> 
+    <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mr-1 mt-2">Eliminar</button>
     </div>`
   }, "")
 
@@ -120,14 +119,24 @@ botonAgregarCategoria.onclick = () => {
   agregarCategoriasAHTML()
 }
 
-
-
-
                                 // Editar lista categorías
                                 //Corregir y hacer de 0 
 
-  
- for (let i = 0; i < listaDeBotonesEditarCategoria.length; i++) {
+// Lista de botones editar-eliminar
+
+
+for (let i = 0; i < listaDeBotonesEliminarCategoria.length; i++) {
+  listaDeBotonesEliminarCategoria[i].onclick = () => {
+    const id = listaDeBotonesEliminarCategoria[i].id
+    console.log(id)
+    const indice = id.charAt(7)
+    const categoriasFiltradas = categorias.filter((elemento, index) => {
+        return index != indice
+      })
+  }
+}
+
+for (let i = 0; i < listaDeBotonesEditarCategoria.length; i++) {
   listaDeBotonesEditarCategoria[i].onclick = () => {
     seccionEditarCategorias.classList.remove("is-hidden");
     seccionCategorias.classList.add("is-hidden");
@@ -136,22 +145,6 @@ botonAgregarCategoria.onclick = () => {
   }
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 botonCancelarEditarCategoria.onclick = () => {
   seccionEditarCategorias.classList.add("is-hidden");
   seccionCategorias.classList.remove("is-hidden")
