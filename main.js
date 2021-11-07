@@ -3,6 +3,8 @@ const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion")
 
 // Categorías
 const seccionCategorias = document.getElementById("seccion-categorias");
+console.log(seccionCategorias) // preguntar para qué sirve 
+
 const listadoDeCategorias = document.getElementById("listado-categorias");
 const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
@@ -11,20 +13,28 @@ const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion
 const botonCambiarFiltros = document.getElementById("boton-cambiar-filtros");
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
 
-const botonBalance = document.getElementById("boton-balance");
+
+
 // ELEMENTOS DEL DOM
+const botonBalanceNavbar = document.getElementById("boton-balance");
+const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
+const botonReportesNavbar = document.querySelector("#boton-reportes")
+console.log(botonBalanceNavbar, botonCategoriasNavbar, botonReportesNavbar)
+
+
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
 const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const formularioFiltros = document.getElementById("formulario-filtros");
 
 // Botones categorías
-const botonNavCategorias = document.getElementById("boton-nav-categorias");
+
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 
-// FUNCIONES GENÉRICAS REUTILIZABLES 
+// FUNCIONES GENÉRICAS REUTILIZABLES
+
 const modificarClasesBotones = (boton, clase1, clase2) => {
 boton.onclick = () => {
   clase1.classList.add("is-hidden")
@@ -43,15 +53,22 @@ const obtenerLStorageYPasarAJs = (clave) => {
   return JSONAObjeto
 }
 
-// OPERACIONES
+// NAVEGACIÓN CON BOTONES
 
-
-
+botonCategoriasNavbar.onclick = () => {
+  seccionCategorias.classList.remove("is-hidden");
+  seccionEditarCategorias.classList.add("is-hidden")
+  seccionBalance.classList.add("is-hidden")
+  seccionNuevaOperacion.classList.add("is-hidden") 
+  }
+  
 
 modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacion);
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
+// OPERACIONES
 
+// FILTROS
 
 botonCambiarFiltros.onclick = (event) => {
 event.preventDefault();
@@ -61,24 +78,24 @@ if (contenedorFiltros.classList.contains("is-hidden")) {
 } else {
   botonCambiarFiltros.textContent = "Ocultar filtros";
 }
-};
+}
+
+
+
+
 
 /* // Botón balance
 
 botonBalance.onclick = () => {
 
-} */
+} 
 
 // Sección categorías
 
-                              // botón nav categorías
+                              // botón nav categorías 
+                              */
+                              
 
-botonNavCategorias.onclick = () => {
-seccionCategorias.classList.remove("is-hidden");
-seccionEditarCategorias.classList.add("is-hidden")
-seccionBalance.classList.add("is-hidden")
-seccionNuevaOperacion.classList.add("is-hidden")
-}
 
                               // CATEGORÍAS 
 
@@ -168,4 +185,3 @@ seccionCategorias.classList.remove("is-hidden")
 }
 
 **/
-
