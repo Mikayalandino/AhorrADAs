@@ -5,7 +5,7 @@ const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion")
 const seccionCategorias = document.getElementById("seccion-categorias");
 const listadoDeCategorias = document.getElementById("listado-categorias");
 const categoriasAgregadas = document.getElementById("categorias-agregadas");
-const selectCategorias = document.getElementById("select-categorias")
+
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
 //
 
@@ -21,6 +21,20 @@ const botonNavCategorias = document.getElementById("boton-nav-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
+
+// FUNCIONES GENÉRICAS REUTILIZABLES 
+
+const aJSONYSubirAlLStorage = (operacion, clave) => {
+const aJSON = JSON.stringify(operacion)
+localStorage.setItem(clave , aJSON)
+}
+
+const obtenerLStorageYPasarAJs = (clave) => {
+    const nuevoObjeto = localStorage.getItem(clave) || `[]`
+    const JSONAObjeto = JSON.parse(nuevoObjeto)     
+    return JSONAObjeto
+}
+
 //
 
 const formularioFiltros = document.getElementById("formulario-filtros");
@@ -65,17 +79,28 @@ botonNavCategorias.onclick = () => {
 
                                 // Lista de categorías
 
-const categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
+let categorias = ["Todas", "Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
-const obtenerCategorias = () => {
-  const categoriasEnLocalStorage = localStorage.getItem("categorias")
-  if (categoriasEnLocalStorage === null) {
-    return categorias
-  } 
-  else {
-    return JSON.parse(categoriasEnLocalStorage)
-  }
+const inputSeccionCategoria = document.querySelector("#input-categoria")
+const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria")
+const selectCategoriasDeFiltros = document.querySelector("#select-categorias")
+
+const subirCategorias = (boton, arr, clave) => {
+  boton.onclick = () => {
+    arr.push(inputSeccionCategoria.value)
+    aJSONYSubirAlLStorage(arr, clave)    
+  }  
 }
+
+subirCategorias(botonInputSeccionCategoria, categorias, "categorias")
+
+categorias = obtenerLStorageYPasarAJs("categorias") 
+ 
+const arrayReduc = categorias.reduce((acc, arr) => {
+    return acc += `<option value="${arr}">${arr}</option>`
+}, "")
+
+selectCategoriasDeFiltros.innerHTML = arrayReduc
 
 /* const agregarCategoriasAlSelect = () => {
   const categorias = obtenerCategorias()
@@ -88,8 +113,10 @@ const obtenerCategorias = () => {
   select.innerHTML = categoriasString
 } */
 
+/**
+
 const agregarCategoriasAHTML = () => {
-  const categorias = obtenerCategorias()
+  //const categorias = obtenerCategorias()
 
   const categoriasString = categorias.reduce((acc, elemento, index) => {
     return acc + `<div class="columns">
@@ -115,7 +142,7 @@ botonAgregarCategoria.onclick = () => {
   const categoriasAJSON = JSON.stringify(categorias)
   localStorage.setItem("categorias", categoriasAJSON)
 
-/*   agregarCategoriasAlSelect() */
+   agregarCategoriasAlSelect() 
   agregarCategoriasAHTML()
 }
 
@@ -149,4 +176,6 @@ botonCancelarEditarCategoria.onclick = () => {
   seccionCategorias.classList.remove("is-hidden")
 
 }
+
+**/
 
