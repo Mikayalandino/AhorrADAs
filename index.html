@@ -35,7 +35,7 @@
             <div class="navbar-end mr-2">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-primary mr-0">
+                        <a class="button is-primary mr-0" href="" id="boton-balance">
                             <span class="icon-text has-text-white">
                                 <span class="icon">
                                     <i class="fas fa-chart-line"></i>
@@ -43,7 +43,7 @@
                                 <span>Balance</span>
                             </span>
                         </a>
-                        <a class="button is-primary mr-0">
+                        <a class="button is-primary mr-0" id="boton-nav-categorias">
                             <span class="icon-text has-text-white">
                                 <span class="icon">
                                     <i class="fas fa-tag"></i>
@@ -205,10 +205,10 @@
                 </div>
 
         </section>
+      
+        <!-- Nueva Operación-->
 
-          <!-- Nueva Operación-->
-
-          <section class="section mt-5 is-hidden" id="seccion-nueva-operacion">
+        <section class="section mt-5 is-hidden" id="seccion-nueva-operacion">
             <div class="container">
                 <div>
                     <div
@@ -281,12 +281,60 @@
 
                 </div>
 
+        </section>
 
+        <!-- Sección Categorías -->
 
+        <section class="section mt-5 is-hidden" id="seccion-categorias">
+            <div class="container">
+                <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+                    <div class="box">
+                        <h3 class="title is-size-2 has-text-weight-medium has-text-weight-bold mb-6">Categorías</h3>
+                        <label class="label">Nombre</label>
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <input class="input" type="text">
+                            </div>
+                            <div class="control">
+                                <button type="button" class="button is-success" id="boton-agregar-categoria">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="" id="listado-categorias">
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seccion editar categorías -->
+
+        <section class="section mt-5 is-hidden " id="seccion-editar-categorias">
+            <div class="container">
+                <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+                    <div class="box">
+                        <h3 class="title is-size-2 has-text-weight-medium has-text-weight-bold mb-6">Editar categoría</h3>
+                        <label class="label">Nombre</label>
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <input class="input mb-4" type="text">
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-8"></div>
+                            <div class="column">
+                                <button type="button" class="button is-light ml-5" id="boton-cancelar-editar-categoria">Cancelar</button>
+                            </div>  
+                            <div class="column">
+                                <button type="button" class="button is-success" id="boton-confirmar-editar-categoria">Confirmar</button>
+                            </div>                  
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
-
 
     <script src="main.js"></script>
 
