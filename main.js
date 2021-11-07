@@ -102,23 +102,9 @@ const arrayReduc = categorias.reduce((acc, arr) => {
 
 selectCategoriasDeFiltros.innerHTML = arrayReduc
 
-/* const agregarCategoriasAlSelect = () => {
-  const categorias = obtenerCategorias()
-  const select = document.querySelector("#categoria-select")
-
-  const categoriasString = categorias.reduce((acc, elemento) => {
-    return acc + `<option value="${elemento}">${elemento}</option>`
-  }, "")
-
-  select.innerHTML = categoriasString
-} */
-
-/**
-
 const agregarCategoriasAHTML = () => {
-  //const categorias = obtenerCategorias()
-
-  const categoriasString = categorias.reduce((acc, elemento, index) => {
+  
+  const categoriasHTML = categorias.reduce((acc, elemento) => {
     return acc + `<div class="columns">
     <div class="column">
         <div class="tag is-primary is-light">${elemento}</div>
@@ -128,10 +114,13 @@ const agregarCategoriasAHTML = () => {
     </div>`
   }, "")
 
-  listadoDeCategorias.innerHTML = categoriasString
+  listadoDeCategorias.innerHTML = categoriasHTML
 }
 
 agregarCategoriasAHTML()
+
+
+/**
 
 botonAgregarCategoria.onclick = () => {
   const nuevaCategoria = listadoDeCategorias.value
