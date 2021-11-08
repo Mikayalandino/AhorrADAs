@@ -134,14 +134,15 @@ const listadoOperaciones = document.getElementById(listado-operaciones)
 //maquetado del listado
 
 /* <div class="columns">
-  <div class="column is-3 has-text-weight-bold">(descripción)</div>
-  <div class="column is-3 tag is-primary is-light">(categoría)</div>
-  <div class="column is-2 has-text-grey">(fecha)</div>
-  <div class="column is-2 has-text-weight-bold  has-text-danger">(monto)</div>
+  <div class="column is-3 has-text-weight-bold has-text-left">(descripción)</div>
+  <!-- corregir categoría que no queda centrado -->
+  <div class="column is-3 tag is-primary is-light has-text-left">(categoría)</div>
+  <div class="column is-2 has-text-grey has-text-right">(fecha)</div>
+  <div class="column is-2 has-text-weight-bold  has-text-danger has-text-right">(monto)</div>
   <div class="column is-2">
     <div class="columns">
-      <button id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small  mt-2">Editar</button> 
-      <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2">Eliminar</button>
+      <button id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small  mt-2 has-text-right">Editar</button> 
+      <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
     </div>
   </div>
 </div>
