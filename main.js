@@ -82,6 +82,27 @@ modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBal
 
 // OPERACIONES
 
+let operaciones = []
+
+const subirObjetoAArray = (array) => {
+  const nuevoObjeto = {
+    descripcion: inputDescripcionOperaciones.value,
+    monto: inputMontoOperaciones.value,  
+    tipo: selectTipoOperaciones.value,
+    categoria: selectCategoriasOperaciones.value,
+    fecha: inputFechaoperaciones.value,
+  }
+  console.log(array)
+  array.push(nuevoObjeto)
+}
+
+botonAgregarOperacion.onclick = () =>{
+  subirObjetoAArray(operaciones)
+  blanquearFormularios(formularioOperaciones)
+}
+
+
+
 
 
 // FILTROS
