@@ -99,6 +99,36 @@ const subirObjetoAArray = (array) => {
 botonAgregarOperacion.onclick = () =>{
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
+  aJSONYSubirAlLStorage(operaciones, "operaciones")
+}
+
+let nuevasOperaciones = []
+
+const guardarObjetosDeLStorage = (array) => {
+  const nuevoArray = [localStorage.getItem("operaciones") || "[]"]
+  const parseArray = JSON.parse(nuevoArray)
+  const nuevosObjetos = parseArray.map((arr) => {
+    return array.push(arr)
+  })  
+  return nuevosObjetos
+}
+
+guardarObjetosDeLStorage(nuevasOperaciones)
+
+operaciones = nuevasOperaciones
+
+
+
+
+
+
+
+const aHTML = (array) => {
+  const arrReduc = array.reduce((acc, arr) => {
+
+  }, "")
+
+  return arrReduc
 }
 
 
