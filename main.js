@@ -101,8 +101,6 @@ botonBalance.onclick = () => {
 
 let categorias = ["Todas", "Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
-
-
 const subirCategorias = (boton, arr, clave) => {
 boton.onclick = () => {
   arr.push(inputSeccionCategoria.value)
