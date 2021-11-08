@@ -6,10 +6,10 @@ const seccionCategorias = document.getElementById("seccion-categorias");
 console.log(seccionCategorias) // preguntar para qué sirve 
 
 const listadoDeCategorias = document.getElementById("listado-categorias");
-const categoriasAgregadas = document.getElementById("categorias-agregadas");
+// const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
-const botonNuevaOperacion = document.getElementById("boton-operacion");
-const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
+
+
 const botonCambiarFiltros = document.getElementById("boton-cambiar-filtros");
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
 
@@ -19,7 +19,17 @@ const contenedorFiltros = document.getElementById("cambiar-filtros");
 const botonBalanceNavbar = document.getElementById("boton-balance");
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
 const botonReportesNavbar = document.querySelector("#boton-reportes")
-console.log(botonBalanceNavbar, botonCategoriasNavbar, botonReportesNavbar)
+
+const botonNuevaOperacion = document.getElementById("boton-operacion");
+const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
+const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion")
+const formularioOperaciones = document.querySelector("#formulario-operaciones")
+
+const inputDescripcionOperaciones = document.querySelector("#input-descripcion")
+const inputMontoOperaciones = document.querySelector("#input-monto")
+const selectTipoOperaciones = document.querySelector("#select-tipo-op")
+const selectCategoriasOperaciones = document.querySelector("#select-categorias-op")
+const inputFechaoperaciones = document.querySelector("#input-fecha")
 
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
@@ -53,6 +63,10 @@ const obtenerLStorageYPasarAJs = (clave) => {
   return JSONAObjeto
 }
 
+const blanquearFormularios = (form) => {
+  form.reset()
+}
+
 // NAVEGACIÓN CON BOTONES
 
 botonCategoriasNavbar.onclick = () => {
@@ -67,6 +81,59 @@ modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacio
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
 // OPERACIONES
+
+let operaciones = []
+
+const subirObjetoAArray = (array) => {
+  const nuevoObjeto = {
+    descripcion: inputDescripcionOperaciones.value,
+    monto: inputMontoOperaciones.value,  
+    tipo: selectTipoOperaciones.value,
+    categoria: selectCategoriasOperaciones.value,
+    fecha: inputFechaoperaciones.value,
+  }
+  console.log(array)
+  array.push(nuevoObjeto)
+}
+
+botonAgregarOperacion.onclick = () =>{
+  subirObjetoAArray(operaciones)
+  blanquearFormularios(formularioOperaciones)
+  aJSONYSubirAlLStorage(operaciones, "operaciones")
+}
+
+let nuevasOperaciones = []
+
+const guardarObjetosDeLStorage = (array) => {
+  const nuevoArray = [localStorage.getItem("operaciones") || "[]"]
+  const parseArray = JSON.parse(nuevoArray)
+  const nuevosObjetos = parseArray.map((arr) => {
+    return array.push(arr)
+  })  
+  return nuevosObjetos
+}
+
+guardarObjetosDeLStorage(nuevasOperaciones)
+
+operaciones = nuevasOperaciones
+
+
+
+
+
+
+
+const aHTML = (array) => {
+  const arrReduc = array.reduce((acc, arr) => {
+
+  }, "")
+
+  return arrReduc
+}
+
+
+
+
 
 // FILTROS
 
@@ -100,8 +167,6 @@ botonBalance.onclick = () => {
                               // CATEGORÍAS 
 
 let categorias = ["Todas", "Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
-
-
 
 const subirCategorias = (boton, arr, clave) => {
 boton.onclick = () => {
