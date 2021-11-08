@@ -129,6 +129,8 @@ const aHTML = (array) => {
 
 const listadoOperaciones = document.getElementById(listado-operaciones)
 
+// al hacer click en nueva operación, abre la sección del listado de nuevas opeaciones, desaparece la imagen y texto sin resultados
+
 
 
 // FILTROS
