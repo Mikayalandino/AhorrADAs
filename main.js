@@ -31,9 +31,6 @@ const selectTipoOperaciones = document.querySelector("#select-tipo-op")
 const selectCategoriasOperaciones = document.querySelector("#select-categorias-op")
 const inputFechaoperaciones = document.querySelector("#input-fecha")
 
-console.log(inputFechaoperaciones)
-
-
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
@@ -64,6 +61,10 @@ const obtenerLStorageYPasarAJs = (clave) => {
   const nuevoObjeto = localStorage.getItem(clave) || `[]`
   const JSONAObjeto = JSON.parse(nuevoObjeto)     
   return JSONAObjeto
+}
+
+const blanquearFormularios = (form) => {
+  form.reset()
 }
 
 // NAVEGACIÓN CON BOTONES
