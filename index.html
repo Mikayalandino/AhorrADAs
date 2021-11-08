@@ -210,18 +210,18 @@
                         <h3 class="title is-size-2 has-text-weight-medium has-text-weight-bold mb-6">
                             Nueva operación</h3>
 
-                        <form>
+                        <form id="formulario-operaciones">
                             <div class="field">
                                 <label class="label">Descripción</label>
                                 <div class="control">
-                                    <input class="input" type="text">
+                                    <input id="input-descripcion" class="input" type="text">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <label class="label">Monto</label>
                                 <div class="control">
-                                    <input class="input" type="number" value="0">
+                                    <input id="input-monto" class="input" type="number" value="0">
                                 </div>
                             </div>
 
@@ -230,7 +230,7 @@
                             </div>
                             <div class="control">
                                 <div class="select is-fullwidth">
-                                    <select class="column">
+                                    <select id="select-tipo-op" class="column">
                                         <option value="gasto">Gasto</option>
                                         <option value="ganancia">Ganancia</option>
                                     </select>
@@ -242,7 +242,7 @@
                             </div>
                             <div class="control">
                                 <div class="select is-fullwidth">
-                                    <select>
+                                    <select id="select-categorias-op">
                                         <option value="comida">Comida</option>
                                         <option value="servicios">Servicios</option>
                                         <option value="salidas">Salidas</option>
@@ -256,7 +256,7 @@
                             <div class="field">
                                 <label class="label mt-3" for="date">Fecha</label>
                                 <div class="control">
-                                    <input class="input" id="date" type="date">
+                                    <input id="input-fecha" class="input" type="date">
                                 </div>
                             </div>
                             <div class="buttons is-right mt-6">

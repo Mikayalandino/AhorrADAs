@@ -6,10 +6,10 @@ const seccionCategorias = document.getElementById("seccion-categorias");
 console.log(seccionCategorias) // preguntar para qué sirve 
 
 const listadoDeCategorias = document.getElementById("listado-categorias");
-const categoriasAgregadas = document.getElementById("categorias-agregadas");
+// const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
-const botonNuevaOperacion = document.getElementById("boton-operacion");
-const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
+
+
 const botonCambiarFiltros = document.getElementById("boton-cambiar-filtros");
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
 
@@ -19,7 +19,20 @@ const contenedorFiltros = document.getElementById("cambiar-filtros");
 const botonBalanceNavbar = document.getElementById("boton-balance");
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
 const botonReportesNavbar = document.querySelector("#boton-reportes")
-console.log(botonBalanceNavbar, botonCategoriasNavbar, botonReportesNavbar)
+
+const botonNuevaOperacion = document.getElementById("boton-operacion");
+const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
+const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion")
+const formularioOperaciones = document.querySelector("#formulario-operaciones")
+
+const inputDescripcionOperaciones = document.querySelector("#input-descripcion")
+const inputMontoOperaciones = document.querySelector("#input-monto")
+const selectTipoOperaciones = document.querySelector("#select-tipo-op")
+const selectCategoriasOperaciones = document.querySelector("#select-categorias-op")
+const inputFechaoperaciones = document.querySelector("#input-fecha")
+
+console.log(inputFechaoperaciones)
+
 
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
@@ -67,6 +80,8 @@ modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacio
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
 // OPERACIONES
+
+
 
 // FILTROS
 
