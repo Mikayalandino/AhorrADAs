@@ -117,12 +117,6 @@ guardarObjetosDeLStorage(nuevasOperaciones)
 
 operaciones = nuevasOperaciones
 
-
-
-
-
-
-
 const aHTML = (array) => {
   const arrReduc = array.reduce((acc, arr) => {
 
@@ -131,7 +125,9 @@ const aHTML = (array) => {
   return arrReduc
 }
 
+                                // listado operaciones
 
+const listadoOperaciones = document.getElementById(listado-operaciones)
 
 
 
