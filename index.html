@@ -174,22 +174,24 @@
                             </div>
                         </div>
 
-                        <div class="colums">
-                            <div class="column is-offset-3 is-7 mt-5 mb-4">
-                                <div class="image 16x16px mt-6">
-                                    <img src="./img/billetera.png">
+                        <div class="operaciones-sin-resultados is-hidden">
+                            <div class="colums">
+                                <div class="column is-offset-3 is-7 mt-5 mb-4">
+                                    <div class="image 16x16px mt-6">
+                                        <img src="./img/billetera.png">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="columns mb-6">
-                            <div class="column mt-5">
-                                <h3
-                                    class="is-size-4 has-text-weight-medium has-text-weight-bold has-text-centered mb-4">
-                                    Sin resultados</h3>
-                                <p class="has-text-centered mb-6">Cambia los filtros o agrega operaciones</p>
+                            <div class="columns mb-6">
+                                <div class="column mt-5">
+                                    <h3
+                                        class="is-size-4 has-text-weight-medium has-text-weight-bold has-text-centered mb-4">
+                                        Sin resultados</h3>
+                                    <p class="has-text-centered mb-6">Cambia los filtros o agrega operaciones</p>
+                                </div>
+
                             </div>
-
                         </div>
 
                         <!-- Listado de operaciones -->
@@ -203,6 +205,19 @@
                                 <div class="column is-2 has-text-right">Acciones</div>
                             </div>
                             <div id="listado-nuevas-operaciones">
+                                <div class="columns">
+                                    <div class="column is-3 has-text-weight-bold has-text-left">(descripción)</div>
+                                    <!-- corregir categoría que no queda centrado -->
+                                    <div class="column is-1 tag is-primary is-light has-text-left">categoría</div>
+                                    <div class="column is-4 has-text-grey has-text-right">(fecha)</div>
+                                    <div class="column is-2 has-text-weight-bold  has-text-danger has-text-right">$12</div>
+                                    <div class="column is-2">
+                                      <div class="columns">
+                                        <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+                                        <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 

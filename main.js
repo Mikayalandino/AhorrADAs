@@ -127,6 +127,7 @@ const aHTML = (array) => {
 
                                 // listado operaciones
 
+const operacionesSinResultados = document.getElementById(operaciones-sin-resultados)
 const listadoOperaciones = document.getElementById(listado-operaciones)
 
 // al hacer click en nueva operación, abre la sección del listado de nuevas opeaciones, desaparece la imagen y texto sin resultados
