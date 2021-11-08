@@ -117,12 +117,6 @@ guardarObjetosDeLStorage(nuevasOperaciones)
 
 operaciones = nuevasOperaciones
 
-
-
-
-
-
-
 const aHTML = (array) => {
   const arrReduc = array.reduce((acc, arr) => {
 
@@ -131,8 +125,29 @@ const aHTML = (array) => {
   return arrReduc
 }
 
+                                // listado operaciones
 
+const operacionesSinResultados = document.getElementById(operaciones-sin-resultados)
+const listadoOperaciones = document.getElementById(listado-operaciones)
 
+// al hacer click en nueva operación y agregar una nueva, abre la sección del listado de nuevas opeaciones, desaparece la imagen y texto sin resultados
+
+//maquetado del listado operaciones
+
+/* <div class="columns">
+  <div class="column is-3 has-text-weight-bold has-text-left">(descripción)</div>
+  <!-- corregir categoría que no queda centrado -->
+  <div class="column is-1 tag is-primary is-light has-text-left mt-3">categoría</div>
+  <div class="column is-4 has-text-grey has-text-right">(fecha)</div>
+  <div class="column is-2 has-text-weight-bold  has-text-danger has-text-right">$12</div>
+  <div class="column is-2">
+    <div class="columns">
+      <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+      <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+    </div>
+  </div>
+</div>
+*/
 
 
 // FILTROS
