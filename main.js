@@ -31,6 +31,11 @@ const selectTipoOperaciones = document.querySelector("#select-tipo-op")
 const selectCategoriasOperaciones = document.querySelector("#select-categorias-op")
 const inputFechaoperaciones = document.querySelector("#input-fecha")
 
+const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
+console.log(operacionesSinResultados)
+const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
+
+
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
@@ -99,7 +104,9 @@ const subirObjetoAArray = (array) => {
 botonAgregarOperacion.onclick = () =>{
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
-  aJSONYSubirAlLStorage(operaciones, "operaciones")
+  aJSONYSubirAlLStorage(operaciones, "operaciones") 
+  listadoOperaciones.innerHTML = aHTML(operaciones)
+  
 }
 
 let nuevasOperaciones = []
@@ -119,34 +126,57 @@ operaciones = nuevasOperaciones
 
 const aHTML = (array) => {
   const arrReduc = array.reduce((acc, arr) => {
-
+    return acc += `<div class="columns">
+    <div class="column is-3 has-text-weight-bold has-text-left">${arr.descripcion}</div>
+    <div class="column is-1 tag is-primary is-light has-text-left mt-3">${arr.categorias}</div>
+    <div class="column is-4 has-text-grey has-text-right">${arr.fecha}</div>
+    <div class="column is-2 has-text-weight-bold  has-text-danger has-text-right">${arr.monto}</div>
+    <div class="column is-2">
+      <div class="columns">
+        <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+        <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+      </div>
+    </div>
+  </div>`
   }, "")
 
   return arrReduc
 }
 
+
+const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
+console.log(seccionListadoOperaciones)
+
+const visualizacionDeOperaciones = (array) => {
+
+  if(operaciones !== "[]"){
+    operacionesSinResultados.classList.add("is-hidden")
+    seccionListadoOperaciones.classList.remove("is-hidden")   
+  }
+  else{
+    operacionesSinResultados.classList.remove("is-hidden")
+    seccionListadoOperaciones.classList.add("is-hidden")
+  }
+}
+
+console.log(aHTML(operaciones))
+
+visualizacionDeOperaciones(operaciones)
+listadoOperaciones.innerHTML = aHTML(operaciones)
+
+
                                 // listado operaciones
 
-const operacionesSinResultados = document.getElementById(operaciones-sin-resultados)
-const listadoOperaciones = document.getElementById(listado-operaciones)
+
+
+
+console.log(listadoOperaciones)
 
 // al hacer click en nueva operación y agregar una nueva, abre la sección del listado de nuevas opeaciones, desaparece la imagen y texto sin resultados
 
 //maquetado del listado operaciones
 
-/* <div class="columns">
-  <div class="column is-3 has-text-weight-bold has-text-left">(descripción)</div>
-  <!-- corregir categoría que no queda centrado -->
-  <div class="column is-1 tag is-primary is-light has-text-left mt-3">categoría</div>
-  <div class="column is-4 has-text-grey has-text-right">(fecha)</div>
-  <div class="column is-2 has-text-weight-bold  has-text-danger has-text-right">$12</div>
-  <div class="column is-2">
-    <div class="columns">
-      <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-      <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
-    </div>
-  </div>
-</div>
+/* 
 */
 
 
