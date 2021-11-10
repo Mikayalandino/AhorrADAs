@@ -62,10 +62,13 @@ const aJSON = JSON.stringify(operacion)
 localStorage.setItem(clave , aJSON)
 }
 
-const obtenerLStorageYPasarAJs = (clave) => {
-  const nuevoObjeto = localStorage.getItem(clave) || `[]`
-  const JSONAObjeto = JSON.parse(nuevoObjeto)     
-  return JSONAObjeto
+const guardarDeLStorage = (array, clave) => {
+  const nuevoArray = [localStorage.getItem(clave) || "[]"]
+  const parseArray = JSON.parse(nuevoArray)
+  const nuevosObjetos = parseArray.map((arr) => {
+    return array.push(arr)
+  })  
+  return nuevosObjetos
 }
 
 const blanquearFormularios = (form) => {
@@ -97,7 +100,6 @@ const subirObjetoAArray = (array) => {
     categoria: selectCategoriasOperaciones.value,
     fecha: inputFechaoperaciones.value,
   }
-  console.log(array)
   array.push(nuevoObjeto)
 }
 
@@ -105,22 +107,12 @@ botonAgregarOperacion.onclick = () =>{
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones") 
-  listadoOperaciones.innerHTML = aHTML(operaciones)
-  
+  listadoOperaciones.innerHTML = aHTML(operaciones)  
 }
 
 let nuevasOperaciones = []
 
-const guardarObjetosDeLStorage = (array) => {
-  const nuevoArray = [localStorage.getItem("operaciones") || "[]"]
-  const parseArray = JSON.parse(nuevoArray)
-  const nuevosObjetos = parseArray.map((arr) => {
-    return array.push(arr)
-  })  
-  return nuevosObjetos
-}
-
-guardarObjetosDeLStorage(nuevasOperaciones)
+guardarDeLStorage(nuevasOperaciones, "operaciones")
 
 operaciones = nuevasOperaciones
 
@@ -143,12 +135,9 @@ const aHTML = (array) => {
   return arrReduc
 }
 
-
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
-console.log(seccionListadoOperaciones)
 
 const visualizacionDeOperaciones = (array) => {
-
   if(operaciones !== "[]"){
     operacionesSinResultados.classList.add("is-hidden")
     seccionListadoOperaciones.classList.remove("is-hidden")   
@@ -159,7 +148,7 @@ const visualizacionDeOperaciones = (array) => {
   }
 }
 
-console.log(aHTML(operaciones))
+aHTML(operaciones)
 
 visualizacionDeOperaciones(operaciones)
 listadoOperaciones.innerHTML = aHTML(operaciones)
@@ -213,16 +202,21 @@ botonBalance.onclick = () => {
 
 let categorias = ["Todas", "Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
-const subirCategorias = (boton, arr, clave) => {
-boton.onclick = () => {
+const pushCategoria = (arr) =>{
   arr.push(inputSeccionCategoria.value)
-  aJSONYSubirAlLStorage(arr, clave)    
-}  
 }
 
-subirCategorias(botonInputSeccionCategoria, categorias, "categorias")
+botonInputSeccionCategoria.onclick = () => { 
+  aJSONYSubirAlLStorage(categorias, "categorias") 
+  pushCategoria(categorias)    
+  agregarCategoriasAHTML()
+}  
 
-categorias = obtenerLStorageYPasarAJs("categorias") 
+let nuevasCategorias = []
+
+guardarDeLStorage(nuevasCategorias, "categorias")
+
+categorias = categorias && nuevasCategorias 
 
 const arrayReduc = categorias.reduce((acc, arr) => {
   return acc += `<option value="${arr}">${arr}</option>`
@@ -231,7 +225,6 @@ const arrayReduc = categorias.reduce((acc, arr) => {
 selectCategoriasDeFiltros.innerHTML = arrayReduc
 
 const agregarCategoriasAHTML = () => {
-
 const categoriasHTML = categorias.reduce((acc, elemento) => {
   return acc + `<div class="columns">
   <div class="column">
@@ -263,6 +256,7 @@ localStorage.setItem("categorias", categoriasAJSON)
 agregarCategoriasAHTML()
 }
 
+ */
                               // Editar lista categorías
 
 // Lista de botones editar-eliminar
@@ -294,4 +288,3 @@ seccionCategorias.classList.remove("is-hidden")
 
 }
 
-**/
