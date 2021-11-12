@@ -57,8 +57,8 @@ boton.onclick = () => {
 }
 }
 
-const aJSONYSubirAlLStorage = (operacion, clave) => {
-const aJSON = JSON.stringify(operacion)
+const aJSONYSubirAlLStorage = (array, clave) => {
+const aJSON = JSON.stringify(array)
 localStorage.setItem(clave , aJSON)
 }
 
@@ -103,12 +103,17 @@ const subirObjetoAArray = (array) => {
   array.push(nuevoObjeto)
 }
 
+
+
+
 botonAgregarOperacion.onclick = () =>{
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones") 
   listadoOperaciones.innerHTML = aHTML(operaciones)  
 }
+
+
 
 let nuevasOperaciones = []
 
@@ -202,11 +207,15 @@ botonBalance.onclick = () => {
 
 let categorias = ["Todas", "Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
+const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave) 
+
+subirCategoriasAlLs(categorias, "categorias")
+
 const pushCategoria = (arr) =>{
-  arr.push(inputSeccionCategoria.value)
+    arr.push(inputSeccionCategoria.value)
 }
 
-botonInputSeccionCategoria.onclick = () => { 
+botonInputSeccionCategoria.onclick = () => {   
   aJSONYSubirAlLStorage(categorias, "categorias") 
   pushCategoria(categorias)    
   agregarCategoriasAHTML()
@@ -216,7 +225,7 @@ let nuevasCategorias = []
 
 guardarDeLStorage(nuevasCategorias, "categorias")
 
-categorias = categorias && nuevasCategorias 
+categorias = nuevasCategorias
 
 const arrayReduc = categorias.reduce((acc, arr) => {
   return acc += `<option value="${arr}">${arr}</option>`
