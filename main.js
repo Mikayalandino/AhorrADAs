@@ -16,9 +16,9 @@ const contenedorFiltros = document.getElementById("cambiar-filtros");
 
 
 // ELEMENTOS DEL DOM
-const botonBalanceNavbar = document.getElementById("boton-balance");
+const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
-const botonReportesNavbar = document.querySelector("#boton-reportes")
+const botonReportesNavbar = document.querySelector("#boton-nav-reportes")
 
 const botonNuevaOperacion = document.getElementById("boton-operacion");
 const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
@@ -36,17 +36,39 @@ console.log(operacionesSinResultados)
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 
 
-
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
 const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const formularioFiltros = document.getElementById("formulario-filtros");
+
+// AhorrADAs pagina completa
+
+const paginaPrincipal = document.getElementById("pagina-completa")
+const botonAhorradas = document.getElementById("boton-ahorradas")
+
+
+
+// Botones balance
+
+botonBalanceNavbar.onclick = () => {
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
+}
 
 // Botones categorías
 
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
+
+// Botones reportes
+const seccionReportesInsuficientes = document.getElementById("seccion-reportes-insuficientes")
+
+botonReportesNavbar.onclick = () => {
+  seccionReportesInsuficientes.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden")
+}
 
 // FUNCIONES GENÉRICAS REUTILIZABLES
 
@@ -82,6 +104,7 @@ botonCategoriasNavbar.onclick = () => {
   seccionEditarCategorias.classList.add("is-hidden")
   seccionBalance.classList.add("is-hidden")
   seccionNuevaOperacion.classList.add("is-hidden") 
+  seccionReportesInsuficientes.classList.add("is-hidden")
   }
   
 
@@ -294,6 +317,7 @@ listaDeBotonesEditarCategoria[i].onclick = () => {
 botonCancelarEditarCategoria.onclick = () => {
 seccionEditarCategorias.classList.add("is-hidden");
 seccionCategorias.classList.remove("is-hidden")
+seccionReportesInsuficientes.classList.add("is-hidden")
 
 }
 
