@@ -9,7 +9,6 @@ const listadoDeCategorias = document.getElementById("listado-categorias");
 // const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
 
-
 const botonCambiarFiltros = document.getElementById("boton-cambiar-filtros");
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
 
@@ -32,7 +31,6 @@ const selectCategoriasOperaciones = document.querySelector("#select-categorias-o
 const inputFechaoperaciones = document.querySelector("#input-fecha")
 
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
-console.log(operacionesSinResultados)
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 
 
@@ -62,6 +60,7 @@ const botonAgregarCategoria = document.getElementById("boton-agregar-categoria")
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 
+// FUNCIONES GENÉRICAS 
 // Botones reportes
 const seccionReportesInsuficientes = document.getElementById("seccion-reportes-insuficientes")
 
@@ -97,6 +96,10 @@ const blanquearFormularios = (form) => {
   form.reset()
 }
 
+//  VARIABLES REUTILIZABLES
+
+let signo = ""
+
 // NAVEGACIÓN CON BOTONES
 
 botonCategoriasNavbar.onclick = () => {
@@ -111,75 +114,6 @@ botonCategoriasNavbar.onclick = () => {
 modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacion);
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
-// OPERACIONES
-
-let operaciones = []
-
-const subirObjetoAArray = (array) => {
-  const nuevoObjeto = {
-    descripcion: inputDescripcionOperaciones.value,
-    monto: inputMontoOperaciones.value,  
-    tipo: selectTipoOperaciones.value,
-    categoria: selectCategoriasOperaciones.value,
-    fecha: inputFechaoperaciones.value,
-  }
-  array.push(nuevoObjeto)
-}
-
-
-
-
-botonAgregarOperacion.onclick = () =>{
-  subirObjetoAArray(operaciones)
-  blanquearFormularios(formularioOperaciones)
-  aJSONYSubirAlLStorage(operaciones, "operaciones") 
-  listadoOperaciones.innerHTML = aHTML(operaciones)  
-}
-
-
-
-let nuevasOperaciones = []
-
-guardarDeLStorage(nuevasOperaciones, "operaciones")
-
-operaciones = nuevasOperaciones
-
-const aHTML = (array) => {
-  const arrReduc = array.reduce((acc, arr) => {
-    return acc += `<div class="columns">
-    <div class="column is-3 has-text-weight-bold has-text-left">${arr.descripcion}</div>
-    <div class="column is-1 tag is-primary is-light has-text-left mt-3">${arr.categorias}</div>
-    <div class="column is-4 has-text-grey has-text-right">${arr.fecha}</div>
-    <div class="column is-2 has-text-weight-bold  has-text-danger has-text-right">${arr.monto}</div>
-    <div class="column is-2">
-      <div class="columns">
-        <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-        <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
-      </div>
-    </div>
-  </div>`
-  }, "")
-
-  return arrReduc
-}
-
-const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
-
-const visualizacionDeOperaciones = (array) => {
-  if(operaciones !== "[]"){
-    operacionesSinResultados.classList.add("is-hidden")
-    seccionListadoOperaciones.classList.remove("is-hidden")   
-  }
-  else{
-    operacionesSinResultados.classList.remove("is-hidden")
-    seccionListadoOperaciones.classList.add("is-hidden")
-  }
-}
-
-aHTML(operaciones)
-
-visualizacionDeOperaciones(operaciones)
-listadoOperaciones.innerHTML = aHTML(operaciones)
 
 
                                 // listado operaciones
@@ -187,7 +121,7 @@ listadoOperaciones.innerHTML = aHTML(operaciones)
 
 
 
-console.log(listadoOperaciones)
+
 
 // al hacer click en nueva operación y agregar una nueva, abre la sección del listado de nuevas opeaciones, desaparece la imagen y texto sin resultados
 
@@ -238,9 +172,9 @@ const pushCategoria = (arr) =>{
     arr.push(inputSeccionCategoria.value)
 }
 
-botonInputSeccionCategoria.onclick = () => {   
-  aJSONYSubirAlLStorage(categorias, "categorias") 
-  pushCategoria(categorias)    
+botonInputSeccionCategoria.onclick = () => { 
+  pushCategoria(categorias)  
+  aJSONYSubirAlLStorage(categorias, "categorias")       
   agregarCategoriasAHTML()
 }  
 
@@ -271,6 +205,8 @@ listadoDeCategorias.innerHTML = categoriasHTML
 }
 
 agregarCategoriasAHTML()
+
+
 
 
 /**
@@ -320,4 +256,80 @@ seccionCategorias.classList.remove("is-hidden")
 seccionReportesInsuficientes.classList.add("is-hidden")
 
 }
+
+
+// OPERACIONES
+
+selectCategoriasOperaciones.innerHTML = arrayReduc
+
+let operaciones = []
+
+const subirObjetoAArray = (array) => {
+  const nuevoObjeto = {
+    descripcion: inputDescripcionOperaciones.value,
+    monto: inputMontoOperaciones.value,  
+    tipo: selectTipoOperaciones.value,
+    categoria: selectCategoriasOperaciones.value,
+    fecha: inputFechaoperaciones.value,
+  }
+  array.push(nuevoObjeto)
+}
+
+botonAgregarOperacion.onclick = () =>{
+  subirObjetoAArray(operaciones)
+  blanquearFormularios(formularioOperaciones)
+  aJSONYSubirAlLStorage(operaciones, "operaciones") 
+  listadoOperaciones.innerHTML = aHTML(operaciones)  
+}
+
+let nuevasOperaciones = []
+
+guardarDeLStorage(nuevasOperaciones, "operaciones")
+
+operaciones = nuevasOperaciones
+
+
+const aHTML = (array) => {
+  const arrReduc = array.reduce((acc, elemento, index) => {
+    const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
+    const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"   
+        
+    return acc += `<div class="columns">
+    <div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
+    <div class="column is-1 tag is-primary is-light has-text-left mt-3">${elemento.categoria}</div>
+    <div class="column is-4 has-text-grey has-text-right">${elemento.fecha}</div>
+    <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
+    <div class="column is-2">
+      <div class="columns">
+        <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+        <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+      </div>
+    </div>
+  </div>`
+  }, "")   
+
+  return arrReduc
+}
+
+// corregir 
+const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
+
+const visualizacionDeOperaciones = (array) => {
+  if(operaciones !== "[]"){
+    operacionesSinResultados.classList.add("is-hidden")
+    seccionListadoOperaciones.classList.remove("is-hidden")   
+  }
+  else{
+    operacionesSinResultados.classList.remove("is-hidden")
+    seccionListadoOperaciones.classList.add("is-hidden")
+  }
+}
+
+aHTML(operaciones)
+
+visualizacionDeOperaciones(operaciones)
+listadoOperaciones.innerHTML = aHTML(operaciones)
+
+
+
 
