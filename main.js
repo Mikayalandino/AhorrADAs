@@ -32,7 +32,6 @@ const selectCategoriasOperaciones = document.querySelector("#select-categorias-o
 const inputFechaoperaciones = document.querySelector("#input-fecha")
 
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
-console.log(operacionesSinResultados)
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 
 
@@ -44,9 +43,13 @@ const formularioFiltros = document.getElementById("formulario-filtros");
 // AhorrADAs pagina completa
 
 const paginaPrincipal = document.getElementById("pagina-completa")
-const botonAhorradas = document.getElementById("boton-ahorradas")
+const botonNavAhorradas = document.getElementById("boton-nav-ahorradas")
 
-
+botonNavAhorradas.onclick = () => {
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
+}
 
 // Botones balance
 
@@ -67,6 +70,7 @@ const seccionReportesInsuficientes = document.getElementById("seccion-reportes-i
 
 botonReportesNavbar.onclick = () => {
   seccionReportesInsuficientes.classList.remove("is-hidden");
+  seccionBalance.classList.add("is-hidden");
   seccionCategorias.classList.add("is-hidden")
 }
 
