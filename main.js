@@ -33,6 +33,8 @@ const inputFechaoperaciones = document.querySelector("#input-fecha")
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 
+const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
+
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
@@ -162,7 +164,7 @@ botonBalance.onclick = () => {
 
                               // CATEGORÍAS 
 
-let categorias = ["Todas", "Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
+let categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
 const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave) 
 
@@ -279,8 +281,13 @@ botonAgregarOperacion.onclick = () =>{
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones") 
-  listadoOperaciones.innerHTML = aHTML(operaciones)  
+  listadoOperaciones.innerHTML = aHTML(operaciones) 
 }
+
+const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
+operacionesSinResultados.classList.add("is-hidden"))
+
+estadoDeContenedorDeOperaciones("operaciones")
 
 let nuevasOperaciones = []
 
@@ -290,14 +297,15 @@ operaciones = nuevasOperaciones
 
 
 const aHTML = (array) => {
-  const arrReduc = array.reduce((acc, elemento, index) => {
+  const arrReduc = array.reduce((acc, elemento) => {
     const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
-    const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"   
-        
+    const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"  
+    const fechas = new Date(elemento.fecha)
+    
     return acc += `<div class="columns">
     <div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
     <div class="column is-1 tag is-primary is-light has-text-left mt-3">${elemento.categoria}</div>
-    <div class="column is-4 has-text-grey has-text-right">${elemento.fecha}</div>
+    <div class="column is-4 has-text-grey has-text-right">${fechas.toLocaleDateString()}</div>
     <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
     <div class="column is-2">
       <div class="columns">
@@ -311,23 +319,16 @@ const aHTML = (array) => {
   return arrReduc
 }
 
-// corregir 
-const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 
-const visualizacionDeOperaciones = (array) => {
-  if(operaciones !== "[]"){
-    operacionesSinResultados.classList.add("is-hidden")
-    seccionListadoOperaciones.classList.remove("is-hidden")   
-  }
-  else{
-    operacionesSinResultados.classList.remove("is-hidden")
-    seccionListadoOperaciones.classList.add("is-hidden")
-  }
-}
+// corregir 
+
+
+
+
+
+
 
 aHTML(operaciones)
-
-visualizacionDeOperaciones(operaciones)
 listadoOperaciones.innerHTML = aHTML(operaciones)
 
 
