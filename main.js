@@ -162,7 +162,7 @@ botonBalance.onclick = () => {
 
                               // CATEGORÍAS 
 
-let categorias = ["Todas", "Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
+let categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 
 const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave) 
 
@@ -289,15 +289,18 @@ guardarDeLStorage(nuevasOperaciones, "operaciones")
 operaciones = nuevasOperaciones
 
 
+
+
 const aHTML = (array) => {
-  const arrReduc = array.reduce((acc, elemento, index) => {
+  const arrReduc = array.reduce((acc, elemento) => {
     const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
-    const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"   
-        
+    const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"  
+    const fechas = new Date(elemento.fecha)
+    
     return acc += `<div class="columns">
     <div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
     <div class="column is-1 tag is-primary is-light has-text-left mt-3">${elemento.categoria}</div>
-    <div class="column is-4 has-text-grey has-text-right">${elemento.fecha}</div>
+    <div class="column is-4 has-text-grey has-text-right">${fechas.toLocaleDateString()}</div>
     <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
     <div class="column is-2">
       <div class="columns">
