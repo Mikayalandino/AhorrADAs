@@ -33,6 +33,8 @@ const inputFechaoperaciones = document.querySelector("#input-fecha")
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 
+const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
+
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
@@ -279,16 +281,19 @@ botonAgregarOperacion.onclick = () =>{
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones") 
-  listadoOperaciones.innerHTML = aHTML(operaciones)  
+  listadoOperaciones.innerHTML = aHTML(operaciones) 
 }
+
+const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
+operacionesSinResultados.classList.add("is-hidden"))
+
+estadoDeContenedorDeOperaciones("operaciones")
 
 let nuevasOperaciones = []
 
 guardarDeLStorage(nuevasOperaciones, "operaciones")
 
 operaciones = nuevasOperaciones
-
-
 
 
 const aHTML = (array) => {
@@ -314,23 +319,16 @@ const aHTML = (array) => {
   return arrReduc
 }
 
-// corregir 
-const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 
-const visualizacionDeOperaciones = (array) => {
-  if(operaciones !== "[]"){
-    operacionesSinResultados.classList.add("is-hidden")
-    seccionListadoOperaciones.classList.remove("is-hidden")   
-  }
-  else{
-    operacionesSinResultados.classList.remove("is-hidden")
-    seccionListadoOperaciones.classList.add("is-hidden")
-  }
-}
+// corregir 
+
+
+
+
+
+
 
 aHTML(operaciones)
-
-visualizacionDeOperaciones(operaciones)
 listadoOperaciones.innerHTML = aHTML(operaciones)
 
 
