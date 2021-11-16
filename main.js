@@ -251,20 +251,12 @@ return arrReduc
 // corregir 
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 
-const visualizacionDeOperaciones = (array) => {
-if(operaciones !== "[]"){
-operacionesSinResultados.classList.add("is-hidden")
-seccionListadoOperaciones.classList.remove("is-hidden")   
-}
-else{
-operacionesSinResultados.classList.remove("is-hidden")
-seccionListadoOperaciones.classList.add("is-hidden")
-}
-}
+const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
+operacionesSinResultados.classList.add("is-hidden"))
+
+estadoDeContenedorDeOperaciones("operaciones")
 
 aHTML(operaciones)
-
-visualizacionDeOperaciones(operaciones)
 listadoOperaciones.innerHTML = aHTML(operaciones)
 
 
