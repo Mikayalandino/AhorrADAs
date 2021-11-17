@@ -270,15 +270,19 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 const inputFecha = document.querySelector("#input-date")
 console.log(inputFecha.value)
 
-const filtrarPorFecha = () => {
-
+const filtrarPorFecha = (array) => {
   inputFecha.oninput = () => {
-    console.log(inputFecha.value)
-  }
+    const filtrarOperaciones = array.filter((elemento) =>{
+      return new Date (elemento.fecha) > inputFecha.value
+    })
 
+    console.log(filtrarOperaciones)
+  
+    listadoOperaciones.innerHTML = filtrarOperaciones    
+  }
 }
 
-filtrarPorFecha()
+filtrarPorFecha(operaciones)
 
 
 
