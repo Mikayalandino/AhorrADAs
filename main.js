@@ -256,11 +256,8 @@ operacionesSinResultados.classList.add("is-hidden"))
 
 estadoDeContenedorDeOperaciones("operaciones")
 
-aHTML(operaciones)
-listadoOperaciones.innerHTML = aHTML(operaciones)
 
-
-// FILTROS
+                     // FILTROS
 botonOcultarFiltros.onclick = () => {
 contenedorFiltros.classList.toggle("is-hidden");
 if (contenedorFiltros.classList.contains("is-hidden")) {
@@ -269,6 +266,46 @@ botonOcultarFiltros.textContent = "Mostrar filtros";
 botonOcultarFiltros.textContent = "Ocultar filtros";
 }
 }
+
+// FECHA
+
+
+
+
+// ORDENAR POR
+
+const selectOrdenarPor = document.querySelector("#ordenar-por")
+console.log(selectOrdenarPor)
+
+const ordenarMasRecientes = (array) => {  
+ const fechasOrdenadas =  array.sort((a, b) => {
+    return new Date (b.fecha) - new Date (a.fecha)
+  })
+  return fechasOrdenadas  
+}
+
+const ordenarMenosRecientes = (array) => {
+  const fechasOrdenadas = array.sort((a, b) => {
+    return new Date (a.fecha) - new Date (b.fecha)
+  })
+  return fechasOrdenadas
+}
+
+const filtradosPorSelects = (selector, valor, funcion) =>{
+  selector.oninput = () =>{
+    if(selector.value === valor){
+      listadoOperaciones.innerHTML = funcion
+    }      
+  }
+}
+
+filtradosPorSelects(selectOrdenarPor, "mas-reciente", ordenarMasRecientes(operaciones))
+filtradosPorSelects(selectOrdenarPor, "menos-reciente", ordenarMenosRecientes(operaciones))
+
+
+
+
+
 
 
 
