@@ -222,9 +222,6 @@ guardarDeLStorage(nuevasOperaciones, "operaciones")
 
 operaciones = nuevasOperaciones
 
-
-
-
 const aHTML = (array) => {
 const arrReduc = array.reduce((acc, elemento) => {
 const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
@@ -249,6 +246,7 @@ return arrReduc
 }
 
 // corregir 
+
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 
 const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
@@ -269,10 +267,26 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 
 // FECHA
 
+const inputFecha = document.querySelector("#input-date")
+console.log(inputFecha.value)
+
+const filtrarPorFecha = () => {
+
+  inputFecha.oninput = () => {
+    console.log(inputFecha.value)
+  }
+
+}
+
+filtrarPorFecha()
 
 
 
-// ORDENAR POR
+
+                     // ORDENAR POR
+
+
+// MÁS Y MENOS RECIENTE
 
 const selectOrdenarPor = document.querySelector("#ordenar-por")
 console.log(selectOrdenarPor)
@@ -281,7 +295,6 @@ const ordenarMasRecientes = (array) => {
  const fechasOrdenadas =  array.sort((a, b) => {
     return new Date (b.fecha) - new Date (a.fecha)
   })
-  console.log(fechasOrdenadas)
   return fechasOrdenadas  
 }
 
@@ -289,11 +302,9 @@ const ordenarMenosRecientes = (array) => {
   const fechasOrdenadas = array.sort((a, b) => {
     return new Date (a.fecha) - new Date (b.fecha)
   })
-  console.log(fechasOrdenadas)
   return fechasOrdenadas
 }
 
-listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
 const selectOrdenarAHTML = (funcion, valor) => {
   let guardarFuncion = funcion
@@ -301,8 +312,13 @@ const selectOrdenarAHTML = (funcion, valor) => {
   selectOrdenarPor.oninput = () => selectOrdenarPor.value === valorSelect && (listadoOperaciones.innerHTML = aHTML(guardarFuncion))  
 }
 
+listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+
+
 selectOrdenarAHTML(ordenarMasRecientes(operaciones), "mas-reciente")
 selectOrdenarAHTML(ordenarMenosRecientes(operaciones), "menos-reciente")
+
+
 
 
 
