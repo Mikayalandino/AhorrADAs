@@ -293,10 +293,21 @@ const ordenarMenosRecientes = (array) => {
   return fechasOrdenadas
 }
 
-listadoOperaciones.innerHTML = ordenarMasRecientes(operaciones)
+listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+
+const selectOrdenarAHTML = (funcion, valor) => {
+  let guardarFuncion = funcion
+  let valorSelect = valor
+  selectOrdenarPor.oninput = () => selectOrdenarPor.value === valorSelect && (listadoOperaciones.innerHTML = aHTML(guardarFuncion))  
+}
+
+selectOrdenarAHTML(ordenarMasRecientes(operaciones), "mas-reciente")
+selectOrdenarAHTML(ordenarMenosRecientes(operaciones, "menos-reciente"))
 
 
-  selectOrdenarPor.oninput = () => console.log(selectOrdenarPor.value) 
+
+
+  
 
  
          
