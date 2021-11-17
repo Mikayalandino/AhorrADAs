@@ -281,6 +281,7 @@ const ordenarMasRecientes = (array) => {
  const fechasOrdenadas =  array.sort((a, b) => {
     return new Date (b.fecha) - new Date (a.fecha)
   })
+  console.log(fechasOrdenadas)
   return fechasOrdenadas  
 }
 
@@ -288,19 +289,21 @@ const ordenarMenosRecientes = (array) => {
   const fechasOrdenadas = array.sort((a, b) => {
     return new Date (a.fecha) - new Date (b.fecha)
   })
+  console.log(fechasOrdenadas)
   return fechasOrdenadas
 }
 
-const filtradosPorSelects = (selector, valor, funcion) =>{
-  selector.oninput = () =>{
-    if(selector.value === valor){
-      listadoOperaciones.innerHTML = funcion
-    }      
-  }
-}
+listadoOperaciones.innerHTML = ordenarMasRecientes(operaciones)
 
-filtradosPorSelects(selectOrdenarPor, "mas-reciente", ordenarMasRecientes(operaciones))
-filtradosPorSelects(selectOrdenarPor, "menos-reciente", ordenarMenosRecientes(operaciones))
+
+  selectOrdenarPor.oninput = () => console.log(selectOrdenarPor.value) 
+
+ 
+         
+  
+
+
+
 
 
 
