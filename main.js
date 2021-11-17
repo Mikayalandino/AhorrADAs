@@ -302,7 +302,7 @@ const selectOrdenarAHTML = (funcion, valor) => {
 }
 
 selectOrdenarAHTML(ordenarMasRecientes(operaciones), "mas-reciente")
-selectOrdenarAHTML(ordenarMenosRecientes(operaciones, "menos-reciente"))
+selectOrdenarAHTML(ordenarMenosRecientes(operaciones), "menos-reciente")
 
 
 
