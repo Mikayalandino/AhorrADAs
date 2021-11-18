@@ -341,25 +341,28 @@ selectOrdenarPorAHTML()
 
 // ORDENAR A/Z Y Z/A
 
-const arrayOrdenadoAZ = operaciones.sort((a,b) => {
-  if (b.descripcion.toLowerCase > a.descripcion.toLowerCase()){
+  
+
+const arrayOrdenadoA = operaciones.sort((a,b) => {
+  
+  if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()){
     return -1
   }
 })
 
-console.log(arrayOrdenadoAZ)
+console.log(arrayOrdenadoA)
 
   
-  const arrayOrdenadoZA = operaciones.sort((a, b) => {
+  const arrayOrdenadoZ = operaciones.sort((a, b) => {
 
     if( a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
-      return 1
+      return -1
     }
   })
 
-  console.log(arrayOrdenadoZA)
+  console.log(arrayOrdenadoZ)
 
-    
+  
 
 
 
