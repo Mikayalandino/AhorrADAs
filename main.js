@@ -330,7 +330,6 @@ const masYMenosRecientes = () => {
   }
 }
 
-
 const selectOrdenarPorAHTML = () => {
   selectOrdenarPor.oninput = () =>{ 
     masYMenosRecientes()  
@@ -338,6 +337,32 @@ const selectOrdenarPorAHTML = () => {
 }
 
 selectOrdenarPorAHTML()
+
+
+// ORDENAR A/Z Y Z/A
+
+const arrayOrdenadoAZ = operaciones.sort((a,b) => {
+  if (b.descripcion.toLowerCase > a.descripcion.toLowerCase()){
+    return -1
+  }
+})
+
+console.log(arrayOrdenadoAZ)
+
+  
+  const arrayOrdenadoZA = operaciones.sort((a, b) => {
+
+    if( a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
+      return 1
+    }
+  })
+
+  console.log(arrayOrdenadoZA)
+
+    
+
+
+
 
 
 
