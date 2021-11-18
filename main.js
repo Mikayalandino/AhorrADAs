@@ -33,6 +33,8 @@ const inputFechaoperaciones = document.querySelector("#input-fecha")
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 
+const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
+
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
@@ -44,6 +46,13 @@ const formularioFiltros = document.getElementById("formulario-filtros");
                       // AhorrADAs pagina completa
 const paginaPrincipal = document.getElementById("pagina-completa")
 const botonAhorradas = document.getElementById("boton-ahorradas")
+const botonNavAhorradas = document.getElementById("boton-nav-ahorradas")
+
+botonNavAhorradas.onclick = () => {
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
+}
 
 // Botones balance
 
@@ -63,8 +72,9 @@ const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-e
 const seccionReportesInsuficientes = document.getElementById("seccion-reportes-insuficientes")
 
 botonReportesNavbar.onclick = () => {
-seccionReportesInsuficientes.classList.remove("is-hidden");
-seccionCategorias.classList.add("is-hidden")
+  seccionReportesInsuficientes.classList.remove("is-hidden");
+  seccionBalance.classList.add("is-hidden");
+  seccionCategorias.classList.add("is-hidden")
 }
 
 // FUNCIONES GENÉRICAS 
@@ -216,6 +226,11 @@ aJSONYSubirAlLStorage(operaciones, "operaciones")
 listadoOperaciones.innerHTML = aHTML(operaciones)  
 }
 
+const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
+operacionesSinResultados.classList.add("is-hidden"))
+
+estadoDeContenedorDeOperaciones("operaciones")
+
 let nuevasOperaciones = []
 
 guardarDeLStorage(nuevasOperaciones, "operaciones")
@@ -245,17 +260,8 @@ return acc += `<div class="columns">
 return arrReduc
 }
 
-// corregir 
-
-const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
-
-const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
-operacionesSinResultados.classList.add("is-hidden"))
-
-estadoDeContenedorDeOperaciones("operaciones")
-
-
                      // FILTROS
+
 botonOcultarFiltros.onclick = () => {
 contenedorFiltros.classList.toggle("is-hidden");
 if (contenedorFiltros.classList.contains("is-hidden")) {
@@ -283,9 +289,6 @@ const filtrarPorFecha = (array) => {
 }
 
 filtrarPorFecha(operaciones)
-
-
-
 
                      // ORDENAR POR
 
