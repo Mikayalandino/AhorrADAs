@@ -154,7 +154,8 @@ const arrayReduc = categorias.reduce((acc, arr) => {
 return acc += `<option value="${arr}">${arr}</option>`
 }, "")
 
-selectCategoriasDeFiltros.innerHTML = arrayReduc
+ selectCategoriasDeFiltros.innerHTML = `<option value="todas">Todas</option>
+ ${arrayReduc}` 
 
 const agregarCategoriasAHTML = () => {
 const categoriasHTML = categorias.reduce((acc, elemento) => {
@@ -223,12 +224,11 @@ botonAgregarOperacion.onclick = () =>{
 subirObjetoAArray(operaciones)
 blanquearFormularios(formularioOperaciones)
 aJSONYSubirAlLStorage(operaciones, "operaciones") 
-listadoOperaciones.innerHTML = aHTML(operaciones)  
+listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))  
 }
 
 const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
 operacionesSinResultados.classList.add("is-hidden"))
-
 estadoDeContenedorDeOperaciones("operaciones")
 
 let nuevasOperaciones = []
@@ -241,7 +241,7 @@ const aHTML = (array) => {
 const arrReduc = array.reduce((acc, elemento) => {
 const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
 const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"  
-const fechas = new Date(elemento.fecha)
+const fechas = new Date(elemento.fecha) 
 
 return acc += `<div class="columns">
 <div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
@@ -273,13 +273,14 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 
 // FECHA
 
-const inputFecha = document.querySelector("#input-date")
-console.log(inputFecha.value)
+/** 
+const inputDateFiltro = document.querySelector("#input-date")
+console.log(inputDateFiltro)
 
 const filtrarPorFecha = (array) => {
-  inputFecha.oninput = () => {
+  inputDateFiltro.oninput = () => {
     const filtrarOperaciones = array.filter((elemento) =>{
-      return new Date (elemento.fecha) > inputFecha.value
+      return new Date (elemento.fecha) === inputFecha.value
     })
 
     console.log(filtrarOperaciones)
@@ -290,6 +291,8 @@ const filtrarPorFecha = (array) => {
 
 filtrarPorFecha(operaciones)
 
+**/
+
                      // ORDENAR POR
 
 
@@ -297,6 +300,7 @@ filtrarPorFecha(operaciones)
 
 const selectOrdenarPor = document.querySelector("#ordenar-por")
 console.log(selectOrdenarPor)
+
 
 const ordenarMasRecientes = (array) => {  
  const fechasOrdenadas =  array.sort((a, b) => {
@@ -313,24 +317,58 @@ const ordenarMenosRecientes = (array) => {
 }
 
 
-const selectOrdenarAHTML = (funcion, valor) => {
-  let guardarFuncion = funcion
-  let valorSelect = valor
-  selectOrdenarPor.oninput = () => selectOrdenarPor.value === valorSelect && (listadoOperaciones.innerHTML = aHTML(guardarFuncion))  
-}
-
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
+const masYMenosRecientes = () => {
+  if(selectOrdenarPor.value === "mas-reciente"){
+    listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+  }
+  else if(selectOrdenarPor.value === "menos-reciente"){
+    listadoOperaciones.innerHTML = aHTML(ordenarMenosRecientes(operaciones))
+  }
+  else{
+    console.log("es otra opción")
+  }
+}
 
-selectOrdenarAHTML(ordenarMasRecientes(operaciones), "mas-reciente")
-selectOrdenarAHTML(ordenarMenosRecientes(operaciones), "menos-reciente")
+const selectOrdenarPorAHTML = () => {
+  selectOrdenarPor.oninput = () =>{ 
+    masYMenosRecientes()  
+}
+}
+
+selectOrdenarPorAHTML()
 
 
-
-
-
+// ORDENAR A/Z Y Z/A
 
   
+
+const arrayOrdenadoA = [...operaciones].sort((a,b) => {
+  
+  if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()){
+    return -1
+  }
+})
+
+console.log(arrayOrdenadoA)
+
+  
+const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
+
+  if( a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
+    return -1
+  }
+})
+
+console.log(arrayOrdenadoZ)
+
+  
+
+
+
+
+
 
  
          

@@ -130,8 +130,7 @@
                             </div>
                             <div class="control">
                                 <div class="select is-fullwidth">
-                                    <select id="select-categorias">
-
+                                    <select id="select-categorias" class="column">
                                                <option value="todas">Todas</option>  <!-- no me lo toma-->                                
                                     </select>
                                 </div>
@@ -342,17 +341,18 @@
       <!--Seccion reportes-->
       
     <section class="section mt-5 is-hidden" id="seccion-reportes-insuficientes">
+        <div class="container">
       <div class="columns">
-        <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+        <div class="column is-10-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
           <div class="box">
             <h2 class="title is-size-2 has-text-weight-bold pb-2">
               Reportes
             </h2>
             <div id="sin-reportes">
               <div class="my-6 py-6">
-                <figure class="image">
-                  <img src="./img/reportes.jpg" class="" alt="">
-                </figure>
+                <div class="image is-16x16px">
+                  <img src="img/reportes.svg" class="" alt="reportes">
+                </div>
                 <h4 class="is-size-4 has-text-centered mt-6 mb-4 has-text-weight-semibold">
                   Operaciones insuficientes
                 </h4>
@@ -361,6 +361,7 @@
                 </p>
               </div>
             </div>
+        </div>
             
         </section>
             
