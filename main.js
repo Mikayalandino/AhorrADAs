@@ -331,43 +331,32 @@ const masYMenosRecientes = () => {
   }
 }
 
-                               // Mayor monto
+                               // Menor monto
 
-const selectOrdenarMayorMonto = document.getElementById("filtro-orden-mayor-monto")
+const selectOrdenarMenorMonto = document.getElementById("filtro-orden-mayor-monto")
 
-const arrayOrdenadoMontoMayor = [...operaciones].sort((a,b) => {
+const arrayOrdenadoMenorMonto = [...operaciones].sort((a,b) => {
   return a.monto - b.monto  
 })
-console.log(arrayOrdenadoMontoMayor)
 
-                                // Menor monto  (monto)
+                                // Mayor monto  (monto)
 
-const selectOrdenarMenorMonto = document.getElementById("filtro-orden-menor-monto")
+const selectOrdenarMayorMonto = document.getElementById("filtro-orden-menor-monto")
 
-const arrayOrdenadoMontoMenor = [...operaciones].sort((a,b) => {
+const arrayOrdenadoMayorMonto = [...operaciones].sort((a,b) => {
   return b.monto - a.monto  
 })
-console.log(arrayOrdenadoMontoMenor)
 
 // Ordenar mayor/menor monto
 
 const mayorMenorMonto = () => {
   if(selectOrdenarPor.value === "mayor-monto") {
-    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMontoMayor)
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMayorMonto)
   }
   else if(selectOrdenarPor.value === "menor-monto") {
-    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMontoMenor)
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMenorMonto)
   }
 }
-
-const selectOrdenarPorAHTML = () => {
-  selectOrdenarPor.oninput = () => { 
-    masYMenosRecientes()
-    mayorMenorMonto()  
-}
-}
-
-selectOrdenarPorAHTML()
 
 // ORDENAR A/Z Y Z/A
 
@@ -377,9 +366,6 @@ const arrayOrdenadoA = [...operaciones].sort((a,b) => {
     return -1
   }
 })
-
-console.log(arrayOrdenadoA)
-
   
 const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
 
@@ -388,9 +374,24 @@ const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
   }
 })
 
-console.log(arrayOrdenadoZ)
+const ordenarDeAZ = () => {
+  if(selectOrdenarPor.value === "a-z") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoA)
+  }
+  else if(selectOrdenarPor.value === "z-a") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoZ)
+  }
+}
 
-  
+const selectOrdenarPorAHTML = () => {
+  selectOrdenarPor.oninput = () => { 
+    masYMenosRecientes()
+    mayorMenorMonto()
+    ordenarDeAZ()  
+}
+}
+
+selectOrdenarPorAHTML()
 
 
 
