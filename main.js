@@ -344,7 +344,7 @@ selectOrdenarPorAHTML()
 
   
 
-const arrayOrdenadoA = operaciones.sort((a,b) => {
+const arrayOrdenadoA = [...operaciones].sort((a,b) => {
   
   if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()){
     return -1
@@ -354,7 +354,7 @@ const arrayOrdenadoA = operaciones.sort((a,b) => {
 console.log(arrayOrdenadoA)
 
   
-const arrayOrdenadoZ = operaciones.sort((a, b) => {
+const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
 
   if( a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
     return -1
