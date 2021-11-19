@@ -331,18 +331,45 @@ const masYMenosRecientes = () => {
   }
 }
 
+                               // Mayor monto
+
+const selectOrdenarMayorMonto = document.getElementById("filtro-orden-mayor-monto")
+
+const arrayOrdenadoMontoMayor = [...operaciones].sort((a,b) => {
+  return a.monto - b.monto  
+})
+console.log(arrayOrdenadoMontoMayor)
+
+                                // Menor monto  (monto)
+
+const selectOrdenarMenorMonto = document.getElementById("filtro-orden-menor-monto")
+
+const arrayOrdenadoMontoMenor = [...operaciones].sort((a,b) => {
+  return b.monto - a.monto  
+})
+console.log(arrayOrdenadoMontoMenor)
+
+// Ordenar mayor/menor monto
+
+const mayorMenorMonto = () => {
+  if(selectOrdenarPor.value === "mayor-monto") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMontoMayor)
+  }
+  else if(selectOrdenarPor.value === "menor-monto") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMontoMenor)
+  }
+}
+
 const selectOrdenarPorAHTML = () => {
-  selectOrdenarPor.oninput = () =>{ 
-    masYMenosRecientes()  
+  selectOrdenarPor.oninput = () => { 
+    masYMenosRecientes()
+    mayorMenorMonto()  
 }
 }
 
 selectOrdenarPorAHTML()
 
-
 // ORDENAR A/Z Y Z/A
-
-  
 
 const arrayOrdenadoA = [...operaciones].sort((a,b) => {
   
