@@ -3,10 +3,8 @@ const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion")
 
 // Categorías
 const seccionCategorias = document.getElementById("seccion-categorias");
-console.log(seccionCategorias) // preguntar para qué sirve 
 
 const listadoDeCategorias = document.getElementById("listado-categorias");
-// const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
 
 const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");
@@ -273,25 +271,15 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 
 // Filtro por tipo
 
-const filtradoPorTodos = () => {
-  if(selectOrdenarPor.value === "todos"){
-    listadoOperaciones.innerHTML = aHTML(ordenarPorTodos(operaciones))
-  }
+const filtrosTipo = document.getElementById("filtros-tipo")
+
+filtrosTipo.onchange = () => {
+  const filtracionPorTipo = operaciones.filter((operacion) => {
+    return operacion.tipo === filtrosTipo.value
+  })
+  console.log("fitro tipo: ", filtracionPorTipo)
+  
 }
-
-
-/* const filtradoPorGastos = operaciones.filter((elemento) => {
-  return elemento === "gasto"
-})
-
-const filtradoPorGanancia = operaciones.filter((elemento) => {
-  return elemento === "ganancia"
-})
-
-console.log("todos", filtradoPorGastos)
-console.log("gastos", filtradoPorGastos)
-console.log("ganancias", filtradoPorGanancia)  
- */
 
 
 // Filtro categoría
@@ -321,14 +309,12 @@ filtrarPorFecha(operaciones)
 
 **/
 
-                     // ORDENAR POR
+// ORDENAR POR
 
 
-// MÁS Y MENOS RECIENTE
+                              // MÁS Y MENOS RECIENTE
 
 const selectOrdenarPor = document.querySelector("#ordenar-por")
-console.log(selectOrdenarPor)
-
 
 const ordenarMasRecientes = (array) => {  
  const fechasOrdenadas =  array.sort((a, b) => {
@@ -343,7 +329,6 @@ const ordenarMenosRecientes = (array) => {
   })
   return fechasOrdenadas
 }
-
 
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
@@ -372,8 +357,6 @@ const arrayOrdenadoMayorMonto = [...operaciones].sort((a,b) => {
   return b.monto - a.monto  
 })
 
-// Ordenar mayor/menor monto
-
 const mayorMenorMonto = () => {
   if(selectOrdenarPor.value === "mayor-monto") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMayorMonto)
@@ -383,7 +366,7 @@ const mayorMenorMonto = () => {
   }
 }
 
-// ORDENAR A/Z Y Z/A
+                               // ORDENAR A/Z Y Z/A
 
 const arrayOrdenadoA = [...operaciones].sort((a,b) => {
   

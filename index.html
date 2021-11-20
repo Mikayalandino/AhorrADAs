@@ -118,7 +118,7 @@
                             </div>
                             <div class="control">
                                 <div class="select is-fullwidth">
-                                    <select class="column">
+                                    <select class="column" id="filtros-tipo">
                                         <option value="todos">Todos</option>
                                         <option value="gasto">Gasto</option>
                                         <option value="ganancia">Ganancia</option>
@@ -296,17 +296,17 @@
                 <div class="box"> 
                     <h3 class="title is-size-2 has-text-weight-medium has-text-weight-bold mb-6">Categorías</h3>
                     <form id="formulario-categorias">
-                        <label class="label">Nombre</label>
-                        <div class="field is-grouped">
-                            <div class="control is-expanded">
-                                <input id="input-categoria" class="input" type="text">
+                        <label class="label">Nombre
+                            <div class="field is-grouped">
+                                <div class="control is-expanded">
+                                    <input id="input-categoria" class="input" type="text">
+                                </div>
+                                <div class="control">
+                                    <button type="button" class="button is-success" id="boton-agregar-categoria">Agregar</button>
+                                </div>
                             </div>
-                            <div class="control">
-                                <button type="button" class="button is-success" id="boton-agregar-categoria">Agregar</button>
-                            </div>
-                        </div>
-                        <div class="" id="listado-categorias">
-                        </div>  
+                            <div class="" id="listado-categorias"></div>
+                        </label>  
                     </form>                       
                 </div>
             </div>
@@ -321,21 +321,22 @@
                 <div class="box">
                     <h3 class="title is-size-2 has-text-weight-medium has-text-weight-bold mb-6">Editar categoría</h3>
                     <form id="formulario-editar-categorias">
-                        <label class="label">Nombre</label>
-                        <div class="field is-grouped">
-                            <div class="control is-expanded">
-                                <input class="input mb-4" type="text">
+                        <label class="label">Nombre
+                            <div class="field is-grouped">
+                                <div class="control is-expanded">
+                                    <input class="input mb-4" type="text">
+                                </div>
                             </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column is-8"></div>
-                            <div class="column">
-                                <button type="button" class="button is-light ml-5" id="boton-cancelar-editar-categoria">Cancelar</button>
-                            </div>  
-                            <div class="column">
-                                <button type="button" class="button is-success" id="boton-confirmar-editar-categoria">Confirmar</button>
-                            </div>                  
-                        </div>
+                            <div class="columns">
+                                <div class="column is-8"></div>
+                                <div class="column">
+                                    <button type="button" class="button is-light ml-5" id="boton-cancelar-editar-categoria">Cancelar</button>
+                                </div>  
+                                <div class="column">
+                                    <button type="button" class="button is-success" id="boton-confirmar-editar-categoria">Confirmar</button>
+                                </div>                  
+                            </div>
+                        </label>
                     </form>
                 </div>
             </div>
