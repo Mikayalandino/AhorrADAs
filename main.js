@@ -150,15 +150,7 @@ const arrayReduc = categorias.reduce((acc, arr) => {
 return acc += `<option value="${arr}">${arr}</option>`
 }, "")
 
-
-// arreglar categorias todas
-
-const categoriaFiltroTodas = document.getElementById("categoria-filtro-todas")
-
-// console.log(categoriaFiltroTodas)
-
-// se borró el código "todas" del innterHTML, porque pisa el del HMTL 
-selectCategoriasDeFiltros.innerHTML = `${arrayReduc}` 
+selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
 
 const agregarCategoriasAHTML = () => {
 const categoriasHTML = categorias.reduce((acc, elemento) => {
@@ -274,7 +266,7 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 }
 }
 
-// Filtro por tipo
+// Filtro por tipo y categoria
 
 const filtrosTipo = document.getElementById("filtros-tipo")
 
@@ -298,12 +290,14 @@ const filtrosPorTipoYCategoria = () => {
   return filtrado
 } 
 
+                               // Filtro por tipo
+
 filtrosTipo.onchange = () => {
   const arrayFiltradoTipo = filtrosPorTipoYCategoria()
   listadoOperaciones.innerHTML = aHTML(arrayFiltradoTipo)
 } 
 
-// Filtro por categoría
+                               // Filtro por categoría
 
 selectCategoriasDeFiltros.onchange = () => {
   const arrayFiltradoCategoria = filtrosPorTipoYCategoria()
