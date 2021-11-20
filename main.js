@@ -278,29 +278,36 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 
 const filtrosTipo = document.getElementById("filtros-tipo")
 
-let arrayFiltrado = []
+let arrayFiltrado = [...operaciones]
+
+const filtrosPorTipoYCategoria = () => {
+  const filtroTipo = filtrosTipo.value
+  const filtracionPorTipo = operaciones.filter((operacion) => {
+    if (filtroTipo === "todos") {
+      return operacion
+    }
+    return operacion.tipo === filtroTipo
+  })
+  const filtracionPorCategoria = selectCategoriasDeFiltros.value
+  const filtrado = filtracionPorTipo.filter((operacion) => {
+    if (filtracionPorCategoria === "todas") {
+      return operacion
+    }
+    return operacion.categoria === filtracionPorCategoria
+  })
+  return filtrado
+} 
 
 filtrosTipo.onchange = () => {
-  const filtracionPorTipo = operaciones.filter((operacion) => {
-    if (filtrosTipo.value === "todos"){
-      return operaciones
-    }
-    return operacion.tipo === filtrosTipo.value
-  })
-  arrayFiltrado = [... filtracionPorTipo]
-  listadoOperaciones.innerHTML = aHTML(filtracionPorTipo)
-}
+  const arrayFiltradoTipo = filtrosPorTipoYCategoria()
+  listadoOperaciones.innerHTML = aHTML(arrayFiltradoTipo)
+} 
 
 // Filtro por categoría
 
 selectCategoriasDeFiltros.onchange = () => {
-  const filtracionPorCategoria = arrayFiltrado.filter((operacion) => {
-    if (filtrosTipo.value === "todas"){
-      return operaciones
-    }
-    return operacion.categoria === selectCategoriasDeFiltros.value
-  })
-  listadoOperaciones.innerHTML = aHTML(filtracionPorCategoria)
+  const arrayFiltradoCategoria = filtrosPorTipoYCategoria()
+  listadoOperaciones.innerHTML = aHTML(arrayFiltradoCategoria)
 }
 
 // FECHA
