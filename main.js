@@ -163,8 +163,8 @@ return acc + `<div class="columns">
 <div class="column">
 <div class="tag is-primary is-light">${elemento}</div>
 </div>
-<button id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small mr-2 mt-2">Editar</button> 
-<button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mr-1 mt-2">Eliminar</button>
+<button type="button" id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small mr-2 mt-2">Editar</button> 
+<button type="button" id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mr-1 mt-2">Eliminar</button>
 </div>`
 }, "")
 
@@ -250,8 +250,8 @@ return acc += `<div class="columns">
 <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
 <div class="column is-2">
 <div class="columns">
-  <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-  <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+  <button type="button" id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+  <button type="button" id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
 </div>
 </div>
 </div>`
@@ -270,6 +270,34 @@ botonOcultarFiltros.textContent = "Mostrar filtros";
 botonOcultarFiltros.textContent = "Ocultar filtros";
 }
 }
+
+// Filtro por tipo
+
+const filtradoPorTodos = () => {
+  if(selectOrdenarPor.value === "todos"){
+    listadoOperaciones.innerHTML = aHTML(ordenarPorTodos(operaciones))
+  }
+}
+
+
+/* const filtradoPorGastos = operaciones.filter((elemento) => {
+  return elemento === "gasto"
+})
+
+const filtradoPorGanancia = operaciones.filter((elemento) => {
+  return elemento === "ganancia"
+})
+
+console.log("todos", filtradoPorGastos)
+console.log("gastos", filtradoPorGastos)
+console.log("ganancias", filtradoPorGanancia)  
+ */
+
+
+// Filtro categoría
+
+
+
 
 // FECHA
 
@@ -333,15 +361,12 @@ const masYMenosRecientes = () => {
 
                                // Menor monto
 
-const selectOrdenarMenorMonto = document.getElementById("filtro-orden-mayor-monto")
-
 const arrayOrdenadoMenorMonto = [...operaciones].sort((a,b) => {
   return a.monto - b.monto  
 })
 
                                 // Mayor monto  (monto)
 
-const selectOrdenarMayorMonto = document.getElementById("filtro-orden-menor-monto")
 
 const arrayOrdenadoMayorMonto = [...operaciones].sort((a,b) => {
   return b.monto - a.monto  
@@ -374,7 +399,7 @@ const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
   }
 })
 
-const ordenarDeAZ = () => {
+const ordenarAlfabeticamente = () => {
   if(selectOrdenarPor.value === "a-z") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoA)
   }
@@ -387,7 +412,7 @@ const selectOrdenarPorAHTML = () => {
   selectOrdenarPor.oninput = () => { 
     masYMenosRecientes()
     mayorMenorMonto()
-    ordenarDeAZ()  
+    ordenarAlfabeticamente()  
 }
 }
 
