@@ -3,10 +3,8 @@ const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion")
 
 // Categorías
 const seccionCategorias = document.getElementById("seccion-categorias");
-console.log(seccionCategorias) // preguntar para qué sirve 
 
 const listadoDeCategorias = document.getElementById("listado-categorias");
-// const categoriasAgregadas = document.getElementById("categorias-agregadas");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
 
 const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");
@@ -128,8 +126,6 @@ modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBal
 
                         // CATEGORÍAS 
 
-
-
 const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave) 
 
 subirCategoriasAlLs(categorias, "categorias")
@@ -154,8 +150,7 @@ const arrayReduc = categorias.reduce((acc, arr) => {
 return acc += `<option value="${arr}">${arr}</option>`
 }, "")
 
- selectCategoriasDeFiltros.innerHTML = `<option value="todas">Todas</option>
- ${arrayReduc}` 
+selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
 
 const agregarCategoriasAHTML = () => {
 const categoriasHTML = categorias.reduce((acc, elemento) => {
@@ -163,8 +158,8 @@ return acc + `<div class="columns">
 <div class="column">
 <div class="tag is-primary is-light">${elemento}</div>
 </div>
-<button id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small mr-2 mt-2">Editar</button> 
-<button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mr-1 mt-2">Eliminar</button>
+<button type="button" id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small mr-2 mt-2">Editar</button> 
+<button type="button" id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mr-1 mt-2">Eliminar</button>
 </div>`
 }, "")
 
@@ -250,8 +245,8 @@ return acc += `<div class="columns">
 <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
 <div class="column is-2">
 <div class="columns">
-  <button id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-  <button id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+  <button type="button" id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+  <button type="button" id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
 </div>
 </div>
 </div>`
@@ -269,6 +264,44 @@ botonOcultarFiltros.textContent = "Mostrar filtros";
 } else {
 botonOcultarFiltros.textContent = "Ocultar filtros";
 }
+}
+
+// Filtro por tipo y categoria
+
+const filtrosTipo = document.getElementById("filtros-tipo")
+
+let arrayFiltrado = [...operaciones]
+
+const filtrosPorTipoYCategoria = () => {
+  const filtroTipo = filtrosTipo.value
+  const filtracionPorTipo = operaciones.filter((operacion) => {
+    if (filtroTipo === "todos") {
+      return operacion
+    }
+    return operacion.tipo === filtroTipo
+  })
+  const filtracionPorCategoria = selectCategoriasDeFiltros.value
+  const filtrado = filtracionPorTipo.filter((operacion) => {
+    if (filtracionPorCategoria === "todas") {
+      return operacion
+    }
+    return operacion.categoria === filtracionPorCategoria
+  })
+  return filtrado
+} 
+
+                               // Filtro por tipo
+
+filtrosTipo.onchange = () => {
+  const arrayFiltradoTipo = filtrosPorTipoYCategoria()
+  listadoOperaciones.innerHTML = aHTML(arrayFiltradoTipo)
+} 
+
+                               // Filtro por categoría
+
+selectCategoriasDeFiltros.onchange = () => {
+  const arrayFiltradoCategoria = filtrosPorTipoYCategoria()
+  listadoOperaciones.innerHTML = aHTML(arrayFiltradoCategoria)
 }
 
 // FECHA
@@ -293,14 +326,12 @@ filtrarPorFecha(operaciones)
 
 **/
 
-                     // ORDENAR POR
+// ORDENAR POR
 
 
-// MÁS Y MENOS RECIENTE
+                              // MÁS Y MENOS RECIENTE
 
 const selectOrdenarPor = document.querySelector("#ordenar-por")
-console.log(selectOrdenarPor)
-
 
 const ordenarMasRecientes = (array) => {  
  const fechasOrdenadas =  array.sort((a, b) => {
@@ -316,7 +347,6 @@ const ordenarMenosRecientes = (array) => {
   return fechasOrdenadas
 }
 
-
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
 const masYMenosRecientes = () => {
@@ -331,18 +361,29 @@ const masYMenosRecientes = () => {
   }
 }
 
-const selectOrdenarPorAHTML = () => {
-  selectOrdenarPor.oninput = () =>{ 
-    masYMenosRecientes()  
+                               // Menor monto
+
+const arrayOrdenadoMenorMonto = [...operaciones].sort((a,b) => {
+  return a.monto - b.monto  
+})
+
+                                // Mayor monto  (monto)
+
+
+const arrayOrdenadoMayorMonto = [...operaciones].sort((a,b) => {
+  return b.monto - a.monto  
+})
+
+const mayorMenorMonto = () => {
+  if(selectOrdenarPor.value === "mayor-monto") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMayorMonto)
+  }
+  else if(selectOrdenarPor.value === "menor-monto") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMenorMonto)
+  }
 }
-}
 
-selectOrdenarPorAHTML()
-
-
-// ORDENAR A/Z Y Z/A
-
-  
+                               // ORDENAR A/Z Y Z/A
 
 const arrayOrdenadoA = [...operaciones].sort((a,b) => {
   
@@ -350,9 +391,6 @@ const arrayOrdenadoA = [...operaciones].sort((a,b) => {
     return -1
   }
 })
-
-console.log(arrayOrdenadoA)
-
   
 const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
 
@@ -361,9 +399,24 @@ const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
   }
 })
 
-console.log(arrayOrdenadoZ)
+const ordenarAlfabeticamente = () => {
+  if(selectOrdenarPor.value === "a-z") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoA)
+  }
+  else if(selectOrdenarPor.value === "z-a") {
+    listadoOperaciones.innerHTML = aHTML(arrayOrdenadoZ)
+  }
+}
 
-  
+const selectOrdenarPorAHTML = () => {
+  selectOrdenarPor.oninput = () => { 
+    masYMenosRecientes()
+    mayorMenorMonto()
+    ordenarAlfabeticamente()  
+}
+}
+
+selectOrdenarPorAHTML()
 
 
 
