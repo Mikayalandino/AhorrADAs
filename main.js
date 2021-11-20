@@ -126,8 +126,6 @@ modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBal
 
                         // CATEGORÍAS 
 
-
-
 const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave) 
 
 subirCategoriasAlLs(categorias, "categorias")
@@ -152,8 +150,15 @@ const arrayReduc = categorias.reduce((acc, arr) => {
 return acc += `<option value="${arr}">${arr}</option>`
 }, "")
 
- selectCategoriasDeFiltros.innerHTML = `<option value="todas">Todas</option>
- ${arrayReduc}` 
+
+// arreglar categorias todas
+
+const categoriaFiltroTodas = document.getElementById("categoria-filtro-todas")
+
+// console.log(categoriaFiltroTodas)
+
+// se borró el código "todas" del innterHTML, porque pisa el del HMTL 
+selectCategoriasDeFiltros.innerHTML = `${arrayReduc}` 
 
 const agregarCategoriasAHTML = () => {
 const categoriasHTML = categorias.reduce((acc, elemento) => {
@@ -273,6 +278,8 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 
 const filtrosTipo = document.getElementById("filtros-tipo")
 
+let arrayFiltrado = []
+
 filtrosTipo.onchange = () => {
   const filtracionPorTipo = operaciones.filter((operacion) => {
     if (filtrosTipo.value === "todos"){
@@ -280,13 +287,14 @@ filtrosTipo.onchange = () => {
     }
     return operacion.tipo === filtrosTipo.value
   })
+  arrayFiltrado = [... filtracionPorTipo]
   listadoOperaciones.innerHTML = aHTML(filtracionPorTipo)
 }
 
 // Filtro por categoría
 
 selectCategoriasDeFiltros.onchange = () => {
-  const filtracionPorCategoria = operaciones.filter((operacion) => {
+  const filtracionPorCategoria = arrayFiltrado.filter((operacion) => {
     if (filtrosTipo.value === "todas"){
       return operaciones
     }
