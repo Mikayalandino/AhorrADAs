@@ -277,15 +277,19 @@ filtrosTipo.onchange = () => {
   const filtracionPorTipo = operaciones.filter((operacion) => {
     return operacion.tipo === filtrosTipo.value
   })
-  console.log("fitro tipo: ", filtracionPorTipo)
-  
+  console.log(filtracionPorTipo)
+  listadoOperaciones.innerHTML = aHTML(filtracionPorTipo)
 }
-
 
 // Filtro categoría
 
-
-
+selectCategoriasDeFiltros.onchange = () => {
+  const filtracionPorCategoria = operaciones.filter((operacion) => {
+    return operacion.categoria === selectCategoriasDeFiltros.value
+  })
+  console.log(filtracionPorCategoria)
+  listadoOperaciones.innerHTML = aHTML(filtracionPorCategoria)
+}
 
 // FECHA
 
