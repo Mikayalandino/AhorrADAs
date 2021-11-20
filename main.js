@@ -275,19 +275,23 @@ const filtrosTipo = document.getElementById("filtros-tipo")
 
 filtrosTipo.onchange = () => {
   const filtracionPorTipo = operaciones.filter((operacion) => {
+    if (filtrosTipo.value === "todos"){
+      return operaciones
+    }
     return operacion.tipo === filtrosTipo.value
   })
-  console.log(filtracionPorTipo)
   listadoOperaciones.innerHTML = aHTML(filtracionPorTipo)
 }
 
-// Filtro categoría
+// Filtro por categoría
 
 selectCategoriasDeFiltros.onchange = () => {
   const filtracionPorCategoria = operaciones.filter((operacion) => {
+    if (filtrosTipo.value === "todas"){
+      return operaciones
+    }
     return operacion.categoria === selectCategoriasDeFiltros.value
   })
-  console.log(filtracionPorCategoria)
   listadoOperaciones.innerHTML = aHTML(filtracionPorCategoria)
 }
 
