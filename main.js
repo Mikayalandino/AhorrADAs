@@ -1,13 +1,14 @@
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
+const seccionEditarOperacion = document.getElementById("seccion-editar-operacion");
 
 // Categorías
 const seccionCategorias = document.getElementById("seccion-categorias");
 
 const listadoDeCategorias = document.getElementById("listado-categorias");
-const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
+const seccionEditarCategorias = document.getElementById("seccion-editar-categorias");
 
-const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");
+const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");;
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
 
 
@@ -15,25 +16,25 @@ const contenedorFiltros = document.getElementById("cambiar-filtros");
                       // ELEMENTOS DEL DOM
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
-const botonReportesNavbar = document.querySelector("#boton-nav-reportes")
+const botonReportesNavbar = document.querySelector("#boton-nav-reportes");
 
 const botonNuevaOperacion = document.getElementById("boton-operacion");
 const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
-const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion")
-const formularioOperaciones = document.querySelector("#formulario-operaciones")
+const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion");
+const formularioOperaciones = document.querySelector("#formulario-operaciones");
 
-const inputDescripcionOperaciones = document.querySelector("#input-descripcion")
-const inputMontoOperaciones = document.querySelector("#input-monto")
-const selectTipoOperaciones = document.querySelector("#select-tipo-op")
-const selectCategoriasOperaciones = document.querySelector("#select-categorias-op")
-const inputFechaoperaciones = document.querySelector("#input-fecha")
+const inputDescripcionOperaciones = document.querySelector("#input-descripcion");
+const inputMontoOperaciones = document.querySelector("#input-monto");
+const selectTipoOperaciones = document.querySelector("#select-tipo-op");
+const selectCategoriasOperaciones = document.querySelector("#select-categorias-op");
+const inputFechaoperaciones = document.querySelector("#input-fecha");
 
-const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
-const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
+const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados");
+const listadoOperaciones = document.getElementById("listado-nuevas-operaciones");
 
-const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
+const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
 
-const sinReportes = document.querySelector("#sin-reportes")
+const sinReportes = document.querySelector("#sin-reportes");
 console.log(sinReportes)
 
 
@@ -45,9 +46,9 @@ const formularioFiltros = document.getElementById("formulario-filtros");
 
 
                       // AhorrADAs pagina completa
-const paginaPrincipal = document.getElementById("pagina-completa")
-const botonAhorradas = document.getElementById("boton-ahorradas")
-const botonNavAhorradas = document.getElementById("boton-nav-ahorradas")
+const paginaPrincipal = document.getElementById("pagina-completa");
+const botonAhorradas = document.getElementById("boton-ahorradas");
+const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
 
 botonNavAhorradas.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
@@ -76,7 +77,7 @@ botonReportesNavbar.onclick = () => {
   seccionReportesInsuficientes.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
   seccionCategorias.classList.add("is-hidden")
-  seccionEditarCategorias.classList.add("is-hidden")
+  seccionEditarCategorias.classList.add("is-hidden");
 }
 
 // FUNCIONES GENÉRICAS 
@@ -86,8 +87,8 @@ botonReportesNavbar.onclick = () => {
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
 boton.onclick = () => {
-clase1.classList.add("is-hidden")
-clase2.classList.remove("is-hidden")
+clase1.classList.add("is-hidden");
+clase2.classList.remove("is-hidden");
 }
 }
 
@@ -118,10 +119,10 @@ let operaciones = []
 
 botonCategoriasNavbar.onclick = () => {
 seccionCategorias.classList.remove("is-hidden");
-seccionEditarCategorias.classList.add("is-hidden")
-seccionBalance.classList.add("is-hidden")
-seccionNuevaOperacion.classList.add("is-hidden") 
-seccionReportesInsuficientes.classList.add("is-hidden")
+seccionEditarCategorias.classList.add("is-hidden");
+seccionBalance.classList.add("is-hidden");
+seccionNuevaOperacion.classList.add("is-hidden") ;
+seccionReportesInsuficientes.classList.add("is-hidden");
 }
 
 
@@ -191,17 +192,22 @@ for (let i = 0; i < listaDeBotonesEditarCategoria.length; i++) {
 listaDeBotonesEditarCategoria[i].onclick = () => {
 seccionEditarCategorias.classList.remove("is-hidden");
 seccionCategorias.classList.add("is-hidden");
-seccionBalance.classList.add("is-hidden")
-seccionNuevaOperacion.classList.add("is-hidden")
+seccionBalance.classList.add("is-hidden");
+seccionNuevaOperacion.classList.add("is-hidden");
 }
 }
 
 botonCancelarEditarCategoria.onclick = () => {
 seccionEditarCategorias.classList.add("is-hidden");
-seccionCategorias.classList.remove("is-hidden")
-seccionReportesInsuficientes.classList.add("is-hidden")
-
+seccionCategorias.classList.remove("is-hidden");
+seccionReportesInsuficientes.classList.add("is-hidden");
 }
+
+botonConfirmarEditarCategoria.onclick = () => {
+  seccionEditarCategorias.classList.add("is-hidden");
+  seccionCategorias.classList.remove("is-hidden");
+
+} 
 
 
 // OPERACIONES
@@ -223,7 +229,9 @@ botonAgregarOperacion.onclick = () =>{
 subirObjetoAArray(operaciones)
 blanquearFormularios(formularioOperaciones)
 aJSONYSubirAlLStorage(operaciones, "operaciones") 
-listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))  
+listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+seccionNuevaOperacion.classList.add("is-hidden");
+seccionBalance.classList.remove("is-hidden");
 }
 
 const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
@@ -249,8 +257,8 @@ return acc += `<div class="columns">
 <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
 <div class="column is-2">
 <div class="columns">
-  <button type="button" id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-  <button type="button" id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+  <button type="button" id="listaDeBotonesEditarOperaciones" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+  <button type="button" id="listaDeBotonesEliminarOperaciones" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
 </div>
 </div>
 </div>`
@@ -258,6 +266,9 @@ return acc += `<div class="columns">
 
 return arrReduc
 }
+
+// Editar operaciones
+
 
                      // FILTROS
 
@@ -422,21 +433,6 @@ const selectOrdenarPorAHTML = () => {
 
 selectOrdenarPorAHTML()
 
-
-
-
-
                                // REPORTES
 
 sinReportes.style.display = "none"
-
-
-
-
-
-
-
-
-
-
-
