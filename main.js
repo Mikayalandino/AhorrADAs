@@ -11,8 +11,6 @@ const seccionEditarCategorias = document.getElementById("seccion-editar-categori
 const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");;
 const contenedorFiltros = document.getElementById("cambiar-filtros"); 
 
-
-
                       // ELEMENTOS DEL DOM
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
@@ -36,14 +34,13 @@ const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 
 const sinReportes = document.querySelector("#sin-reportes");
 console.log(sinReportes)
-
+const sinReportes = document.querySelector("#sin-reportes")
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
 const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const formularioFiltros = document.getElementById("formulario-filtros");
-
-
+const inputDateFiltro = document.querySelector("#input-date")
 
                       // AhorrADAs pagina completa
 const paginaPrincipal = document.getElementById("pagina-completa");
@@ -321,25 +318,17 @@ selectCategoriasDeFiltros.onchange = () => {
 
 // FECHA
 
-/** 
-const inputDateFiltro = document.querySelector("#input-date")
-console.log(inputDateFiltro)
-
-const filtrarPorFecha = (array) => {
-  inputDateFiltro.oninput = () => {
-    const filtrarOperaciones = array.filter((elemento) =>{
-      return new Date (elemento.fecha) === inputFecha.value
-    })
-
-    console.log(filtrarOperaciones)
-  
-    listadoOperaciones.innerHTML = filtrarOperaciones    
+const filtradoPorFecha = (array) => {
+  inputDateFiltro.oninput = () => {  
+    const arrayFiltrado = array.filter((elemento) => {
+      return  new Date (elemento.fecha)  > new Date (inputDateFiltro.value)
+    })  
+    listadoOperaciones.innerHTML = aHTML(arrayFiltrado)   
   }
 }
+filtradoPorFecha(operaciones)
+ 
 
-filtrarPorFecha(operaciones)
-
-**/
 
 // ORDENAR POR
 
