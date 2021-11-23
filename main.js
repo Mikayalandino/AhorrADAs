@@ -34,13 +34,14 @@ const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 
 const sinReportes = document.querySelector("#sin-reportes")
-console.log(sinReportes)
+
 
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
 const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const formularioFiltros = document.getElementById("formulario-filtros");
+const inputDateFiltro = document.querySelector("#input-date")
 
 
 
@@ -309,25 +310,17 @@ selectCategoriasDeFiltros.onchange = () => {
 
 // FECHA
 
-/** 
-const inputDateFiltro = document.querySelector("#input-date")
-console.log(inputDateFiltro)
-
-const filtrarPorFecha = (array) => {
-  inputDateFiltro.oninput = () => {
-    const filtrarOperaciones = array.filter((elemento) =>{
-      return new Date (elemento.fecha) === inputFecha.value
-    })
-
-    console.log(filtrarOperaciones)
-  
-    listadoOperaciones.innerHTML = filtrarOperaciones    
+const filtradoPorFecha = (array) => {
+  inputDateFiltro.oninput = () => {  
+    const arrayFiltrado = array.filter((elemento) => {
+      return  new Date (elemento.fecha)  > new Date (inputDateFiltro.value)
+    })  
+    listadoOperaciones.innerHTML = aHTML(arrayFiltrado)   
   }
 }
+filtradoPorFecha(operaciones)
+ 
 
-filtrarPorFecha(operaciones)
-
-**/
 
 // ORDENAR POR
 
