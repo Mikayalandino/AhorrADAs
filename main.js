@@ -76,6 +76,7 @@ botonReportesNavbar.onclick = () => {
   seccionReportesInsuficientes.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
   seccionCategorias.classList.add("is-hidden")
+  seccionEditarCategorias.classList.add("is-hidden")
 }
 
 // FUNCIONES GENÉRICAS 
