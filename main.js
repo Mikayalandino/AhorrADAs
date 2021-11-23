@@ -33,8 +33,6 @@ const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
 
 const sinReportes = document.querySelector("#sin-reportes");
-console.log(sinReportes)
-const sinReportes = document.querySelector("#sin-reportes")
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
