@@ -157,13 +157,13 @@ return acc += `<option value="${arr}">${arr}</option>`
 selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
 
 const agregarCategoriasAHTML = () => {
-const categoriasHTML = categorias.reduce((acc, elemento) => {
+const categoriasHTML = categorias.reduce((acc, elemento, index) => {
 return acc + `<div class="columns">
 <div class="column">
 <div class="tag is-primary is-light">${elemento}</div>
 </div>
-<button type="button" id="listaDeBotonesEditarCategoria" class= "button is-ghost is-small mr-2 mt-2">Editar</button> 
-<button type="button" id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mr-1 mt-2">Eliminar</button>
+<button type="button" id="editar-categorias-${index}" class="button is-ghost is-small mr-2 mt-2 editar-categorias">Editar</button> 
+<button type="button" id="eliminar-categorias-${index}" class="button is-ghost is-small mr-1 mt-2 eliminar-categorias">Eliminar</button>
 </div>`
 }, "")
 
@@ -173,10 +173,47 @@ listadoDeCategorias.innerHTML = categoriasHTML
 agregarCategoriasAHTML()
 
 
-// Lista de botones editar-eliminar
+// BOTONES EDITAR-ELIMINAR CATEGORÍAS
+
+const formularioEditarCategoria = () => {
+seccionEditarCategorias.classList.remove("is-hidden")
+seccionCategorias.classList.add("is-hidden")
+seccionBalance.classList.add("is-hidden")
+seccionNuevaOperacion.classList.add("is-hidden")
+
+}
 
 
-for (let i = 0; i < listaDeBotonesEliminarCategoria.length; i++) {
+const editarCategoriasConBoton = () => {
+  
+  const botonEditCategoria = document.querySelectorAll(".editar-categorias")
+  console.log(botonEditCategoria)
+
+  for(let i = 0; i < botonEditCategoria.length; i++){
+    console.log(botonEditCategoria[i])
+
+    botonEditCategoria[i].onclick = () => {
+
+      const idRecortado = botonEditCategoria[i].id.slice(20)
+      idNumerico = Number (idRecortado)
+      formularioEditarCategoria(idNumerico)    
+    }
+  }
+}
+
+editarCategoriasConBoton()
+
+botonCancelarEditarCategoria.onclick = () => {
+seccionEditarCategorias.classList.add("is-hidden");
+seccionCategorias.classList.remove("is-hidden")
+seccionReportesInsuficientes.classList.add("is-hidden")
+}
+
+
+
+const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias")
+
+/**for (let i = 0; i < editar-categorias-${index}.length; i++) {
 listaDeBotonesEliminarCategoria[i].onclick = () => {
 const id = listaDeBotonesEliminarCategoria[i].id
 console.log(id)
@@ -185,23 +222,31 @@ const categoriasFiltradas = categorias.filter((elemento, index) => {
 return index != indice
 })
 }
-}
+} **/
 
-for (let i = 0; i < listaDeBotonesEditarCategoria.length; i++) {
+const inputEditarCategoria = document.querySelector("#input-edit-categorias")
+
+
+console.log(inputEditarCategoria)
+
+/**for (let i = 0; i < listaDeBotonesEditarCategoria.length; i++) {
 listaDeBotonesEditarCategoria[i].onclick = () => {
-seccionEditarCategorias.classList.remove("is-hidden");
-seccionCategorias.classList.add("is-hidden");
-seccionBalance.classList.add("is-hidden")
-seccionNuevaOperacion.classList.add("is-hidden")
+
+inputEditarCategoria.value = categorias[i]
+console.log(categorias[i])
+}
+
+botonConfirmarEditarCategoria.onclick = () => {
+  console.log(inputEditarCategoria.value)
 }
 }
 
-botonCancelarEditarCategoria.onclick = () => {
-seccionEditarCategorias.classList.add("is-hidden");
-seccionCategorias.classList.remove("is-hidden")
-seccionReportesInsuficientes.classList.add("is-hidden")
+const categoriasEditadas = categorias.map ((elemento) => {
+  return elemento = inputEditarCategoria.value
+})
 
-}
+
+**/
 
 
 // OPERACIONES
@@ -259,6 +304,14 @@ return acc += `<div class="columns">
 return arrReduc
 }
 
+// EDITAR Y ELIMINAR OPERACIONES 
+
+
+
+
+
+
+
                      // FILTROS
 
 botonOcultarFiltros.onclick = () => {
@@ -270,7 +323,7 @@ botonOcultarFiltros.textContent = "Ocultar filtros";
 }
 }
 
-// Filtro por tipo y categoria
+// FILTRO POR TIPO Y CATEGORÍA 
 
 const filtrosTipo = document.getElementById("filtros-tipo")
 
@@ -294,21 +347,17 @@ const filtrosPorTipoYCategoria = () => {
   return filtrado
 } 
 
-                               // Filtro por tipo
-
 filtrosTipo.onchange = () => {
   const arrayFiltradoTipo = filtrosPorTipoYCategoria()
   listadoOperaciones.innerHTML = aHTML(arrayFiltradoTipo)
 } 
-
-                               // Filtro por categoría
 
 selectCategoriasDeFiltros.onchange = () => {
   const arrayFiltradoCategoria = filtrosPorTipoYCategoria()
   listadoOperaciones.innerHTML = aHTML(arrayFiltradoCategoria)
 }
 
-// FECHA
+// FILTRO POR FECHA
 
 const filtradoPorFecha = (array) => {
   inputDateFiltro.oninput = () => {  
@@ -322,10 +371,10 @@ filtradoPorFecha(operaciones)
  
 
 
-// ORDENAR POR
+                              // ORDENAR POR
 
 
-                              // MÁS Y MENOS RECIENTE
+// MÁS Y MENOS RECIENTE
 
 const selectOrdenarPor = document.querySelector("#ordenar-por")
 
@@ -357,14 +406,13 @@ const masYMenosRecientes = () => {
   }
 }
 
-                               // Menor monto
+// MENOR MONTO
 
 const arrayOrdenadoMenorMonto = [...operaciones].sort((a,b) => {
   return a.monto - b.monto  
 })
 
-                                // Mayor monto  (monto)
-
+// MAYOR MONTO
 
 const arrayOrdenadoMayorMonto = [...operaciones].sort((a,b) => {
   return b.monto - a.monto  
@@ -379,7 +427,7 @@ const mayorMenorMonto = () => {
   }
 }
 
-                               // ORDENAR A/Z Y Z/A
+// ORDENAR A/Z Y Z/A
 
 const arrayOrdenadoA = [...operaciones].sort((a,b) => {
   
@@ -413,9 +461,6 @@ const selectOrdenarPorAHTML = () => {
 }
 
 selectOrdenarPorAHTML()
-
-
-
 
 
                                // REPORTES
