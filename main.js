@@ -175,29 +175,36 @@ agregarCategoriasAHTML()
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
 
-const formularioEditarCategoria = () => {
+const formularioEditarCategoria = (id) => {
+
+  let categoriaEditada = categorias[id]
+
 seccionEditarCategorias.classList.remove("is-hidden")
 seccionCategorias.classList.add("is-hidden")
 seccionBalance.classList.add("is-hidden")
 seccionNuevaOperacion.classList.add("is-hidden")
 
-}
 
+botonConfirmarEditarCategoria.onclick = () => {
+ const valorInput = inputEditarCategoria.value
+ categoriaEditada = valorInput
+ aJSONYSubirAlLStorage(categoriaEditada, "categorias")  
+}
+}
 
 const editarCategoriasConBoton = () => {
   
   const botonEditCategoria = document.querySelectorAll(".editar-categorias")
-  console.log(botonEditCategoria)
 
   for(let i = 0; i < botonEditCategoria.length; i++){
-    console.log(botonEditCategoria[i])
 
     botonEditCategoria[i].onclick = () => {
 
       const idRecortado = botonEditCategoria[i].id.slice(20)
       idNumerico = Number (idRecortado)
+      inputEditarCategoria.value = categorias[i]      
       formularioEditarCategoria(idNumerico)    
-    }
+    }   
   }
 }
 
