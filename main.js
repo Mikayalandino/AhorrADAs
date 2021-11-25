@@ -1,3 +1,4 @@
+
 const seccionBalance = document.getElementById("seccion-balance")
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion")
 // Categorías
@@ -8,8 +9,8 @@ const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros")
 const contenedorFiltros = document.getElementById("cambiar-filtros") 
 
 
-
                       // ELEMENTOS DEL DOM
+
 const botonBalanceNavbar = document.getElementById("boton-nav-balance")
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias")
 const botonReportesNavbar = document.querySelector("#boton-nav-reportes")
@@ -36,6 +37,9 @@ const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias")
 const sinReportes = document.querySelector("#sin-reportes")
 
 
+const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
+
+const sinReportes = document.querySelector("#sin-reportes");
 
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
@@ -43,12 +47,10 @@ const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const formularioFiltros = document.getElementById("formulario-filtros");
 const inputDateFiltro = document.querySelector("#input-date")
 
-
-
                       // AhorrADAs pagina completa
-const paginaPrincipal = document.getElementById("pagina-completa")
-const botonAhorradas = document.getElementById("boton-ahorradas")
-const botonNavAhorradas = document.getElementById("boton-nav-ahorradas")
+const paginaPrincipal = document.getElementById("pagina-completa");
+const botonAhorradas = document.getElementById("boton-ahorradas");
+const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
 
 botonNavAhorradas.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
@@ -77,6 +79,7 @@ botonReportesNavbar.onclick = () => {
   seccionReportesInsuficientes.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
   seccionCategorias.classList.add("is-hidden")
+  seccionEditarCategorias.classList.add("is-hidden");
 }
 
 // FUNCIONES GENÉRICAS 
@@ -86,8 +89,8 @@ botonReportesNavbar.onclick = () => {
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
 boton.onclick = () => {
-clase1.classList.add("is-hidden")
-clase2.classList.remove("is-hidden")
+clase1.classList.add("is-hidden");
+clase2.classList.remove("is-hidden");
 }
 }
 
@@ -118,10 +121,10 @@ let operaciones = []
 
 botonCategoriasNavbar.onclick = () => {
 seccionCategorias.classList.remove("is-hidden");
-seccionEditarCategorias.classList.add("is-hidden")
-seccionBalance.classList.add("is-hidden")
-seccionNuevaOperacion.classList.add("is-hidden") 
-seccionReportesInsuficientes.classList.add("is-hidden")
+seccionEditarCategorias.classList.add("is-hidden");
+seccionBalance.classList.add("is-hidden");
+seccionNuevaOperacion.classList.add("is-hidden") ;
+seccionReportesInsuficientes.classList.add("is-hidden");
 }
 
 
@@ -187,7 +190,6 @@ const editarCategoriaConInput = (id) => {
       agregarCategoriasAHTML(categorias)
       aJSONYSubirAlLStorage(categorias, "categorias")
     }
-}
 
 const editarCategoriasBoton = () => {
   
@@ -239,6 +241,7 @@ const eliminarCategoriasBoton = () => {
 
 eliminarCategoriasBoton()
 
+
                     // OPERACIONES
 
 selectCategoriasOperaciones.innerHTML = arrayReduc
@@ -258,7 +261,9 @@ botonAgregarOperacion.onclick = () =>{
 subirObjetoAArray(operaciones)
 blanquearFormularios(formularioOperaciones)
 aJSONYSubirAlLStorage(operaciones, "operaciones") 
-listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))  
+listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+seccionNuevaOperacion.classList.add("is-hidden");
+seccionBalance.classList.remove("is-hidden");
 }
 
 const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
@@ -284,8 +289,8 @@ return acc += `<div class="columns">
 <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
 <div class="column is-2">
 <div class="columns">
-  <button type="button" id="listaDeBotonesEditarCategoria" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-  <button type="button" id="listaDeBotonesEliminarCategoria" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+  <button type="button" id="listaDeBotonesEditarOperaciones" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+  <button type="button" id="listaDeBotonesEliminarOperaciones" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
 </div>
 </div>
 </div>`
@@ -294,10 +299,8 @@ return acc += `<div class="columns">
 return arrReduc
 }
 
+
 // EDITAR Y ELIMINAR OPERACIONES 
-
-
-
 
 
 
@@ -456,14 +459,3 @@ selectOrdenarPorAHTML()
                                // REPORTES
 
 sinReportes.style.display = "none"
-
-
-
-
-
-
-
-
-
-
-
