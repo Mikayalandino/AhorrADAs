@@ -175,36 +175,35 @@ agregarCategoriasAHTML()
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
 
-const formularioEditarCategoria = (id) => {
+const formularioEditarCategoria = (id) => {  
 
-  let categoriaEditada = categorias[id]
+    seccionEditarCategorias.classList.remove("is-hidden")
+    seccionCategorias.classList.add("is-hidden")
+    seccionBalance.classList.add("is-hidden")
+    seccionNuevaOperacion.classList.add("is-hidden")
 
-seccionEditarCategorias.classList.remove("is-hidden")
-seccionCategorias.classList.add("is-hidden")
-seccionBalance.classList.add("is-hidden")
-seccionNuevaOperacion.classList.add("is-hidden")
-
-
-botonConfirmarEditarCategoria.onclick = () => {
- const valorInput = inputEditarCategoria.value
- categoriaEditada = valorInput
- aJSONYSubirAlLStorage(categoriaEditada, "categorias")  
-}
+    botonConfirmarEditarCategoria.onclick = () => {
+      categorias[id] = inputEditarCategoria.value
+      agregarCategoriasAHTML(categorias)
+      aJSONYSubirAlLStorage(categorias, "categorias")
+    }
 }
 
 const editarCategoriasConBoton = () => {
   
-  const botonEditCategoria = document.querySelectorAll(".editar-categorias")
+  const btnEditarCategoria = document.querySelectorAll(".editar-categorias")
 
-  for(let i = 0; i < botonEditCategoria.length; i++){
+  for(let i = 0; i < btnEditarCategoria.length; i++){
 
-    botonEditCategoria[i].onclick = () => {
+    console.log(btnEditarCategoria[i])
 
-      const idRecortado = botonEditCategoria[i].id.slice(20)
+    btnEditarCategoria[i].onclick = () => {   
+      
+      const idRecortado = btnEditarCategoria[i].id.slice(18)
       idNumerico = Number (idRecortado)
-      inputEditarCategoria.value = categorias[i]      
+      inputEditarCategoria.value = categorias[idNumerico]    
       formularioEditarCategoria(idNumerico)    
-    }   
+    }     
   }
 }
 
