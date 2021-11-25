@@ -228,7 +228,7 @@ const eliminarCategoriasBoton = () => {
         return index != idNumerico
 
       })
-
+      
       categorias = filtradoCategorias
       agregarCategoriasAHTML(categorias)
       aJSONYSubirAlLStorage(categorias, "categorias")
