@@ -1,24 +1,21 @@
-const seccionBalance = document.getElementById("seccion-balance");
-const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
-
+const seccionBalance = document.getElementById("seccion-balance")
+const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion")
 // Categorías
-const seccionCategorias = document.getElementById("seccion-categorias");
-
-const listadoDeCategorias = document.getElementById("listado-categorias");
+const seccionCategorias = document.getElementById("seccion-categorias")
+const listadoDeCategorias = document.getElementById("listado-categorias")
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
-
-const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");
-const contenedorFiltros = document.getElementById("cambiar-filtros"); 
+const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros")
+const contenedorFiltros = document.getElementById("cambiar-filtros") 
 
 
 
                       // ELEMENTOS DEL DOM
-const botonBalanceNavbar = document.getElementById("boton-nav-balance");
-const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
+const botonBalanceNavbar = document.getElementById("boton-nav-balance")
+const botonCategoriasNavbar = document.getElementById("boton-nav-categorias")
 const botonReportesNavbar = document.querySelector("#boton-nav-reportes")
 
-const botonNuevaOperacion = document.getElementById("boton-operacion");
-const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
+const botonNuevaOperacion = document.getElementById("boton-operacion")
+const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion")
 const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion")
 const formularioOperaciones = document.querySelector("#formulario-operaciones")
 
@@ -30,8 +27,11 @@ const inputFechaoperaciones = document.querySelector("#input-fecha")
 
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados")
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
-
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
+const inputEditarCategoria = document.querySelector("#input-edit-categorias")
+const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias")
+
+
 
 const sinReportes = document.querySelector("#sin-reportes")
 
@@ -175,7 +175,7 @@ agregarCategoriasAHTML()
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
 
-const formularioEditarCategoria = (id) => {  
+const editarCategoriaConInput = (id) => {  
 
     seccionEditarCategorias.classList.remove("is-hidden")
     seccionCategorias.classList.add("is-hidden")
@@ -189,25 +189,23 @@ const formularioEditarCategoria = (id) => {
     }
 }
 
-const editarCategoriasConBoton = () => {
+const editarCategoriasBoton = () => {
   
   const btnEditarCategoria = document.querySelectorAll(".editar-categorias")
 
   for(let i = 0; i < btnEditarCategoria.length; i++){
-
-    console.log(btnEditarCategoria[i])
 
     btnEditarCategoria[i].onclick = () => {   
       
       const idRecortado = btnEditarCategoria[i].id.slice(18)
       idNumerico = Number (idRecortado)
       inputEditarCategoria.value = categorias[idNumerico]    
-      formularioEditarCategoria(idNumerico)    
+      editarCategoriaConInput(idNumerico)    
     }     
   }
 }
 
-editarCategoriasConBoton()
+editarCategoriasBoton()
 
 botonCancelarEditarCategoria.onclick = () => {
 seccionEditarCategorias.classList.add("is-hidden");
@@ -215,47 +213,33 @@ seccionCategorias.classList.remove("is-hidden")
 seccionReportesInsuficientes.classList.add("is-hidden")
 }
 
+const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias")
 
+const eliminarCategoriasBoton = () => {
 
-const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias")
+  for(let i = 0; i < botonesEliminanCategorias.length; i++){
+    
+    botonesEliminanCategorias[i].onclick = () => {
+     
+      const idRecortado =  botonesEliminanCategorias[i].id.slice(20)
+      idNumerico = Number (idRecortado)
+      
+      const filtradoCategorias = categorias.filter((elemento, index) => {
+        return index != idNumerico
 
-/**for (let i = 0; i < editar-categorias-${index}.length; i++) {
-listaDeBotonesEliminarCategoria[i].onclick = () => {
-const id = listaDeBotonesEliminarCategoria[i].id
-console.log(id)
-const indice = id.charAt(7)
-const categoriasFiltradas = categorias.filter((elemento, index) => {
-return index != indice
-})
-}
-} **/
+      })
 
-const inputEditarCategoria = document.querySelector("#input-edit-categorias")
-
-
-console.log(inputEditarCategoria)
-
-/**for (let i = 0; i < listaDeBotonesEditarCategoria.length; i++) {
-listaDeBotonesEditarCategoria[i].onclick = () => {
-
-inputEditarCategoria.value = categorias[i]
-console.log(categorias[i])
+      categorias = filtradoCategorias
+      agregarCategoriasAHTML(categorias)
+      aJSONYSubirAlLStorage(categorias, "categorias")
+  
+    }    
+  } 
 }
 
-botonConfirmarEditarCategoria.onclick = () => {
-  console.log(inputEditarCategoria.value)
-}
-}
+eliminarCategoriasBoton()
 
-const categoriasEditadas = categorias.map ((elemento) => {
-  return elemento = inputEditarCategoria.value
-})
-
-
-**/
-
-
-// OPERACIONES
+                    // OPERACIONES
 
 selectCategoriasOperaciones.innerHTML = arrayReduc
 
