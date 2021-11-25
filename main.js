@@ -6,10 +6,10 @@ const seccionCategorias = document.getElementById("seccion-categorias")
 const listadoDeCategorias = document.getElementById("listado-categorias")
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias")
 const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros")
-const contenedorFiltros = document.getElementById("cambiar-filtros") 
+const contenedorFiltros = document.getElementById("cambiar-filtros")
 
 
-                      // ELEMENTOS DEL DOM
+// ELEMENTOS DEL DOM
 
 const botonBalanceNavbar = document.getElementById("boton-nav-balance")
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias")
@@ -34,10 +34,10 @@ const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias")
 
 
 
-const sinReportes = document.querySelector("#sin-reportes")
 
 
-const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
+
+
 
 const sinReportes = document.querySelector("#sin-reportes");
 
@@ -47,7 +47,7 @@ const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const formularioFiltros = document.getElementById("formulario-filtros");
 const inputDateFiltro = document.querySelector("#input-date")
 
-                      // AhorrADAs pagina completa
+// AhorrADAs pagina completa
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
@@ -61,9 +61,9 @@ botonNavAhorradas.onclick = () => {
 // Botones balance
 
 botonBalanceNavbar.onclick = () => {
-seccionBalance.classList.remove("is-hidden");
-seccionCategorias.classList.add("is-hidden");
-seccionReportesInsuficientes.classList.add("is-hidden");
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
 }
 
 // Botones categorías
@@ -85,67 +85,67 @@ botonReportesNavbar.onclick = () => {
 // FUNCIONES GENÉRICAS 
 
 
-                      // FUNCIONES GENÉRICAS REUTILIZABLES
+// FUNCIONES GENÉRICAS REUTILIZABLES
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
-boton.onclick = () => {
-clase1.classList.add("is-hidden");
-clase2.classList.remove("is-hidden");
-}
+  boton.onclick = () => {
+    clase1.classList.add("is-hidden");
+    clase2.classList.remove("is-hidden");
+  }
 }
 
 const aJSONYSubirAlLStorage = (array, clave) => {
-const aJSON = JSON.stringify(array)
-localStorage.setItem(clave , aJSON)
+  const aJSON = JSON.stringify(array)
+  localStorage.setItem(clave, aJSON)
 }
 
 const guardarDeLStorage = (array, clave) => {
-const nuevoArray = [localStorage.getItem(clave) || "[]"]
-const parseArray = JSON.parse(nuevoArray)
-const nuevosObjetos = parseArray.map((arr) => {
-return array.push(arr)
-})  
-return nuevosObjetos
+  const nuevoArray = [localStorage.getItem(clave) || "[]"]
+  const parseArray = JSON.parse(nuevoArray)
+  const nuevosObjetos = parseArray.map((arr) => {
+    return array.push(arr)
+  })
+  return nuevosObjetos
 }
 
 const blanquearFormularios = (form) => {
-form.reset()
+  form.reset()
 }
 
-                      //  VARIABLES GLOBALES
+//  VARIABLES GLOBALES
 
 let categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 let operaciones = []
 
-                      // NAVEGACIÓN CON BOTONES
+// NAVEGACIÓN CON BOTONES
 
 botonCategoriasNavbar.onclick = () => {
-seccionCategorias.classList.remove("is-hidden");
-seccionEditarCategorias.classList.add("is-hidden");
-seccionBalance.classList.add("is-hidden");
-seccionNuevaOperacion.classList.add("is-hidden") ;
-seccionReportesInsuficientes.classList.add("is-hidden");
+  seccionCategorias.classList.remove("is-hidden");
+  seccionEditarCategorias.classList.add("is-hidden");
+  seccionBalance.classList.add("is-hidden");
+  seccionNuevaOperacion.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
 }
 
 
 modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacion);
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
-                        // CATEGORÍAS 
+// CATEGORÍAS 
 
-const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave) 
+const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave)
 
 subirCategoriasAlLs(categorias, "categorias")
 
-const pushCategoria = (arr) =>{
-arr.push(inputSeccionCategoria.value)
+const pushCategoria = (arr) => {
+  arr.push(inputSeccionCategoria.value)
 }
 
-botonInputSeccionCategoria.onclick = () => { 
-pushCategoria(categorias)  
-aJSONYSubirAlLStorage(categorias, "categorias")       
-agregarCategoriasAHTML()
-}  
+botonInputSeccionCategoria.onclick = () => {
+  pushCategoria(categorias)
+  aJSONYSubirAlLStorage(categorias, "categorias")
+  agregarCategoriasAHTML()
+}
 
 let nuevasCategorias = []
 
@@ -154,23 +154,23 @@ guardarDeLStorage(nuevasCategorias, "categorias")
 categorias = nuevasCategorias
 
 const arrayReduc = categorias.reduce((acc, arr) => {
-return acc += `<option value="${arr}">${arr}</option>`
+  return acc += `<option value="${arr}">${arr}</option>`
 }, "")
 
-selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
+selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}`
 
 const agregarCategoriasAHTML = () => {
-const categoriasHTML = categorias.reduce((acc, elemento, index) => {
-return acc + `<div class="columns">
+  const categoriasHTML = categorias.reduce((acc, elemento, index) => {
+    return acc + `<div class="columns">
 <div class="column">
 <div class="tag is-primary is-light">${elemento}</div>
 </div>
 <button type="button" id="editar-categorias-${index}" class="button is-ghost is-small mr-2 mt-2 editar-categorias">Editar</button> 
 <button type="button" id="eliminar-categorias-${index}" class="button is-ghost is-small mr-1 mt-2 eliminar-categorias">Eliminar</button>
 </div>`
-}, "")
+  }, "")
 
-listadoDeCategorias.innerHTML = categoriasHTML
+  listadoDeCategorias.innerHTML = categoriasHTML
 }
 
 agregarCategoriasAHTML()
@@ -178,96 +178,97 @@ agregarCategoriasAHTML()
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
 
-const editarCategoriaConInput = (id) => {  
+const editarCategoriaConInput = (id) => {
 
-    seccionEditarCategorias.classList.remove("is-hidden")
-    seccionCategorias.classList.add("is-hidden")
-    seccionBalance.classList.add("is-hidden")
-    seccionNuevaOperacion.classList.add("is-hidden")
+  seccionEditarCategorias.classList.remove("is-hidden")
+  seccionCategorias.classList.add("is-hidden")
+  seccionBalance.classList.add("is-hidden")
+  seccionNuevaOperacion.classList.add("is-hidden")
 
-    botonConfirmarEditarCategoria.onclick = () => {
-      categorias[id] = inputEditarCategoria.value
-      agregarCategoriasAHTML(categorias)
-      aJSONYSubirAlLStorage(categorias, "categorias")
-    }
+  botonConfirmarEditarCategoria.onclick = () => {
+    categorias[id] = inputEditarCategoria.value
+    agregarCategoriasAHTML(categorias)
+    aJSONYSubirAlLStorage(categorias, "categorias")
+  }
+}
 
 const editarCategoriasBoton = () => {
-  
+
   const btnEditarCategoria = document.querySelectorAll(".editar-categorias")
 
-  for(let i = 0; i < btnEditarCategoria.length; i++){
+  for (let i = 0; i < btnEditarCategoria.length; i++) {
 
-    btnEditarCategoria[i].onclick = () => {   
-      
+    btnEditarCategoria[i].onclick = () => {
+
       const idRecortado = btnEditarCategoria[i].id.slice(18)
-      idNumerico = Number (idRecortado)
-      inputEditarCategoria.value = categorias[idNumerico]    
-      editarCategoriaConInput(idNumerico)    
-    }     
+      idNumerico = Number(idRecortado)
+      inputEditarCategoria.value = categorias[idNumerico]
+      editarCategoriaConInput(idNumerico)
+    }
   }
 }
 
 editarCategoriasBoton()
 
 botonCancelarEditarCategoria.onclick = () => {
-seccionEditarCategorias.classList.add("is-hidden");
-seccionCategorias.classList.remove("is-hidden")
-seccionReportesInsuficientes.classList.add("is-hidden")
+  seccionEditarCategorias.classList.add("is-hidden");
+  seccionCategorias.classList.remove("is-hidden")
+  seccionReportesInsuficientes.classList.add("is-hidden")
 }
 
 const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias")
 
 const eliminarCategoriasBoton = () => {
 
-  for(let i = 0; i < botonesEliminanCategorias.length; i++){
-    
+  for (let i = 0; i < botonesEliminanCategorias.length; i++) {
+
     botonesEliminanCategorias[i].onclick = () => {
-     
-      const idRecortado =  botonesEliminanCategorias[i].id.slice(20)
-      idNumerico = Number (idRecortado)
-      
+
+      const idRecortado = botonesEliminanCategorias[i].id.slice(20)
+      idNumerico = Number(idRecortado)
+
       const filtradoCategorias = categorias.filter((elemento, index) => {
         return index != idNumerico
 
       })
-      
+
       categorias = filtradoCategorias
       agregarCategoriasAHTML(categorias)
       aJSONYSubirAlLStorage(categorias, "categorias")
-  
-    }    
-  } 
+
+    }
+  }
 }
 
 eliminarCategoriasBoton()
 
 
-                    // OPERACIONES
+// OPERACIONES
 
 selectCategoriasOperaciones.innerHTML = arrayReduc
 
 const subirObjetoAArray = (array) => {
-const nuevoObjeto = {
-descripcion: inputDescripcionOperaciones.value,
-monto: inputMontoOperaciones.value,  
-tipo: selectTipoOperaciones.value,
-categoria: selectCategoriasOperaciones.value,
-fecha: inputFechaoperaciones.value,
-}
-array.push(nuevoObjeto)
+  const nuevoObjeto = {
+    descripcion: inputDescripcionOperaciones.value,
+    monto: inputMontoOperaciones.value,
+    tipo: selectTipoOperaciones.value,
+    categoria: selectCategoriasOperaciones.value,
+    fecha: inputFechaoperaciones.value,
+  }
+  array.push(nuevoObjeto)
 }
 
-botonAgregarOperacion.onclick = () =>{
-subirObjetoAArray(operaciones)
-blanquearFormularios(formularioOperaciones)
-aJSONYSubirAlLStorage(operaciones, "operaciones") 
-listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
-seccionNuevaOperacion.classList.add("is-hidden");
-seccionBalance.classList.remove("is-hidden");
+botonAgregarOperacion.onclick = () => {
+  subirObjetoAArray(operaciones)
+  blanquearFormularios(formularioOperaciones)
+  aJSONYSubirAlLStorage(operaciones, "operaciones")
+  listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+  seccionNuevaOperacion.classList.add("is-hidden");
+  seccionBalance.classList.remove("is-hidden");
 }
 
 const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
-operacionesSinResultados.classList.add("is-hidden"))
+  operacionesSinResultados.classList.add("is-hidden"))
 estadoDeContenedorDeOperaciones("operaciones")
 
 let nuevasOperaciones = []
@@ -277,12 +278,12 @@ guardarDeLStorage(nuevasOperaciones, "operaciones")
 operaciones = nuevasOperaciones
 
 const aHTML = (array) => {
-const arrReduc = array.reduce((acc, elemento) => {
-const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
-const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"  
-const fechas = new Date(elemento.fecha) 
+  const arrReduc = array.reduce((acc, elemento) => {
+    const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
+    const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"
+    const fechas = new Date(elemento.fecha)
 
-return acc += `<div class="columns">
+    return acc += `<div class="columns">
 <div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
 <div class="column is-1 tag is-primary is-light has-text-left mt-3">${elemento.categoria}</div>
 <div class="column is-4 has-text-grey has-text-right">${fechas.toLocaleDateString()}</div>
@@ -294,9 +295,9 @@ return acc += `<div class="columns">
 </div>
 </div>
 </div>`
-}, "")   
+  }, "")
 
-return arrReduc
+  return arrReduc
 }
 
 
@@ -305,15 +306,15 @@ return arrReduc
 
 
 
-                     // FILTROS
+// FILTROS
 
 botonOcultarFiltros.onclick = () => {
-contenedorFiltros.classList.toggle("is-hidden");
-if (contenedorFiltros.classList.contains("is-hidden")) {
-botonOcultarFiltros.textContent = "Mostrar filtros";
-} else {
-botonOcultarFiltros.textContent = "Ocultar filtros";
-}
+  contenedorFiltros.classList.toggle("is-hidden");
+  if (contenedorFiltros.classList.contains("is-hidden")) {
+    botonOcultarFiltros.textContent = "Mostrar filtros";
+  } else {
+    botonOcultarFiltros.textContent = "Ocultar filtros";
+  }
 }
 
 // FILTRO POR TIPO Y CATEGORÍA 
@@ -338,12 +339,12 @@ const filtrosPorTipoYCategoria = () => {
     return operacion.categoria === filtracionPorCategoria
   })
   return filtrado
-} 
+}
 
 filtrosTipo.onchange = () => {
   const arrayFiltradoTipo = filtrosPorTipoYCategoria()
   listadoOperaciones.innerHTML = aHTML(arrayFiltradoTipo)
-} 
+}
 
 selectCategoriasDeFiltros.onchange = () => {
   const arrayFiltradoCategoria = filtrosPorTipoYCategoria()
@@ -353,34 +354,34 @@ selectCategoriasDeFiltros.onchange = () => {
 // FILTRO POR FECHA
 
 const filtradoPorFecha = (array) => {
-  inputDateFiltro.oninput = () => {  
+  inputDateFiltro.oninput = () => {
     const arrayFiltrado = array.filter((elemento) => {
-      return  new Date (elemento.fecha)  > new Date (inputDateFiltro.value)
-    })  
-    listadoOperaciones.innerHTML = aHTML(arrayFiltrado)   
+      return new Date(elemento.fecha) > new Date(inputDateFiltro.value)
+    })
+    listadoOperaciones.innerHTML = aHTML(arrayFiltrado)
   }
 }
 filtradoPorFecha(operaciones)
- 
 
 
-                              // ORDENAR POR
+
+// ORDENAR POR
 
 
 // MÁS Y MENOS RECIENTE
 
 const selectOrdenarPor = document.querySelector("#ordenar-por")
 
-const ordenarMasRecientes = (array) => {  
- const fechasOrdenadas =  array.sort((a, b) => {
-    return new Date (b.fecha) - new Date (a.fecha)
+const ordenarMasRecientes = (array) => {
+  const fechasOrdenadas = array.sort((a, b) => {
+    return new Date(b.fecha) - new Date(a.fecha)
   })
-  return fechasOrdenadas  
+  return fechasOrdenadas
 }
 
 const ordenarMenosRecientes = (array) => {
   const fechasOrdenadas = array.sort((a, b) => {
-    return new Date (a.fecha) - new Date (b.fecha)
+    return new Date(a.fecha) - new Date(b.fecha)
   })
   return fechasOrdenadas
 }
@@ -388,74 +389,74 @@ const ordenarMenosRecientes = (array) => {
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
 const masYMenosRecientes = () => {
-  if(selectOrdenarPor.value === "mas-reciente"){
+  if (selectOrdenarPor.value === "mas-reciente") {
     listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
   }
-  else if(selectOrdenarPor.value === "menos-reciente"){
+  else if (selectOrdenarPor.value === "menos-reciente") {
     listadoOperaciones.innerHTML = aHTML(ordenarMenosRecientes(operaciones))
   }
-  else{
+  else {
     console.log("es otra opción")
   }
 }
 
 // MENOR MONTO
 
-const arrayOrdenadoMenorMonto = [...operaciones].sort((a,b) => {
-  return a.monto - b.monto  
+const arrayOrdenadoMenorMonto = [...operaciones].sort((a, b) => {
+  return a.monto - b.monto
 })
 
 // MAYOR MONTO
 
-const arrayOrdenadoMayorMonto = [...operaciones].sort((a,b) => {
-  return b.monto - a.monto  
+const arrayOrdenadoMayorMonto = [...operaciones].sort((a, b) => {
+  return b.monto - a.monto
 })
 
 const mayorMenorMonto = () => {
-  if(selectOrdenarPor.value === "mayor-monto") {
+  if (selectOrdenarPor.value === "mayor-monto") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMayorMonto)
   }
-  else if(selectOrdenarPor.value === "menor-monto") {
+  else if (selectOrdenarPor.value === "menor-monto") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMenorMonto)
   }
 }
 
 // ORDENAR A/Z Y Z/A
 
-const arrayOrdenadoA = [...operaciones].sort((a,b) => {
-  
-  if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()){
+const arrayOrdenadoA = [...operaciones].sort((a, b) => {
+
+  if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()) {
     return -1
   }
 })
-  
+
 const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
 
-  if( a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
+  if (a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) {
     return -1
   }
 })
 
 const ordenarAlfabeticamente = () => {
-  if(selectOrdenarPor.value === "a-z") {
+  if (selectOrdenarPor.value === "a-z") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoA)
   }
-  else if(selectOrdenarPor.value === "z-a") {
+  else if (selectOrdenarPor.value === "z-a") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoZ)
   }
 }
 
 const selectOrdenarPorAHTML = () => {
-  selectOrdenarPor.oninput = () => { 
+  selectOrdenarPor.oninput = () => {
     masYMenosRecientes()
     mayorMenorMonto()
-    ordenarAlfabeticamente()  
-}
+    ordenarAlfabeticamente()
+  }
 }
 
 selectOrdenarPorAHTML()
 
 
-                               // REPORTES
+// REPORTES
 
 sinReportes.style.display = "none"
