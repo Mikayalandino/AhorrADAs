@@ -1,5 +1,4 @@
                                 // ELEMENTOS DEL DOM
-
 // AhorrADAs página completa
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
@@ -133,11 +132,8 @@ botonInputSeccionCategoria.onclick = () => {
 }  
 
 let nuevasCategorias = []
-
 guardarDeLStorage(nuevasCategorias, "categorias")
-
 categorias = nuevasCategorias
-
 const arrayReduc = categorias.reduce((acc, arr) => {
 return acc += `<option value="${arr}">${arr}</option>`
 }, "")
@@ -157,7 +153,29 @@ const agregarCategoriasAHTML = () => {
   listadoDeCategorias.innerHTML = categoriasHTML
 }
 
-agregarCategoriasAHTML()
+// CATEGORIAS A HTML
+
+const arrayReduc = categorias.reduce((acc, arr) => {
+    return acc += `<option value="${arr}">${arr}</option>`
+    }, "")
+      
+  selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
+  
+  const agregarCategoriasAHTML = () => {
+  const categoriasHTML = categorias.reduce((acc, elemento, index) => {
+  return acc + `<div class="columns">
+  <div class="column">
+  <div class="tag is-primary is-light">${elemento}</div>
+  </div>
+  <button type="button" id="editar-categorias-${index}" class="button is-ghost is-small mr-2 mt-2 editar-categorias">Editar</button> 
+  <button type="button" id="eliminar-categorias-${index}" class="button is-ghost is-small mr-1 mt-2 eliminar-categorias">Eliminar</button>
+  </div>`
+  }, "")
+  
+  listadoDeCategorias.innerHTML = categoriasHTML
+  }
+  
+  agregarCategoriasAHTML()
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
 
@@ -181,7 +199,7 @@ const editarCategoriasBoton = () => {
       const idRecortado = btnEditarCategoria[i].id.slice(18)
       idNumerico = Number (idRecortado)
       inputEditarCategoria.value = categorias[idNumerico]    
-      editarCategoriaConInput(idNumerico)    
+      editarCategoriaConInput(idNumerico)  
     }     
   }
 }
@@ -235,14 +253,12 @@ botonAgregarOperacion.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
 }
 
-const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
-operacionesSinResultados.classList.add("is-hidden"))
+const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"), 
+operacionesSinResultados.classList.add("is-hidden")) 
 estadoDeContenedorDeOperaciones("operaciones")
 
 let nuevasOperaciones = []
-
 guardarDeLStorage(nuevasOperaciones, "operaciones")
-
 operaciones = nuevasOperaciones
 
 const aHTML = (array) => {
@@ -313,6 +329,8 @@ selectCategoriasDeFiltros.onchange = () => {
 
 // FILTRO POR FECHA
 
+inputDateFiltro.value =  new Date().toLocaleDateString()
+ 
 const filtradoPorFecha = (array) => {
   inputDateFiltro.oninput = () => {  
     const arrayFiltrado = array.filter((elemento) => {
@@ -349,10 +367,7 @@ const masYMenosRecientes = () => {
   }
   else if(selectOrdenarPor.value === "menos-reciente"){
     listadoOperaciones.innerHTML = aHTML(ordenarMenosRecientes(operaciones))
-  }
-  else{
-    console.log("es otra opción")
-  }
+  }  
 }
 
 // MENOR MONTO
@@ -404,7 +419,7 @@ const selectOrdenarPorAHTML = () => {
     masYMenosRecientes()
     mayorMenorMonto()
     ordenarAlfabeticamente()  
-}
+  }
 }
 
 selectOrdenarPorAHTML()
