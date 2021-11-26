@@ -460,3 +460,48 @@ selectOrdenarPorAHTML()
 // REPORTES
 
 sinReportes.style.display = "none"
+
+
+
+const categoriaMayorGanancia = document.getElementById("categoria-mayor-ganancia")
+const categoriaMayorGananciaMonto = document.getElementById("categoria-mayor-ganancia-monto")
+
+
+const categoriasConOperaciones = categorias.map(categoria => {
+  const operacionPorCategoria = operaciones.filter(operacion => {
+    if (operacion.categoria === categoria) {
+      return true
+    }
+  })
+
+  let gasto = 0;
+  let ganancia = 0; //acc
+  operacionPorCategoria.forEach(op => {
+    if (op.tipo === "ganancia") ganancia = ganancia + parseInt(op.monto)
+    if (op.tipo === "gasto") gasto = gasto + parseInt(op.monto)
+
+  })
+
+  return {
+    nombre: categoria,
+    ganancia,
+    gasto,
+    balance: ganancia - gasto, 
+  }
+})
+
+const calcularMayorGanancia = () => {
+  const ordenado = [...categoriasConOperaciones]
+  ordenado.sort((a, b) => {
+    return b.ganancia - a.ganancia
+  })
+  return ordenado[0]
+}
+
+// Obtener categoria con mayor ganancia
+
+categoriaMayorGanancia.innerHTML = calcularMayorGanancia().nombre
+categoriaMayorGananciaMonto.innerHTML = "+$" + calcularMayorGanancia().ganancia
+
+console.log(categoriasConOperaciones)
+console.log(calcularMayorGanancia())
