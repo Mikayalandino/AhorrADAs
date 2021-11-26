@@ -303,9 +303,6 @@ const aHTML = (array) => {
 
 // EDITAR Y ELIMINAR OPERACIONES 
 
-
-
-
 // FILTROS
 
 botonOcultarFiltros.onclick = () => {
@@ -466,6 +463,11 @@ sinReportes.style.display = "none"
 const categoriaMayorGanancia = document.getElementById("categoria-mayor-ganancia")
 const categoriaMayorGananciaMonto = document.getElementById("categoria-mayor-ganancia-monto")
 
+const categoriaMayorGasto = document.getElementById("categoria-mayor-gasto")
+const categoriaMayorGastoMonto = document.getElementById("categoria-mayor-gasto-monto")
+
+const categoriaMayorBalance = document.getElementById("categoria-mayor-balance")
+const categoriaMayorBalanceMonto = document.getElementById("categoria-mayor-balance-monto")
 
 const categoriasConOperaciones = categorias.map(categoria => {
   const operacionPorCategoria = operaciones.filter(operacion => {
@@ -490,18 +492,26 @@ const categoriasConOperaciones = categorias.map(categoria => {
   }
 })
 
-const calcularMayorGanancia = () => {
+const calcularResumen = (elemento) => {
   const ordenado = [...categoriasConOperaciones]
   ordenado.sort((a, b) => {
-    return b.ganancia - a.ganancia
+    return b[elemento] - a[elemento]
   })
   return ordenado[0]
 }
 
 // Obtener categoria con mayor ganancia
 
-categoriaMayorGanancia.innerHTML = calcularMayorGanancia().nombre
-categoriaMayorGananciaMonto.innerHTML = "+$" + calcularMayorGanancia().ganancia
+categoriaMayorGanancia.innerHTML = calcularResumen("ganancia").nombre
+categoriaMayorGananciaMonto.innerHTML = "+$" + calcularResumen("ganancia").ganancia
+
+categoriaMayorGasto.innerHTML = calcularResumen("gasto").nombre
+categoriaMayorGastoMonto.innerHTML = "+$" + calcularResumen("gasto").gasto
+
+categoriaMayorBalance.innerHTML = calcularResumen("balance").nombre
+categoriaMayorBalanceMonto.innerHTML = "+$" + calcularResumen("balance").balance 
 
 console.log(categoriasConOperaciones)
-console.log(calcularMayorGanancia())
+
+console.log(calcularResumen("ganancia"))
+console.log(calcularResumen("gasto"))
