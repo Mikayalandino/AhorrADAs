@@ -11,6 +11,7 @@ const contenedorFiltros = document.getElementById("cambiar-filtros")
 
                       // ELEMENTOS DEL DOM
 
+//NAVBAR
 const botonBalanceNavbar = document.getElementById("boton-nav-balance")
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias")
 const botonReportesNavbar = document.querySelector("#boton-nav-reportes")
@@ -34,18 +35,13 @@ const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias")
 
 
 
-const sinReportes = document.querySelector("#sin-reportes")
-
-
-const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
-
-const sinReportes = document.querySelector("#sin-reportes");
-
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
 const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const formularioFiltros = document.getElementById("formulario-filtros");
 const inputDateFiltro = document.querySelector("#input-date")
+
+const sinReportes = document.querySelector("#sin-reportes")
 
                       // AhorrADAs pagina completa
 const paginaPrincipal = document.getElementById("pagina-completa");
@@ -189,7 +185,11 @@ const editarCategoriaConInput = (id) => {
       categorias[id] = inputEditarCategoria.value
       agregarCategoriasAHTML(categorias)
       aJSONYSubirAlLStorage(categorias, "categorias")
+      
+       
+      
     }
+  }
 
 const editarCategoriasBoton = () => {
   
@@ -202,7 +202,7 @@ const editarCategoriasBoton = () => {
       const idRecortado = btnEditarCategoria[i].id.slice(18)
       idNumerico = Number (idRecortado)
       inputEditarCategoria.value = categorias[idNumerico]    
-      editarCategoriaConInput(idNumerico)    
+      editarCategoriaConInput(idNumerico)  
     }     
   }
 }
@@ -262,12 +262,14 @@ subirObjetoAArray(operaciones)
 blanquearFormularios(formularioOperaciones)
 aJSONYSubirAlLStorage(operaciones, "operaciones") 
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
-seccionNuevaOperacion.classList.add("is-hidden");
-seccionBalance.classList.remove("is-hidden");
+//seccionNuevaOperacion.classList.add("is-hidden")
+//seccionBalance.classList.remove("is-hidden")
+estadoDeContenedorDeOperaciones("operaciones")
 }
 
-const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
-operacionesSinResultados.classList.add("is-hidden"))
+const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"), 
+operacionesSinResultados.classList.add("is-hidden")) 
+
 estadoDeContenedorDeOperaciones("operaciones")
 
 let nuevasOperaciones = []
@@ -457,5 +459,3 @@ selectOrdenarPorAHTML()
 
 
                                // REPORTES
-
-sinReportes.style.display = "none"
