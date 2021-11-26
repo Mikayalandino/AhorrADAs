@@ -144,32 +144,32 @@ agregarCategoriasAHTML()
 }  
 
 let nuevasCategorias = []
-
 guardarDeLStorage(nuevasCategorias, "categorias")
-
 categorias = nuevasCategorias
 
+// CATEGORIAS A HTML
+
 const arrayReduc = categorias.reduce((acc, arr) => {
-return acc += `<option value="${arr}">${arr}</option>`
-}, "")
-
-selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
-
-const agregarCategoriasAHTML = () => {
-const categoriasHTML = categorias.reduce((acc, elemento, index) => {
-return acc + `<div class="columns">
-<div class="column">
-<div class="tag is-primary is-light">${elemento}</div>
-</div>
-<button type="button" id="editar-categorias-${index}" class="button is-ghost is-small mr-2 mt-2 editar-categorias">Editar</button> 
-<button type="button" id="eliminar-categorias-${index}" class="button is-ghost is-small mr-1 mt-2 eliminar-categorias">Eliminar</button>
-</div>`
-}, "")
-
-listadoDeCategorias.innerHTML = categoriasHTML
-}
-
-agregarCategoriasAHTML()
+    return acc += `<option value="${arr}">${arr}</option>`
+    }, "")
+      
+  selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
+  
+  const agregarCategoriasAHTML = () => {
+  const categoriasHTML = categorias.reduce((acc, elemento, index) => {
+  return acc + `<div class="columns">
+  <div class="column">
+  <div class="tag is-primary is-light">${elemento}</div>
+  </div>
+  <button type="button" id="editar-categorias-${index}" class="button is-ghost is-small mr-2 mt-2 editar-categorias">Editar</button> 
+  <button type="button" id="eliminar-categorias-${index}" class="button is-ghost is-small mr-1 mt-2 eliminar-categorias">Eliminar</button>
+  </div>`
+  }, "")
+  
+  listadoDeCategorias.innerHTML = categoriasHTML
+  }
+  
+  agregarCategoriasAHTML()
 
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
@@ -184,10 +184,7 @@ const editarCategoriaConInput = (id) => {
     botonConfirmarEditarCategoria.onclick = () => {
       categorias[id] = inputEditarCategoria.value
       agregarCategoriasAHTML(categorias)
-      aJSONYSubirAlLStorage(categorias, "categorias")
-      
-       
-      
+      aJSONYSubirAlLStorage(categorias, "categorias")     
     }
   }
 
@@ -218,85 +215,74 @@ seccionReportesInsuficientes.classList.add("is-hidden")
 const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias")
 
 const eliminarCategoriasBoton = () => {
-
-  for(let i = 0; i < botonesEliminanCategorias.length; i++){
-    
-    botonesEliminanCategorias[i].onclick = () => {
-     
+  for(let i = 0; i < botonesEliminanCategorias.length; i++){    
+    botonesEliminanCategorias[i].onclick = () => {     
       const idRecortado =  botonesEliminanCategorias[i].id.slice(20)
-      idNumerico = Number (idRecortado)
-      
+      idNumerico = Number (idRecortado)      
       const filtradoCategorias = categorias.filter((elemento, index) => {
         return index != idNumerico
-
-      })
-      
+      })   
       categorias = filtradoCategorias
       agregarCategoriasAHTML(categorias)
-      aJSONYSubirAlLStorage(categorias, "categorias")
-  
+      aJSONYSubirAlLStorage(categorias, "categorias")  
     }    
   } 
 }
 
 eliminarCategoriasBoton()
 
-
                     // OPERACIONES
 
 selectCategoriasOperaciones.innerHTML = arrayReduc
 
 const subirObjetoAArray = (array) => {
-const nuevoObjeto = {
-descripcion: inputDescripcionOperaciones.value,
-monto: inputMontoOperaciones.value,  
-tipo: selectTipoOperaciones.value,
-categoria: selectCategoriasOperaciones.value,
-fecha: inputFechaoperaciones.value,
-}
-array.push(nuevoObjeto)
+  const nuevoObjeto = {
+    descripcion: inputDescripcionOperaciones.value,
+    monto: inputMontoOperaciones.value,  
+    tipo: selectTipoOperaciones.value,
+    categoria: selectCategoriasOperaciones.value,
+    fecha: inputFechaoperaciones.value,
+  }
+  array.push(nuevoObjeto)
 }
 
 botonAgregarOperacion.onclick = () =>{
-subirObjetoAArray(operaciones)
-blanquearFormularios(formularioOperaciones)
-aJSONYSubirAlLStorage(operaciones, "operaciones") 
-listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
-//seccionNuevaOperacion.classList.add("is-hidden")
-//seccionBalance.classList.remove("is-hidden")
-estadoDeContenedorDeOperaciones("operaciones")
+  subirObjetoAArray(operaciones)
+  blanquearFormularios(formularioOperaciones)
+  aJSONYSubirAlLStorage(operaciones, "operaciones") 
+  listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+  editarCategoriasBoton()
+  //seccionNuevaOperacion.classList.add("is-hidden")
+  //seccionBalance.classList.remove("is-hidden")
+  estadoDeContenedorDeOperaciones("operaciones")
 }
 
 const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"), 
 operacionesSinResultados.classList.add("is-hidden")) 
-
 estadoDeContenedorDeOperaciones("operaciones")
 
 let nuevasOperaciones = []
-
 guardarDeLStorage(nuevasOperaciones, "operaciones")
-
 operaciones = nuevasOperaciones
 
 const aHTML = (array) => {
-const arrReduc = array.reduce((acc, elemento) => {
-const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
-const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"  
-const fechas = new Date(elemento.fecha) 
-
-return acc += `<div class="columns">
-<div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
-<div class="column is-1 tag is-primary is-light has-text-left mt-3">${elemento.categoria}</div>
-<div class="column is-4 has-text-grey has-text-right">${fechas.toLocaleDateString()}</div>
-<div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
-<div class="column is-2">
-<div class="columns">
-  <button type="button" id="listaDeBotonesEditarOperaciones" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-  <button type="button" id="listaDeBotonesEliminarOperaciones" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
-</div>
-</div>
-</div>`
-}, "")   
+  const arrReduc = array.reduce((acc, elemento) => {
+    const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
+    const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"  
+    const fechas = new Date(elemento.fecha) 
+    return acc += `<div class="columns">
+          <div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
+          <div class="column is-1 tag is-primary is-light has-text-left mt-3">${elemento.categoria}</div>
+          <div class="column is-4 has-text-grey has-text-right">${fechas.toLocaleDateString()}</div>
+          <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
+          <div class="column is-2">
+          <div class="columns">
+          <button type="button" id="listaDeBotonesEditarOperaciones" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
+          <button type="button" id="listaDeBotonesEliminarOperaciones" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+        </div>
+      </div> 
+     </div>`
+    }, "") 
 
 return arrReduc
 }
@@ -310,12 +296,12 @@ return arrReduc
                      // FILTROS
 
 botonOcultarFiltros.onclick = () => {
-contenedorFiltros.classList.toggle("is-hidden");
-if (contenedorFiltros.classList.contains("is-hidden")) {
-botonOcultarFiltros.textContent = "Mostrar filtros";
-} else {
-botonOcultarFiltros.textContent = "Ocultar filtros";
-}
+  contenedorFiltros.classList.toggle("is-hidden")
+  if (contenedorFiltros.classList.contains("is-hidden")) {
+    botonOcultarFiltros.textContent = "Mostrar filtros"
+  } else {
+    botonOcultarFiltros.textContent = "Ocultar filtros"
+  }
 }
 
 // FILTRO POR TIPO Y CATEGORÍA 
@@ -354,6 +340,8 @@ selectCategoriasDeFiltros.onchange = () => {
 
 // FILTRO POR FECHA
 
+inputDateFiltro.value =  new Date().toLocaleDateString()
+ 
 const filtradoPorFecha = (array) => {
   inputDateFiltro.oninput = () => {  
     const arrayFiltrado = array.filter((elemento) => {
@@ -395,10 +383,7 @@ const masYMenosRecientes = () => {
   }
   else if(selectOrdenarPor.value === "menos-reciente"){
     listadoOperaciones.innerHTML = aHTML(ordenarMenosRecientes(operaciones))
-  }
-  else{
-    console.log("es otra opción")
-  }
+  }  
 }
 
 // MENOR MONTO
