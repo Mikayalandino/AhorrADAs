@@ -134,24 +134,6 @@ botonInputSeccionCategoria.onclick = () => {
 let nuevasCategorias = []
 guardarDeLStorage(nuevasCategorias, "categorias")
 categorias = nuevasCategorias
-const arrayReduc = categorias.reduce((acc, arr) => {
-return acc += `<option value="${arr}">${arr}</option>`
-}, "")
-
-selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}` 
-
-const agregarCategoriasAHTML = () => {
-  const categoriasHTML = categorias.reduce((acc, elemento, index) => {
-    return acc + `<div class="columns">
-    <div class="column">
-    <div class="tag is-primary is-light">${elemento}</div>
-    </div>
-    <button type="button" id="editar-categorias-${index}" class="button is-ghost is-small mr-2 mt-2 editar-categorias">Editar</button> 
-    <button type="button" id="eliminar-categorias-${index}" class="button is-ghost is-small mr-1 mt-2 eliminar-categorias">Eliminar</button>
-    </div>`
-  }, "")
-  listadoDeCategorias.innerHTML = categoriasHTML
-}
 
 // CATEGORIAS A HTML
 
