@@ -175,8 +175,7 @@ const eliminarCategoriasBoton = () => {
        aJSONYSubirAlLStorage(categorias, "categorias")      
      }   
    } 
- }
- 
+ } 
 
 const editarCategoriaConInput = (id) => {  
   seccionEditarCategorias.classList.remove("is-hidden");
@@ -422,27 +421,64 @@ sinReportes.style.display = "none"
 
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
-const bttnEditOp = document.querySelectorAll(".edit-op")
+const bttnsEditOp = document.querySelectorAll(".edit-op")
 const botonesOperacionesEliminar = document.querySelectorAll(".delete-op")
+const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion");
 
 const editarOperacionesBoton = () => {
   
-  for (let i = 0; i < bttnEditOp.length; i++) {
-    
-    console.log(bttnEditOp[i])
+  for (let i = 0; i < bttnsEditOp.length; i++) {  
 
-    bttnEditOp[i].onclick = () => {
-      console.log(bttnEditOp[i])
-    }            
-      //const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion");
-      //seccionEditarOperaciones.classList.remove("is-hidden");   
-      //const idCortado = bttnEditOp[i].id.slice(6)
-      //console.log(bttnEditOp[idRecortado])
-      //idNumerico = Number(idCortado)
-      //console.log(idCortado)
+    bttnsEditOp[i].onclick = () => {      
+      const idCortado = bttnsEditOp[i].id.slice(10)      
+      const idNumerico = Number(idCortado) 
+      inputEditCategoria.innerHTML = agregarCategoriasAHTML(categorias)
+      valorFormEditarOperaciones(idNumerico)     
+      formOperacionesEditadas()    
+
+    }         
       //editarOperacionesBoton()
-     
   }
 }
 
 editarOperacionesBoton()
+
+const botonEditarOp = document.querySelector("#boton-edit-op")
+const botonCancelOp = document.querySelector("#boton-cancel-op")
+const inputEditDescripcion = document.querySelector("#edit-descripcion")
+const inputEditMonto = document.querySelector("#edit-monto")
+const inputEditTipo = document.querySelector("#edit-tipo-op")
+const inputEditCategoria = document.querySelector("#edit-categorias-op")
+const inputEditFecha = document.querySelector("#edit-fecha")
+
+const valorFormEditarOperaciones = (id) => {
+  inputEditDescripcion.value = operaciones[id].descripcion
+  inputEditMonto.value = operaciones[id].monto
+  inputEditTipo.value = operaciones[id].tipo  
+  inputEditFecha.value = operaciones[id].fecha
+}
+
+const formOperacionesEditadas = (id) => {
+  seccionEditarOperaciones.classList.remove("is-hidden");   
+  seccionBalance.classList.add("is-hidden");
+
+  botonAgregarOperacion.onclick = () => {
+    console.log(botonAgregarOperacion)
+
+  }
+
+}
+
+/**
+const editarCategoriaConInput = (id) => {  
+  seccionEditarCategorias.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionBalance.classList.add("is-hidden")
+  seccionNuevaOperacion.classList.add("is-hidden");
+
+  botonConfirmarEditarCategoria.onclick = () => {
+    categorias[id] = inputEditarCategoria.value    
+    aJSONYSubirAlLStorage(categorias, "categorias")    
+  }
+}
+**/
