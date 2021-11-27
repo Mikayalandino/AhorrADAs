@@ -361,7 +361,6 @@ const filtradoPorFecha = (array) => {
 filtradoPorFecha(operaciones)
 
 
-
 // ORDENAR POR
 
 
@@ -469,6 +468,13 @@ const categoriaMayorGastoMonto = document.getElementById("categoria-mayor-gasto-
 const categoriaMayorBalance = document.getElementById("categoria-mayor-balance")
 const categoriaMayorBalanceMonto = document.getElementById("categoria-mayor-balance-monto")
 
+const categoriaMesMayorGanancia= document.getElementById("mes-mayor-ganancia")
+const categoriaMesMayorGananciaMonto= document.getElementById("mes-mayor-ganancia-monto")
+
+const categoriaMesMayorGasto = document.getElementById("mes-mayor-gasto")
+const categoriaMesMayorGastoMonto = document.getElementById("mes-mayor-gasto-monto")
+
+
 const categoriasConOperaciones = categorias.map(categoria => {
   const operacionPorCategoria = operaciones.filter(operacion => {
     if (operacion.categoria === categoria) {
@@ -500,18 +506,80 @@ const calcularResumen = (elemento) => {
   return ordenado[0]
 }
 
+
+
+
+
 // Obtener categoria con mayor ganancia
 
 categoriaMayorGanancia.innerHTML = calcularResumen("ganancia").nombre
 categoriaMayorGananciaMonto.innerHTML = "+$" + calcularResumen("ganancia").ganancia
 
+// Obtener categoria con mayor gasto 
+
 categoriaMayorGasto.innerHTML = calcularResumen("gasto").nombre
-categoriaMayorGastoMonto.innerHTML = "+$" + calcularResumen("gasto").gasto
+categoriaMayorGastoMonto.innerHTML = "-$" + calcularResumen("gasto").gasto
+
+// Obtener categoria balance 
 
 categoriaMayorBalance.innerHTML = calcularResumen("balance").nombre
-categoriaMayorBalanceMonto.innerHTML = "+$" + calcularResumen("balance").balance 
+categoriaMayorBalanceMonto.innerHTML = "$" + calcularResumen("balance").balance 
 
-console.log(categoriasConOperaciones)
+console.log(operaciones)
 
-console.log(calcularResumen("ganancia"))
-console.log(calcularResumen("gasto"))
+// console.log(calcularResumen("ganancia"))
+// console.log(calcularResumen("gasto"))
+
+// Obtener mes con mayor ganancia
+
+const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+let operacionesPorMeses = new Array(12).fill([]);
+operaciones.forEach(operacion => {
+  const mesNumero = new Date(operacion.fecha).getMonth()
+  operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion] 
+})
+
+operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
+  const sumasMesesGanancia = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "ganancia") {
+        return acc + parseInt(curr.monto)
+      }
+      return acc 
+  }, 0) 
+
+  const sumasMesesGasto = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "gasto") {
+        return acc + parseInt(curr.monto)
+      }
+      return acc 
+  }, 0) 
+
+  return { 
+    nombre: meses[mesNumero],  
+    ganancia: sumasMesesGanancia,
+    gasto: sumasMesesGasto,
+  }
+})
+
+// const sumaMayorMes = sumasMesesGanancia.filter((elemento) => {
+//   return elemento > sumasMesesGanancia[] 
+// })
+
+const obtenerMayorMontoPorMes = (elemento) => {
+  const ordenado = [...operacionesPorMeses]
+  ordenado.sort((a, b) => {
+    return b[elemento] - a[elemento]
+  })
+  return ordenado[0]
+}
+
+console.log('Mayor ganancia', obtenerMayorMontoPorMes('ganancia'));
+console.log('Mayor gasto', obtenerMayorMontoPorMes('gasto'));
+
+// console.log("despues del map", operacionesPorMeses)
+
+categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
+categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
+categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
+categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
