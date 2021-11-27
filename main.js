@@ -32,7 +32,7 @@ const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
-const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias");
+
 // Reportes
 const botonReportesNavbar = document.querySelector("#boton-nav-reportes");
 const sinReportes = document.querySelector("#sin-reportes");
@@ -161,6 +161,23 @@ const arrayReduc = categorias.reduce((acc, arr) => {
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
 
+const eliminarCategoriasBoton = () => {
+
+  for(let i = 0; i < bttnEliminarCategorias.length; i++) {    
+ 
+     bttnEliminarCategorias[i].onclick = () => {
+       const idRecortado =  bttnEliminarCategorias[i].id.slice(20)
+       idNumerico = Number (idRecortado)
+       const filtradoCategorias = categorias.filter((elemento, index) => {
+         return index != idNumerico            
+       })
+       categorias = filtradoCategorias      
+       aJSONYSubirAlLStorage(categorias, "categorias")      
+     }   
+   } 
+ }
+ 
+
 const editarCategoriaConInput = (id) => {  
   seccionEditarCategorias.classList.remove("is-hidden");
   seccionCategorias.classList.add("is-hidden");
@@ -168,9 +185,8 @@ const editarCategoriaConInput = (id) => {
   seccionNuevaOperacion.classList.add("is-hidden");
 
   botonConfirmarEditarCategoria.onclick = () => {
-    categorias[id] = inputEditarCategoria.value
-    agregarCategoriasAHTML(categorias)
-    aJSONYSubirAlLStorage(categorias, "categorias")
+    categorias[id] = inputEditarCategoria.value    
+    aJSONYSubirAlLStorage(categorias, "categorias")    
   }
 }
 
@@ -194,20 +210,11 @@ botonCancelarEditarCategoria.onclick = () => {
   seccionReportesInsuficientes.classList.add("is-hidden");
 }
 
-const eliminarCategoriasBoton = () => {
-  for(let i = 0; i < botonesEliminanCategorias.length; i++) {
-    botonesEliminanCategorias[i].onclick = () => {
-      const idRecortado =  botonesEliminanCategorias[i].id.slice(20)
-      idNumerico = Number (idRecortado)
-      const filtradoCategorias = categorias.filter((elemento, index) => {
-        return index != idNumerico
-      })
-      categorias = filtradoCategorias
-      agregarCategoriasAHTML(categorias)
-      aJSONYSubirAlLStorage(categorias, "categorias")
-    }   
-  } 
-}
+
+const bttnEliminarCategorias = document.querySelectorAll(".eliminar-categorias")
+
+
+
 
 eliminarCategoriasBoton()
 
@@ -244,7 +251,7 @@ guardarDeLStorage(nuevasOperaciones, "operaciones")
 operaciones = nuevasOperaciones
 
 const aHTML = (array) => {
-  const arrReduc = array.reduce((acc, elemento) => {
+  const arrReduc = array.reduce((acc, elemento, index) => {
     const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
     const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"  
     const fechas = new Date(elemento.fecha) 
@@ -254,9 +261,9 @@ const aHTML = (array) => {
     <div class="column is-4 has-text-grey has-text-right">${fechas.toLocaleDateString()}</div>
     <div class="column is-2 has-text-weight-bold ${montoClase(elemento)} has-text-right">${montoSigno(elemento)}${elemento.monto}</div>
     <div class="column is-2">
-    <div class="columns">
-      <button type="button" id="listaDeBotonesEditarOperaciones" class= "button is-2 is-ghost is-small  mt-2 has-text-right">Editar</button> 
-      <button type="button" id="listaDeBotonesEliminarOperaciones" class= "button is-ghost is-small mt-2 has-text-right">Eliminar</button>
+    <div class="columns">  
+    <button type="button" id="editar-op-${index}" class="button is-ghost is-small mr-2 mt-2 edit-op">Editar</button> 
+    <button type="button" id="eliminar-op-${index}" class="button is-ghost is-small mr-1 mt-2 delete-op">Eliminar</button>
     </div>
     </div>
     </div>`
@@ -264,7 +271,7 @@ const aHTML = (array) => {
   return arrReduc
 }
 
-// EDITAR Y ELIMINAR OPERACIONES 
+
 
                      // FILTROS
 
@@ -311,7 +318,7 @@ selectCategoriasDeFiltros.onchange = () => {
 
 // FILTRO POR FECHA
 
-inputDateFiltro.value =  new Date().toLocaleDateString()
+//inputDateFiltro.value =  new Date().toLocaleDateString()
  
 const filtradoPorFecha = (array) => {
   inputDateFiltro.oninput = () => {  
@@ -409,3 +416,33 @@ selectOrdenarPorAHTML()
                                // REPORTES
 
 sinReportes.style.display = "none"
+
+
+// EDITAR Y ELIMINAR OPERACIONES 
+
+listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+
+const bttnEditOp = document.querySelectorAll(".edit-op")
+const botonesOperacionesEliminar = document.querySelectorAll(".delete-op")
+
+const editarOperacionesBoton = () => {
+  
+  for (let i = 0; i < bttnEditOp.length; i++) {
+    
+    console.log(bttnEditOp[i])
+
+    bttnEditOp[i].onclick = () => {
+      console.log(bttnEditOp[i])
+    }            
+      //const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion");
+      //seccionEditarOperaciones.classList.remove("is-hidden");   
+      //const idCortado = bttnEditOp[i].id.slice(6)
+      //console.log(bttnEditOp[idRecortado])
+      //idNumerico = Number(idCortado)
+      //console.log(idCortado)
+      //editarOperacionesBoton()
+     
+  }
+}
+
+editarOperacionesBoton()
