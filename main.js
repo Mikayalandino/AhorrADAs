@@ -164,7 +164,8 @@ const editarCategoriaConInput = (id) => {
   seccionBalance.classList.add("is-hidden")
   seccionNuevaOperacion.classList.add("is-hidden");
 
-  botonConfirmarEditarCategoria.onclick = () => {
+  botonConfirmarEditarCategoria.onclick = (event) => {
+    event.preventDefault();
     categorias[id] = inputEditarCategoria.value
     agregarCategoriasAHTML(categorias)
     aJSONYSubirAlLStorage(categorias, "categorias")
