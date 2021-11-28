@@ -209,6 +209,7 @@ const eliminarCategoriasBoton = () => {
       agregarCategoriasAHTML(categorias)
       editarCategoriasBoton()
       eliminarCategoriasBoton()
+      reportesAHTML()
     }
   }
 }
@@ -241,7 +242,8 @@ const editarCategoriasBoton = () => {
       idNumerico = Number(idRecortado)
       inputEditarCategoria.value = categorias[idNumerico]     
       editarCategoriaConInput(idNumerico)
-      eliminarCategoriasBoton()  
+      eliminarCategoriasBoton() 
+      reportesAHTML() 
     }
   }
 }
@@ -273,13 +275,14 @@ const subirObjetoAArray = (array) => {
 }
 
 botonAgregarOperacion.onclick = (event) => {
-  event.preventDefault();
+  event.preventDefault(event)
+  reportesAHTML()
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones")
   listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
-  seccionNuevaOperacion.classList.add("is-hidden");
-  seccionBalance.classList.remove("is-hidden");
+  seccionNuevaOperacion.classList.add("is-hidden")
+  seccionBalance.classList.remove("is-hidden")
   estadoDeContenedorDeOperaciones("operaciones")
 }
 
