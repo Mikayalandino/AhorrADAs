@@ -181,10 +181,12 @@ const agregarCategoriasAHTML = () => {
   </div>`
   }, "")
 
-  listadoDeCategorias.innerHTML = categoriasHTML
+  listadoDeCategorias.innerHTML = categoriasHTML   
+  editarCategoriasBoton()
+  eliminarCategoriasBoton() 
 }
 
-agregarCategoriasAHTML()
+
 
 // BOTONES EDITAR-ELIMINAR CATEGORÍAS
 
@@ -255,6 +257,7 @@ const editarCategoriasBoton = () => {
 
 editarCategoriasBoton()
 eliminarCategoriasBoton()
+agregarCategoriasAHTML()
 
 botonCancelarEditarCategoria.onclick = () => {
   seccionEditarCategorias.classList.add("is-hidden");
@@ -530,9 +533,6 @@ const editarOperacionesBoton = () => {
 
 editarOperacionesBoton()
 eliminarOperacionesBotones()
-
-console.log(arrayReduc(categorias))
-
 
 // REPORTES
 
