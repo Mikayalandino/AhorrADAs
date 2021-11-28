@@ -216,14 +216,15 @@ const editarCategoriaConInput = (id) => {
   botonConfirmarEditarCategoria.onclick = () => {    
 
     const editarCatEnOp = operaciones.map((elemento, index) => {
-      let clonOperaciones = {...operaciones[index]}
-      const categoriaDeOp = inputEditarCategoria.value
-      clonOperaciones.categoria = categoriaDeOp  
-      return clonOperaciones
+      const elementos = elemento.categoria = inputEditarCategoria.value
+      return categoria = elementos
+
     })
+
+    console.log(editarCatEnOp)
     
-    operaciones = editarCatEnOp
-    aJSONYSubirAlLStorage(operaciones, "operaciones")
+    //operaciones = editarCatEnOp
+    //aJSONYSubirAlLStorage(operaciones, "operaciones")
     categorias[id] = inputEditarCategoria.value
     aJSONYSubirAlLStorage(categorias, "categorias")
     agregarCategoriasAHTML(categorias)
@@ -279,6 +280,7 @@ botonAgregarOperacion.onclick = () => {
   listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
   seccionNuevaOperacion.classList.add("is-hidden");
   seccionBalance.classList.remove("is-hidden");
+  estadoDeContenedorDeOperaciones("operaciones")
 }
 
 const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
@@ -480,8 +482,6 @@ const eliminarOperacionesBotones = () => {
   }
 }
 
-
-
 const valorFormEditarOperaciones = (id) => {
   inputEditDescripcion.value = operaciones[id].descripcion
   inputEditMonto.value = operaciones[id].monto
@@ -586,7 +586,7 @@ const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "
 let operacionesPorMeses = new Array(12).fill([]);
 operaciones.forEach(operacion => {
   const mesNumero = new Date(operacion.fecha).getMonth()
-  operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion]
+  //operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion]
 })
 operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
   const sumasMesesGanancia = operacion.reduce((acc, curr) => {
@@ -618,7 +618,12 @@ const obtenerMayorMontoPorMes = (elemento) => {
 }
 
 //Obtener categorías de mes con mayor ganancia y gasto 
-categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
-categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
-categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
-categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
+
+const reportesAHTML = () => {
+
+  categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
+  categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
+  categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
+  categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
+
+}
