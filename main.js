@@ -506,10 +506,6 @@ const calcularResumen = (elemento) => {
   return ordenado[0]
 }
 
-
-
-
-
 // Obtener categoria con mayor ganancia
 
 categoriaMayorGanancia.innerHTML = calcularResumen("ganancia").nombre
@@ -527,9 +523,6 @@ categoriaMayorBalanceMonto.innerHTML = "$" + calcularResumen("balance").balance
 
 console.log(operaciones)
 
-// console.log(calcularResumen("ganancia"))
-// console.log(calcularResumen("gasto"))
-
 // Obtener mes con mayor ganancia
 
 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -539,47 +532,3 @@ operaciones.forEach(operacion => {
   const mesNumero = new Date(operacion.fecha).getMonth()
   operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion] 
 })
-
-operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
-  const sumasMesesGanancia = operacion.reduce((acc, curr) => {
-    if (curr.tipo === "ganancia") {
-        return acc + parseInt(curr.monto)
-      }
-      return acc 
-  }, 0) 
-
-  const sumasMesesGasto = operacion.reduce((acc, curr) => {
-    if (curr.tipo === "gasto") {
-        return acc + parseInt(curr.monto)
-      }
-      return acc 
-  }, 0) 
-
-  return { 
-    nombre: meses[mesNumero],  
-    ganancia: sumasMesesGanancia,
-    gasto: sumasMesesGasto,
-  }
-})
-
-// const sumaMayorMes = sumasMesesGanancia.filter((elemento) => {
-//   return elemento > sumasMesesGanancia[] 
-// })
-
-const obtenerMayorMontoPorMes = (elemento) => {
-  const ordenado = [...operacionesPorMeses]
-  ordenado.sort((a, b) => {
-    return b[elemento] - a[elemento]
-  })
-  return ordenado[0]
-}
-
-console.log('Mayor ganancia', obtenerMayorMontoPorMes('ganancia'));
-console.log('Mayor gasto', obtenerMayorMontoPorMes('gasto'));
-
-// console.log("despues del map", operacionesPorMeses)
-
-categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
-categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
-categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
-categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
