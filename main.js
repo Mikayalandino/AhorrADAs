@@ -532,7 +532,23 @@ editarOperacionesBoton()
 eliminarOperacionesBotones()
 
 // REPORTES
+// BALANCE
 
+
+const balanceGastos = (array, tipo) => {
+
+  const filtroOp = array.filter((elemento) => {
+    return elemento.tipo === tipo && elemento
+  })
+  
+  const reduceGastos = filtroOp.reduce((acc, elemento) => {
+    return acc + Number(elemento.monto)
+  }, 0)
+  
+  return reduceGastos  
+}
+
+const balanceTotal = balanceGastos(operaciones, "ganancia") - balanceGastos(operaciones, "gasto")
 //RESUMEN 
 
 const categoriasConOperaciones = categorias.map(categoria => {
