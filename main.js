@@ -232,6 +232,8 @@ const editarCategoriaConInput = (id) => {
     eliminarCategoriasBoton()
     listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones)) 
     selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc(categorias)}`
+    editarOperacionesBoton()
+    eliminarOperacionesBotones()
   }
 }
 
@@ -586,7 +588,7 @@ const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "
 let operacionesPorMeses = new Array(12).fill([]);
 operaciones.forEach(operacion => {
   const mesNumero = new Date(operacion.fecha).getMonth()
-  //operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion]
+  operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion]
 })
 operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
   const sumasMesesGanancia = operacion.reduce((acc, curr) => {
