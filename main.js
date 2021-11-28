@@ -22,6 +22,8 @@ const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion")
 const botonEditarOp = document.querySelector("#boton-edit-op")
 const botonCancelOp = document.querySelector("#boton-cancel-op")
+const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
+const botonesEliminarOperaciones = document.querySelectorAll(".delete-op")
 const inputEditDescripcion = document.querySelector("#edit-descripcion")
 const inputEditMonto = document.querySelector("#edit-monto")
 const inputEditTipo = document.querySelector("#edit-tipo-op")
@@ -157,11 +159,17 @@ categorias = nuevasCategorias
 
 // CATEGORIAS A HTML
 
-const arrayReduc = categorias.reduce((acc, arr) => {
-  return acc += `<option value="${arr}">${arr}</option>`
-}, "")
+const arrayReduc = (array) => {
 
-selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc}`
+  const arrayReducido = array.reduce((acc, arr) => {
+    return acc += `<option value="${arr}">${arr}</option>`
+  }, "")
+
+  return arrayReducido
+}
+
+
+selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc(categorias)}`
 
 const agregarCategoriasAHTML = () => {
   const categoriasHTML = categorias.reduce((acc, elemento, index) => {
@@ -225,8 +233,8 @@ const editarCategoriaConInput = (id) => {
     agregarCategoriasAHTML(categorias)
     editarCategoriasBoton()
     eliminarCategoriasBoton()
-    listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
-    
+    listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones)) 
+    selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc(categorias)}`
   }
 }
 
@@ -238,7 +246,7 @@ const editarCategoriasBoton = () => {
       idNumerico = Number(idRecortado)
       inputEditarCategoria.value = categorias[idNumerico]     
       editarCategoriaConInput(idNumerico)
-      eliminarCategoriasBoton()     
+      eliminarCategoriasBoton()  
     }
   }
 }
@@ -255,7 +263,7 @@ botonCancelarEditarCategoria.onclick = () => {
 
 // OPERACIONES
 
-selectCategoriasOperaciones.innerHTML = arrayReduc
+selectCategoriasOperaciones.innerHTML = arrayReduc(categorias)
 
 const subirObjetoAArray = (array) => {
   const nuevoObjeto = {
@@ -457,8 +465,6 @@ sinReportes.style.display = "none"
 
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
-const botonesEliminarOperaciones = document.querySelectorAll(".delete-op")
-
 const eliminarOperacionesBotones = () => {  
 
   const botonesEliminarOperaciones = document.querySelectorAll(".delete-op")
@@ -480,7 +486,7 @@ const eliminarOperacionesBotones = () => {
   }
 }
 
-const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
+
 
 const valorFormEditarOperaciones = (id) => {
   inputEditDescripcion.value = operaciones[id].descripcion
@@ -491,6 +497,7 @@ const valorFormEditarOperaciones = (id) => {
 }
 
 const formOperacionesAEditar = (id) => {
+  const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
   seccionEditarOperaciones.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
 
@@ -500,10 +507,10 @@ const formOperacionesAEditar = (id) => {
     operaciones[id].tipo = inputEditTipo.value
     operaciones[id].categoria = selectEditCategoria.value
     operaciones[id].fecha = inputEditFecha.value
+    listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
     editarOperacionesBoton()
     eliminarOperacionesBotones()
-    aJSONYSubirAlLStorage(operaciones, "operaciones")  
-    listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones)) 
+    aJSONYSubirAlLStorage(operaciones, "operaciones")       
     seccionEditarOperaciones.classList.add("is-hidden")
     seccionBalance.classList.remove("is-hidden")
   }
@@ -517,7 +524,7 @@ const editarOperacionesBoton = () => {
     botonesEditarOperaciones[i].onclick = () => {
       const idCortado = botonesEditarOperaciones[i].id.slice(10)
       const idNumerico = Number(idCortado)
-      selectEditCategoria.innerHTML = arrayReduc
+      selectEditCategoria.innerHTML = arrayReduc(categorias)
       valorFormEditarOperaciones(idNumerico)
       formOperacionesAEditar(idNumerico)
       editarOperacionesBoton() 
@@ -529,4 +536,5 @@ const editarOperacionesBoton = () => {
 editarOperacionesBoton()
 eliminarOperacionesBotones()
 
+console.log(arrayReduc(categorias))
 
