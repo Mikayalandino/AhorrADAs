@@ -68,7 +68,6 @@ const filtrosTipo = document.getElementById("filtros-tipo");
 const selectOrdenarPor = document.querySelector("#ordenar-por");
 
 // Botón AhorrADAs
-
 botonNavAhorradas.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
   seccionCategorias.classList.add("is-hidden");
@@ -76,7 +75,6 @@ botonNavAhorradas.onclick = () => {
 }
 
 // Botones balance
-
 botonBalanceNavbar.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
   seccionCategorias.classList.add("is-hidden");
@@ -84,14 +82,12 @@ botonBalanceNavbar.onclick = () => {
 }
 
 // Botones reportes
-
 botonReportesNavbar.onclick = () => {
   seccionReportesInsuficientes.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
   seccionCategorias.classList.add("is-hidden")
   seccionEditarCategorias.classList.add("is-hidden");
 }
-
 // FUNCIONES GENÉRICAS REUTILIZABLES
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
@@ -314,8 +310,6 @@ const aHTML = (array) => {
   return arrReduc
 }
 
-
-
 // FILTROS
 
 botonOcultarFiltros.onclick = () => {
@@ -372,7 +366,7 @@ const filtradoPorFecha = (array) => {
   }
 }
 filtradoPorFecha(operaciones)
-
+ 
 // ORDENAR POR
 
 // MÁS Y MENOS RECIENTE
@@ -538,3 +532,93 @@ eliminarOperacionesBotones()
 
 console.log(arrayReduc(categorias))
 
+
+// REPORTES
+
+sinReportes.style.display = "none"
+
+//RESUMEN 
+
+const categoriasConOperaciones = categorias.map(categoria => {
+  const operacionPorCategoria = operaciones.filter(operacion => {
+    if (operacion.categoria === categoria) {
+      return true
+    }
+  })
+
+  let gasto = 0;
+  let ganancia = 0; //acc
+  operacionPorCategoria.forEach(op => {
+    if (op.tipo === "ganancia") ganancia = ganancia + parseInt(op.monto)
+    if (op.tipo === "gasto") gasto = gasto + parseInt(op.monto)
+
+  })
+
+  return {
+    nombre: categoria,
+    ganancia,
+    gasto,
+    balance: ganancia - gasto,
+  }
+})
+
+const calcularResumen = (elemento) => {
+  const ordenado = [...categoriasConOperaciones]
+  ordenado.sort((a, b) => {
+    return b[elemento] - a[elemento]
+  })
+  return ordenado[0]
+}
+
+// Obtener categoria con mayor ganancia, gasto y balance 
+
+categoriaMayorGanancia.innerHTML = calcularResumen("ganancia").nombre
+categoriaMayorGananciaMonto.innerHTML = "+$" + calcularResumen("ganancia").ganancia
+categoriaMayorGasto.innerHTML = calcularResumen("gasto").nombre
+categoriaMayorGastoMonto.innerHTML = "-$" + calcularResumen("gasto").gasto
+categoriaMayorBalance.innerHTML = calcularResumen("balance").nombre
+categoriaMayorBalanceMonto.innerHTML = "$" + calcularResumen("balance").balance 
+
+// Obtener mes con mayor ganancia y gasto 
+
+const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+let operacionesPorMeses = new Array(12).fill([]);
+operaciones.forEach(operacion => {
+  const mesNumero = new Date(operacion.fecha).getMonth()
+  operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion]
+})
+operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
+  const sumasMesesGanancia = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "ganancia") {
+      return acc + parseInt(curr.monto)
+    }
+    return acc
+  }, 0)
+
+  const sumasMesesGasto = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "gasto") {
+      return acc + parseInt(curr.monto)
+    }
+    return acc
+  }, 0)
+
+  return {
+    nombre: meses[mesNumero],
+    ganancia: sumasMesesGanancia,
+    gasto: sumasMesesGasto,
+  }
+})
+const obtenerMayorMontoPorMes = (elemento) => {
+  const ordenado = [...operacionesPorMeses]
+  ordenado.sort((a, b) => {
+    return b[elemento] - a[elemento]
+  })
+  return ordenado[0]
+}
+
+//Obtener categorías de mes con mayor ganancia y gasto 
+categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
+categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
+categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
+categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
