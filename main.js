@@ -220,16 +220,7 @@ const editarCategoriaConInput = (id) => {
 
   botonConfirmarEditarCategoria.onclick = () => {    
 
-    const editarCatEnOp = operaciones.map((elemento, index) => {
-      const elementos = elemento.categoria = inputEditarCategoria.value
-      return categoria = elementos
-
-    })
-
-    console.log(editarCatEnOp)
-    
-    //operaciones = editarCatEnOp
-    //aJSONYSubirAlLStorage(operaciones, "operaciones")
+   
     categorias[id] = inputEditarCategoria.value
     aJSONYSubirAlLStorage(categorias, "categorias")
     agregarCategoriasAHTML(categorias)
@@ -365,8 +356,6 @@ selectCategoriasDeFiltros.onchange = () => {
 
 // FILTRO POR FECHA
 
-//inputDateFiltro.value =  new Date().toLocaleDateString()
-
 const filtradoPorFecha = (array) => {
   inputDateFiltro.oninput = () => {
     const arrayFiltrado = array.filter((elemento) => {
@@ -463,7 +452,7 @@ selectOrdenarPorAHTML()
 
 // EDITAR Y ELIMINAR OPERACIONES 
 
-listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
+
 
 const eliminarOperacionesBotones = () => {  
 
