@@ -274,9 +274,14 @@ formularioOperaciones.onsubmit = () => {
   seccionBalance.classList.remove("is-hidden");
 }
 
-const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
-  operacionesSinResultados.classList.add("is-hidden"))
-estadoDeContenedorDeOperaciones("operaciones")
+const estadoDeContenedorDeOperaciones = () => {
+  const item = JSON.parse(localStorage.getItem("operaciones"));
+  const noHayItem = item === null || !item.length
+
+  seccionListadoOperaciones.classList.toggle("is-hidden", noHayItem)
+  operacionesSinResultados.classList.toggle("is-hidden", !noHayItem)
+}
+estadoDeContenedorDeOperaciones()
 
 let nuevasOperaciones = []
 guardarDeLStorage(nuevasOperaciones, "operaciones")
