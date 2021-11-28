@@ -46,7 +46,6 @@ const filtrosTipo = document.getElementById("filtros-tipo");
 const selectOrdenarPor = document.querySelector("#ordenar-por");
 
 // Botón AhorrADAs
-
 botonNavAhorradas.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
   seccionCategorias.classList.add("is-hidden");
@@ -54,7 +53,6 @@ botonNavAhorradas.onclick = () => {
 }
 
 // Botones balance
-
 botonBalanceNavbar.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
   seccionCategorias.classList.add("is-hidden");
@@ -62,15 +60,13 @@ botonBalanceNavbar.onclick = () => {
 }
 
 // Botones reportes
-
 botonReportesNavbar.onclick = () => {
   seccionReportesInsuficientes.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
   seccionCategorias.classList.add("is-hidden")
   seccionEditarCategorias.classList.add("is-hidden");
 }
-
-                      // FUNCIONES GENÉRICAS REUTILIZABLES
+// FUNCIONES GENÉRICAS REUTILIZABLES
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
   boton.onclick = () => {
@@ -97,12 +93,12 @@ const blanquearFormularios = (form) => {
   form.reset()
 }
 
-                      //  VARIABLES GLOBALES
+//  VARIABLES GLOBALES
 
 let categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 let operaciones = []
 
-                      // NAVEGACIÓN CON BOTONES
+// NAVEGACIÓN CON BOTONES
 
 botonCategoriasNavbar.onclick = () => {
   seccionCategorias.classList.remove("is-hidden");
@@ -115,9 +111,9 @@ botonCategoriasNavbar.onclick = () => {
 modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacion);
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
-                        // CATEGORÍAS 
+// CATEGORÍAS 
 
-const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave) 
+const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave)
 
 subirCategoriasAlLs(categorias, "categorias")
 
@@ -211,7 +207,7 @@ const eliminarCategoriasBoton = () => {
 
 eliminarCategoriasBoton()
 
-                    // OPERACIONES
+// OPERACIONES
 
 selectCategoriasOperaciones.innerHTML = arrayReduc
 
@@ -266,7 +262,7 @@ const aHTML = (array) => {
 
 // EDITAR Y ELIMINAR OPERACIONES 
 
-                     // FILTROS
+// FILTROS
 
 botonOcultarFiltros.onclick = () => {
   contenedorFiltros.classList.toggle("is-hidden");
@@ -297,12 +293,12 @@ const filtrosPorTipoYCategoria = () => {
     return operacion.categoria === filtracionPorCategoria
   })
   return filtrado
-} 
+}
 
 filtrosTipo.onchange = () => {
   const arrayFiltradoTipo = filtrosPorTipoYCategoria()
   listadoOperaciones.innerHTML = aHTML(arrayFiltradoTipo)
-} 
+}
 
 selectCategoriasDeFiltros.onchange = () => {
   const arrayFiltradoCategoria = filtrosPorTipoYCategoria()
@@ -314,16 +310,16 @@ selectCategoriasDeFiltros.onchange = () => {
 inputDateFiltro.value =  new Date().toLocaleDateString()
  
 const filtradoPorFecha = (array) => {
-  inputDateFiltro.oninput = () => {  
+  inputDateFiltro.oninput = () => {
     const arrayFiltrado = array.filter((elemento) => {
-      return  new Date (elemento.fecha)  > new Date (inputDateFiltro.value)
-    })  
-    listadoOperaciones.innerHTML = aHTML(arrayFiltrado)   
+      return new Date(elemento.fecha) > new Date(inputDateFiltro.value)
+    })
+    listadoOperaciones.innerHTML = aHTML(arrayFiltrado)
   }
 }
 filtradoPorFecha(operaciones)
  
-                              // ORDENAR POR
+// ORDENAR POR
 
 // MÁS Y MENOS RECIENTE
 
@@ -331,12 +327,12 @@ const ordenarMasRecientes = (array) => {
  const fechasOrdenadas =  array.sort((a, b) => {
     return new Date (b.fecha) - new Date (a.fecha)
   })
-  return fechasOrdenadas  
+  return fechasOrdenadas
 }
 
 const ordenarMenosRecientes = (array) => {
   const fechasOrdenadas = array.sort((a, b) => {
-    return new Date (a.fecha) - new Date (b.fecha)
+    return new Date(a.fecha) - new Date(b.fecha)
   })
   return fechasOrdenadas
 }
@@ -344,31 +340,31 @@ const ordenarMenosRecientes = (array) => {
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
 const masYMenosRecientes = () => {
-  if(selectOrdenarPor.value === "mas-reciente"){
+  if (selectOrdenarPor.value === "mas-reciente") {
     listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
   }
-  else if(selectOrdenarPor.value === "menos-reciente"){
+  else if (selectOrdenarPor.value === "menos-reciente") {
     listadoOperaciones.innerHTML = aHTML(ordenarMenosRecientes(operaciones))
   }  
 }
 
 // MENOR MONTO
 
-const arrayOrdenadoMenorMonto = [...operaciones].sort((a,b) => {
-  return a.monto - b.monto  
+const arrayOrdenadoMenorMonto = [...operaciones].sort((a, b) => {
+  return a.monto - b.monto
 })
 
 // MAYOR MONTO
 
-const arrayOrdenadoMayorMonto = [...operaciones].sort((a,b) => {
-  return b.monto - a.monto  
+const arrayOrdenadoMayorMonto = [...operaciones].sort((a, b) => {
+  return b.monto - a.monto
 })
 
 const mayorMenorMonto = () => {
-  if(selectOrdenarPor.value === "mayor-monto") {
+  if (selectOrdenarPor.value === "mayor-monto") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMayorMonto)
   }
-  else if(selectOrdenarPor.value === "menor-monto") {
+  else if (selectOrdenarPor.value === "menor-monto") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMenorMonto)
   }
 }
@@ -380,7 +376,7 @@ const arrayOrdenadoA = [...operaciones].sort((a,b) => {
     return -1
   }
 })
-  
+
 const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
   if( a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
     return -1
@@ -388,16 +384,16 @@ const arrayOrdenadoZ = [...operaciones].sort((a, b) => {
 })
 
 const ordenarAlfabeticamente = () => {
-  if(selectOrdenarPor.value === "a-z") {
+  if (selectOrdenarPor.value === "a-z") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoA)
   }
-  else if(selectOrdenarPor.value === "z-a") {
+  else if (selectOrdenarPor.value === "z-a") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoZ)
   }
 }
 
 const selectOrdenarPorAHTML = () => {
-  selectOrdenarPor.oninput = () => { 
+  selectOrdenarPor.oninput = () => {
     masYMenosRecientes()
     mayorMenorMonto()
     ordenarAlfabeticamente()  
@@ -406,6 +402,93 @@ const selectOrdenarPorAHTML = () => {
 
 selectOrdenarPorAHTML()
 
-                               // REPORTES
+
+// REPORTES
 
 sinReportes.style.display = "none"
+
+//RESUMEN 
+
+const categoriasConOperaciones = categorias.map(categoria => {
+  const operacionPorCategoria = operaciones.filter(operacion => {
+    if (operacion.categoria === categoria) {
+      return true
+    }
+  })
+
+  let gasto = 0;
+  let ganancia = 0; //acc
+  operacionPorCategoria.forEach(op => {
+    if (op.tipo === "ganancia") ganancia = ganancia + parseInt(op.monto)
+    if (op.tipo === "gasto") gasto = gasto + parseInt(op.monto)
+
+  })
+
+  return {
+    nombre: categoria,
+    ganancia,
+    gasto,
+    balance: ganancia - gasto,
+  }
+})
+
+const calcularResumen = (elemento) => {
+  const ordenado = [...categoriasConOperaciones]
+  ordenado.sort((a, b) => {
+    return b[elemento] - a[elemento]
+  })
+  return ordenado[0]
+}
+
+// Obtener categoria con mayor ganancia, gasto y balance 
+
+categoriaMayorGanancia.innerHTML = calcularResumen("ganancia").nombre
+categoriaMayorGananciaMonto.innerHTML = "+$" + calcularResumen("ganancia").ganancia
+categoriaMayorGasto.innerHTML = calcularResumen("gasto").nombre
+categoriaMayorGastoMonto.innerHTML = "-$" + calcularResumen("gasto").gasto
+categoriaMayorBalance.innerHTML = calcularResumen("balance").nombre
+categoriaMayorBalanceMonto.innerHTML = "$" + calcularResumen("balance").balance 
+
+// Obtener mes con mayor ganancia y gasto 
+
+const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+let operacionesPorMeses = new Array(12).fill([]);
+operaciones.forEach(operacion => {
+  const mesNumero = new Date(operacion.fecha).getMonth()
+  operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion]
+})
+operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
+  const sumasMesesGanancia = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "ganancia") {
+      return acc + parseInt(curr.monto)
+    }
+    return acc
+  }, 0)
+
+  const sumasMesesGasto = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "gasto") {
+      return acc + parseInt(curr.monto)
+    }
+    return acc
+  }, 0)
+
+  return {
+    nombre: meses[mesNumero],
+    ganancia: sumasMesesGanancia,
+    gasto: sumasMesesGasto,
+  }
+})
+const obtenerMayorMontoPorMes = (elemento) => {
+  const ordenado = [...operacionesPorMeses]
+  ordenado.sort((a, b) => {
+    return b[elemento] - a[elemento]
+  })
+  return ordenado[0]
+}
+
+//Obtener categorías de mes con mayor ganancia y gasto 
+categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
+categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
+categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
+categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto

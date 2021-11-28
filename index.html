@@ -214,6 +214,7 @@
                                     <div class="control">
                                         <input id="input-descripcion" class="input" type="text">
                                     </div>
+
                                 </div>
                                 <div class="field">
                                     <label class="label">Monto</label>
@@ -369,92 +370,178 @@
             </div>
         </section>
 
+        <!-- Seccion editar categorías -->
+
+        <section class="section mt-5 is-hidden" id="seccion-editar-categorias">
+            <div class="container">
+                <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+                    <div class="box">
+                        <h3 class="title is-size-2 has-text-weight-medium has-text-weight-bold mb-6">Editar categoría
+                        </h3>
+                        <form id="formulario-editar-categorias">
+                            <label class="label">Nombre
+                                <div class="field is-grouped">
+                                    <div class="control is-expanded">
+                                        <input id="input-edit-categorias" class="input mb-4" type="text">
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column is-8"></div>
+                                    <div class="column">
+                                        <button type="button" class="button is-light ml-5"
+                                            id="boton-cancelar-editar-categoria">Cancelar</button>
+                                    </div>
+                                    <div class="column">
+                                        <button type="button" class="button is-success"
+                                            id="boton-confirmar-editar-categoria">Confirmar</button>
+                                    </div>
+                                </div>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!--Seccion reportes-->
-        
+
         <section class="section mt-5 is-hidden" id="seccion-reportes-insuficientes">
             <div class="container">
                 <div class="columns">
                     <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
                         <div class="box">
-                            <h2 class="title is-size-2 has-text-weight-bold pb-2">Reportes</h2>
+                            <h2 class="title is-size-2 has-text-weight-bold pb-2">
+                                Reportes
+                            </h2>
                             <div id="sin-reportes">
                                 <div class="my-6 py-6">
                                     <div class="container column is-5">
                                         <img src="img/reportes.svg" alt="reportes">
                                     </div>
-                                    <h4 class="is-size-4 has-text-centered mt-6 mb-4 has-text-weight-semibold">Operaciones insuficientes</h4>
-                                    <p class="has-text-centered">Prueba agregando más operaciones</p>
+                                    <h4 class="is-size-4 has-text-centered mt-6 mb-4 has-text-weight-semibold">
+                                        Operaciones insuficientes
+                                    </h4>
+                                    <p class="has-text-centered">
+                                        Prueba agregando más operaciones
+                                    </p>
                                 </div>
                             </div>
-                            <div class="m-5 mt-6 pt-4">
-                                <div class="mb-4 pb-4">
-                                    <h3 class="is-size-4 has-text-weight-medium">Resumen</h3>
+                            <section>
+                                <!--
+                                    Comienzo Resumen
+                                -->
+                                <div class="m-5 mt-6 pt-4">
+                                    <div class="mb-4 pb-4">
+                                        <h3 class="is-size-4 has-text-weight-medium">Resumen</h3>
+                                    </div>
+                                    <!-- 
+                                        Categoría Mayor Ganancia 
+                                    -->
+                                    <div class="columns is-align-items-center pb-1">
+                                        <div class="column is-8 has-text-weight-medium has-text-left">Categoría con
+                                            mayor ganancia</div>
+                                        <div class="column is-1 tag is-primary is-light has-text-left p-4"
+                                            id="categoria-mayor-ganancia">
+                                        </div>
+                                        <div class="column is-3 has-text-weight-bold has-text-success has-text-right"
+                                            id="categoria-mayor-ganancia-monto">
+                                            +$0</div>
+                                    </div>
+                                    <!-- 
+                                        Categoría mayor gasto
+                                    -->
+                                    <div class="columns is-align-items-center pb-1">
+                                        <div class="column is-8 has-text-weight-medium has-text-left">Categoría con
+                                            mayor gasto</div>
+                                        <div class="column is-1 tag is-primary is-light has-text-left p-4"
+                                            id="categoria-mayor-gasto">Transporte
+                                        </div>
+                                        <div class="column is-3 has-text-weight-bold has-text-danger has-text-right"
+                                            id="categoria-mayor-gasto-monto">+$0
+                                        </div>
+                                    </div>
+                                    <!-- 
+                                        Categoría mayor balance
+                                    -->
+                                    <div class="columns is-align-items-center pb-1">
+                                        <div class="column is-8 has-text-weight-medium has-text-left">Categoría con
+                                            mayor balance</div>
+                                        <div class="column is-1 tag is-primary is-light has-text-left p-4"
+                                            id="categoria-mayor-balance">Transporte
+                                        </div>
+                                        <div class="column is-3 has-text-weight-bold has-text-right"
+                                            id="categoria-mayor-balance-monto">+$0</div>
+                                    </div>
+                                    <!-- 
+                                        Categoría mes mayor ganancia
+                                    -->
+                                    <div class="columns is-align-items-center pb-1">
+                                        <div class="column is-7 has-text-weight-medium has-text-left">Mes con mayor
+                                            ganancia</div>
+                                        <div class="column is-2 has-text-right" id="mes-mayor-ganancia">10/10/2020</div>
+                                        <div class="column is-3 has-text-weight-bold has-text-success has-text-right"
+                                            id="mes-mayor-ganancia-monto">
+                                            +$0</div>
+                                    </div>
+                                    <!-- 
+                                        Categoría mes mayor gasto
+                                    -->
+                                    <div class="columns is-align-items-center pb-1">
+                                        <div class="column is-7 has-text-weight-medium has-text-left">Mes con mayor
+                                            gasto</div>
+                                        <div class="column is-2 has-text-right" id="mes-mayor-gasto">10/10/2020</div>
+                                        <div class="column is-3 has-text-weight-bold has-text-danger has-text-right"
+                                            id="mes-mayor-gasto-monto">+$0
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="columns is-align-items-center pb-1">
-                                    <div class="column is-8 has-text-weight-medium has-text-left">Categoría con mayor ganancia</div>
-                                    <div class="column is-1 tag is-primary is-light has-text-left p-4">Transporte</div>
-                                    <div class="column is-3 has-text-weight-bold has-text-success has-text-right">+$0</div>
+                            </section>
+                            <!-- 
+                                Totales por categorías
+                            -->
+                            <section>
+                                <div class="m-5 mt-6 pt-6">
+                                    <div class="mb-4 pb-4">
+                                        <h3 class="is-size-4 has-text-weight-medium">Totales por categoría</h3>
+                                    </div>
+                                    <div class="columns has-text-weight-medium">
+                                        <div class="column is-3 has-text-left">Categoría</div>
+                                        <div class="column is-3 has-text-right">Ganancias</div>
+                                        <div class="column is-3 has-text-right">Gastos</div>
+                                        <div class="column is-3 has-text-right">Balance</div>
+                                    </div>
+                                    <div class="columns has-text-weight-medium pt-1 pb-1">
+                                        <div class="column is-3 has-text-left">Comida</div>
+                                        <div class="column is-3 has-text-right has-text-success">+$0</div>
+                                        <div class="column is-3 has-text-right has-text-danger">-$0</div>
+                                        <div class="column is-3 has-text-right">$0</div>
+                                    </div>
                                 </div>
-                                <div class="columns is-align-items-center pb-1">
-                                    <div class="column is-8 has-text-weight-medium has-text-left">Categoría con mayor gasto</div>
-                                    <div class="column is-1 tag is-primary is-light has-text-left p-4">Transporte</div>
-                                    <div class="column is-3 has-text-weight-bold has-text-danger has-text-right">+$0</div>
+                            </section>
+                            <!--
+                                 Totales por mes
+                                -->
+                            <section>
+                                <div class="m-5 mt-6 pt-6">
+                                    <div class="mb-4 pb-4">
+                                        <h3 class="is-size-4 has-text-weight-medium">Totales por mes</h3>
+                                    </div>
+                                    <div class="columns has-text-weight-medium">
+                                        <div class="column is-3 has-text-left">Mes</div>
+                                        <div class="column is-3 has-text-right">Ganancias</div>
+                                        <div class="column is-3 has-text-right">Gastos</div>
+                                        <div class="column is-3 has-text-right">Balance</div>
+                                    </div>
+                                    <div class="columns has-text-weight-medium pt-1 pb-1">
+                                        <div class="column is-3 has-text-left">11/2021</div>
+                                        <div class="column is-3 has-text-right has-text-success">+$0</div>
+                                        <div class="column is-3 has-text-right has-text-danger">-$0</div>
+                                        <div class="column is-3 has-text-right">$0</div>
+                                    </div>
                                 </div>
-                                <div class="columns is-align-items-center pb-1">
-                                    <div class="column is-8 has-text-weight-medium has-text-left">Categoría con mayor balance</div>
-                                    <div class="column is-1 tag is-primary is-light has-text-left p-4">Transporte</div>
-                                    <div class="column is-3 has-text-weight-bold has-text-right">+$0</div>
-                                </div>
-                                <div class="columns is-align-items-center pb-1">
-                                    <div class="column is-7 has-text-weight-medium has-text-left">Mes con mayor ganancia</div>
-                                    <div class="column is-2 has-text-right">10/10/2020</div>
-                                    <div class="column is-3 has-text-weight-bold has-text-success has-text-right">+$0</div>
-                                </div>
-                                <div class="columns is-align-items-center pb-1">
-                                    <div class="column is-7 has-text-weight-medium has-text-left">Mes con mayor ganancia</div>
-                                    <div class="column is-2 has-text-right">10/10/2020</div>
-                                    <div class="column is-3 has-text-weight-bold has-text-danger has-text-right">+$0</div>
-                                </div>
-                            </div>
-                            <div class="m-5 mt-6 pt-6">
-                                <div class="mb-4 pb-4">
-                                    <h3 class="is-size-4 has-text-weight-medium">Totales por categoría</h3>
-                                </div>
-                                <div class="columns has-text-weight-medium">
-                                    <div class="column is-3 has-text-left">Categoría</div>
-                                    <div class="column is-3 has-text-right">Ganancias</div>
-                                    <div class="column is-3 has-text-right">Gastos</div>
-                                    <div class="column is-3 has-text-right">Balance</div>
-                                </div>
-                                <div class="columns has-text-weight-medium pt-1 pb-1">
-                                    <div class="column is-3 has-text-left">Comida</div>
-                                    <div class="column is-3 has-text-right has-text-success">+$0</div>
-                                    <div class="column is-3 has-text-right has-text-danger">-$0</div>
-                                    <div class="column is-3 has-text-right">$0</div>
-                                </div>
-                            </div>
-                            <div class="m-5 mt-6 pt-6">
-                                <div class="mb-4 pb-4">
-                                    <h3 class="is-size-4 has-text-weight-medium">Totales por mes</h3>
-                                </div>
-                                <div class="columns has-text-weight-medium">
-                                    <div class="column is-3 has-text-left">Mes</div>
-                                    <div class="column is-3 has-text-right">Ganancias</div>
-                                    <div class="column is-3 has-text-right">Gastos</div>
-                                    <div class="column is-3 has-text-right">Balance</div>
-                                </div>
-                                <div class="columns has-text-weight-medium pt-1 pb-1">
-                                    <div class="column is-3 has-text-left">11/2021</div>
-                                    <div class="column is-3 has-text-right has-text-success">+$0</div>
-                                    <div class="column is-3 has-text-right has-text-danger">-$0</div>
-                                    <div class="column is-3 has-text-right">$0</div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
         </section>
+        </section>
+
     </main>
 
     <script src="main.js"></script>
