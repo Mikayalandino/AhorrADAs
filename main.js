@@ -459,11 +459,12 @@ sinReportes.style.display = "none"
 
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
-const bttnsEditOp = document.querySelectorAll(".edit-op")
+
 const botonesOperacionesEliminar = document.querySelectorAll(".delete-op")
 const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion");
 
 const editarOperacionesBoton = () => {
+  const bttnsEditOp = document.querySelectorAll(".edit-op")
 
   for (let i = 0; i < bttnsEditOp.length; i++) {
 
@@ -472,9 +473,8 @@ const editarOperacionesBoton = () => {
       const idNumerico = Number(idCortado)
       selectEditCategoria.innerHTML = arrayReduc
       valorFormEditarOperaciones(idNumerico)
-      formOperacionesEditadas()
+      formOperacionesAEditar(idNumerico)
     }
-    //editarOperacionesBoton()
   }
 }
 
@@ -496,27 +496,23 @@ const valorFormEditarOperaciones = (id) => {
   inputEditFecha.value = operaciones[id].fecha
 }
 
-const formOperacionesEditadas = (id) => {
+
+const formularioEditarOp = document.querySelector("#formulario-editar-operaciones")
+
+
+const formOperacionesAEditar = (id) => {
   seccionEditarOperaciones.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
 
-  botonAgregarOperacion.onclick = () => {
-    console.log(botonAgregarOperacion)
+  botonEditarOp.onclick = () => {
+    operaciones[id].descripcion = inputEditDescripcion.value
+    operaciones[id].monto = inputEditMonto.value
+    operaciones[id].tipo = inputEditTipo.value
+    operaciones[id].categoria = selectEditCategoria.value
+    operaciones[id].fecha = inputEditFecha.value
 
-  }
-
-}
-
-/**
-const editarCategoriaConInput = (id) => {
-  seccionEditarCategorias.classList.remove("is-hidden");
-  seccionCategorias.classList.add("is-hidden");
-  seccionBalance.classList.add("is-hidden")
-  seccionNuevaOperacion.classList.add("is-hidden");
-
-  botonConfirmarEditarCategoria.onclick = () => {
-    categorias[id] = inputEditarCategoria.value
-    aJSONYSubirAlLStorage(categorias, "categorias")
+    aJSONYSubirAlLStorage(operaciones, "operaciones")   
   }
 }
-**/
+
+
