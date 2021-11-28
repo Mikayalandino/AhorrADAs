@@ -58,6 +58,9 @@ const categoriaMesMayorGanancia= document.getElementById("mes-mayor-ganancia");
 const categoriaMesMayorGananciaMonto= document.getElementById("mes-mayor-ganancia-monto");
 const categoriaMesMayorGasto = document.getElementById("mes-mayor-gasto");
 const categoriaMesMayorGastoMonto = document.getElementById("mes-mayor-gasto-monto");
+const reportesResumen = document.querySelector("#reportes-resumen");
+const reportesTotalCategorias = document.querySelector("#reportes-totales-cat");
+const reportesTotalFecha = document.querySelector("#reportes-totales-mes");
 
 // FILTROS
 const formularioFiltros = document.getElementById("formulario-filtros");
@@ -297,7 +300,7 @@ const aHTML = (array) => {
   const arrReduc = array.reduce((acc, elemento, index) => {
     const montoSigno = (elemento) => elemento.tipo === "ganancia" ? `+$` : `-$`
     const montoClase = (elemento) => elemento.tipo === "ganancia" ? "has-text-success" : "has-text-danger"
-    const fechas = new Date(elemento.fecha)
+    const fechas = new Date(elemento.fecha) 
     return acc += `<div class="columns">
     <div class="column is-3 has-text-weight-bold has-text-left">${elemento.descripcion}</div>
     <div class="column is-1 tag is-primary is-light has-text-left mt-3">${elemento.categoria}</div>
@@ -454,10 +457,6 @@ const selectOrdenarPorAHTML = () => {
 
 selectOrdenarPorAHTML()
 
-// REPORTES
-
-sinReportes.style.display = "none"
-
 
 // EDITAR Y ELIMINAR OPERACIONES 
 
@@ -536,8 +535,6 @@ console.log(arrayReduc(categorias))
 
 
 // REPORTES
-
-sinReportes.style.display = "none"
 
 //RESUMEN 
 
@@ -623,9 +620,29 @@ const obtenerMayorMontoPorMes = (elemento) => {
 
 const reportesAHTML = () => {
 
-  categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
-  categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
-  categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
-  categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
+  const arrayMap = operaciones.map((elemento, index) =>{
+    if( index > 1){
+      sinReportes.classList.add("is-hidden")
+      reportesResumen.classList.remove("is-hidden")
+      reportesTotalCategorias.classList.remove("is-hidden")
+      reportesTotalFecha.classList.remove("is-hidden")
+      categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
+      categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
+      categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
+      categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto      
+    }
 
+    else{      
+      reportesResumen.classList.add("is-hidden")
+      reportesTotalCategorias.classList.add("is-hidden")
+      reportesTotalFecha.classList.add("is-hidden") 
+    }
+  })
+  return arrayMap
 }
+
+reportesAHTML()
+
+
+  
+
