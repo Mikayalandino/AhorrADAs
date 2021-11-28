@@ -470,7 +470,7 @@ const editarOperacionesBoton = () => {
     bttnsEditOp[i].onclick = () => {
       const idCortado = bttnsEditOp[i].id.slice(10)
       const idNumerico = Number(idCortado)
-      inputEditCategoria.innerHTML = agregarCategoriasAHTML(categorias)
+      selectEditCategoria.innerHTML = arrayReduc
       valorFormEditarOperaciones(idNumerico)
       formOperacionesEditadas()
     }
@@ -485,17 +485,15 @@ const botonCancelOp = document.querySelector("#boton-cancel-op")
 const inputEditDescripcion = document.querySelector("#edit-descripcion")
 const inputEditMonto = document.querySelector("#edit-monto")
 const inputEditTipo = document.querySelector("#edit-tipo-op")
-const inputEditCategoria = document.querySelector("#edit-categorias-op")
+const selectEditCategoria = document.querySelector("#editar-categorias-op")
 const inputEditFecha = document.querySelector("#edit-fecha")
-
-
 
 const valorFormEditarOperaciones = (id) => {
   inputEditDescripcion.value = operaciones[id].descripcion
   inputEditMonto.value = operaciones[id].monto
   inputEditTipo.value = operaciones[id].tipo
+  selectEditCategoria.value = operaciones[id].categoria
   inputEditFecha.value = operaciones[id].fecha
-
 }
 
 const formOperacionesEditadas = (id) => {
