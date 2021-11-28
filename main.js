@@ -32,7 +32,18 @@ const seccionListadoOperaciones = document.querySelector(".listado-operaciones")
 const inputEditarCategoria = document.querySelector("#input-edit-categorias")
 const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias")
 
+//SECCION REPORTES 
 
+const categoriaMayorGanancia = document.getElementById("categoria-mayor-ganancia")
+const categoriaMayorGananciaMonto = document.getElementById("categoria-mayor-ganancia-monto")
+const categoriaMayorGasto = document.getElementById("categoria-mayor-gasto")
+const categoriaMayorGastoMonto = document.getElementById("categoria-mayor-gasto-monto")
+const categoriaMayorBalance = document.getElementById("categoria-mayor-balance")
+const categoriaMayorBalanceMonto = document.getElementById("categoria-mayor-balance-monto")
+const categoriaMesMayorGanancia= document.getElementById("mes-mayor-ganancia")
+const categoriaMesMayorGananciaMonto= document.getElementById("mes-mayor-ganancia-monto")
+const categoriaMesMayorGasto = document.getElementById("mes-mayor-gasto")
+const categoriaMesMayorGastoMonto = document.getElementById("mes-mayor-gasto-monto")
 
 
 
@@ -457,23 +468,7 @@ selectOrdenarPorAHTML()
 
 sinReportes.style.display = "none"
 
-
-
-const categoriaMayorGanancia = document.getElementById("categoria-mayor-ganancia")
-const categoriaMayorGananciaMonto = document.getElementById("categoria-mayor-ganancia-monto")
-
-const categoriaMayorGasto = document.getElementById("categoria-mayor-gasto")
-const categoriaMayorGastoMonto = document.getElementById("categoria-mayor-gasto-monto")
-
-const categoriaMayorBalance = document.getElementById("categoria-mayor-balance")
-const categoriaMayorBalanceMonto = document.getElementById("categoria-mayor-balance-monto")
-
-const categoriaMesMayorGanancia= document.getElementById("mes-mayor-ganancia")
-const categoriaMesMayorGananciaMonto= document.getElementById("mes-mayor-ganancia-monto")
-
-const categoriaMesMayorGasto = document.getElementById("mes-mayor-gasto")
-const categoriaMesMayorGastoMonto = document.getElementById("mes-mayor-gasto-monto")
-
+//RESUMEN 
 
 const categoriasConOperaciones = categorias.map(categoria => {
   const operacionPorCategoria = operaciones.filter(operacion => {
@@ -494,7 +489,7 @@ const categoriasConOperaciones = categorias.map(categoria => {
     nombre: categoria,
     ganancia,
     gasto,
-    balance: ganancia - gasto, 
+    balance: ganancia - gasto,
   }
 })
 
@@ -506,49 +501,41 @@ const calcularResumen = (elemento) => {
   return ordenado[0]
 }
 
-// Obtener categoria con mayor ganancia
+// Obtener categoria con mayor ganancia, gasto y balance 
 
 categoriaMayorGanancia.innerHTML = calcularResumen("ganancia").nombre
 categoriaMayorGananciaMonto.innerHTML = "+$" + calcularResumen("ganancia").ganancia
-
-// Obtener categoria con mayor gasto 
-
 categoriaMayorGasto.innerHTML = calcularResumen("gasto").nombre
 categoriaMayorGastoMonto.innerHTML = "-$" + calcularResumen("gasto").gasto
-
-// Obtener categoria balance 
-
 categoriaMayorBalance.innerHTML = calcularResumen("balance").nombre
 categoriaMayorBalanceMonto.innerHTML = "$" + calcularResumen("balance").balance 
 
-console.log(operaciones)
-
-// Obtener mes con mayor ganancia
+// Obtener mes con mayor ganancia y gasto 
 
 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 let operacionesPorMeses = new Array(12).fill([]);
 operaciones.forEach(operacion => {
   const mesNumero = new Date(operacion.fecha).getMonth()
-  operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion] 
+  operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion]
 })
 operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
   const sumasMesesGanancia = operacion.reduce((acc, curr) => {
     if (curr.tipo === "ganancia") {
-        return acc + parseInt(curr.monto)
-      }
-      return acc 
-  }, 0) 
+      return acc + parseInt(curr.monto)
+    }
+    return acc
+  }, 0)
 
   const sumasMesesGasto = operacion.reduce((acc, curr) => {
     if (curr.tipo === "gasto") {
-        return acc + parseInt(curr.monto)
-      }
-      return acc 
-  }, 0) 
+      return acc + parseInt(curr.monto)
+    }
+    return acc
+  }, 0)
 
-  return { 
-    nombre: meses[mesNumero],  
+  return {
+    nombre: meses[mesNumero],
     ganancia: sumasMesesGanancia,
     gasto: sumasMesesGasto,
   }
@@ -560,6 +547,8 @@ const obtenerMayorMontoPorMes = (elemento) => {
   })
   return ordenado[0]
 }
+
+//Obtener categorías de mes con mayor ganancia y gasto 
 categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
 categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
 categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
