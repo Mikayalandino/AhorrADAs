@@ -122,7 +122,8 @@ let operaciones = []
 
 // NAVEGACIÓN CON BOTONES
 
-botonCategoriasNavbar.onclick = () => {
+botonCategoriasNavbar.onclick = (event) => {
+  event.preventDefault();
   seccionCategorias.classList.remove("is-hidden");
   seccionEditarCategorias.classList.add("is-hidden");
   seccionBalance.classList.add("is-hidden");
@@ -213,17 +214,8 @@ const editarCategoriaConInput = (id) => {
   seccionBalance.classList.add("is-hidden")
   seccionNuevaOperacion.classList.add("is-hidden");
 
-  botonConfirmarEditarCategoria.onclick = () => {    
-
-    const editarCatEnOp = operaciones.map((elemento, index) => {
-      let clonOperaciones = {...operaciones[index]}
-      const categoriaDeOp = inputEditarCategoria.value
-      clonOperaciones.categoria = categoriaDeOp  
-      return clonOperaciones
-    })
-    
-    operaciones = editarCatEnOp
-    aJSONYSubirAlLStorage(operaciones, "operaciones")
+  botonConfirmarEditarCategoria.onclick = (event) => {
+    event.preventDefault();
     categorias[id] = inputEditarCategoria.value
     aJSONYSubirAlLStorage(categorias, "categorias")
     agregarCategoriasAHTML(categorias)
@@ -272,7 +264,8 @@ const subirObjetoAArray = (array) => {
   array.push(nuevoObjeto)
 }
 
-botonAgregarOperacion.onclick = () => {
+botonAgregarOperacion.onclick = (event) => {
+  event.preventDefault();
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones")
