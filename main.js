@@ -147,7 +147,8 @@ const pushCategoria = (arr) => {
   arr.push(inputSeccionCategoria.value)
 }
 
-botonInputSeccionCategoria.onclick = () => {
+botonInputSeccionCategoria.onclick = (event) => {
+  event.preventDefault();
   pushCategoria(categorias)
   aJSONYSubirAlLStorage(categorias, "categorias")
   agregarCategoriasAHTML()
@@ -274,9 +275,7 @@ const subirObjetoAArray = (array) => {
   array.push(nuevoObjeto)
 }
 
-botonAgregarOperacion.onclick = (event) => {
-  event.preventDefault(event)
-  reportesAHTML()
+formularioOperaciones.onsubmit = () => {
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones")
@@ -286,9 +285,14 @@ botonAgregarOperacion.onclick = (event) => {
   estadoDeContenedorDeOperaciones("operaciones")
 }
 
-const estadoDeContenedorDeOperaciones = (id) => localStorage.getItem(id) !== null && (seccionListadoOperaciones.classList.remove("is-hidden"),
-  operacionesSinResultados.classList.add("is-hidden"))
-estadoDeContenedorDeOperaciones("operaciones")
+const estadoDeContenedorDeOperaciones = () => {
+  const item = JSON.parse(localStorage.getItem("operaciones"));
+  const noHayItem = item === null || !item.length
+
+  seccionListadoOperaciones.classList.toggle("is-hidden", noHayItem)
+  operacionesSinResultados.classList.toggle("is-hidden", !noHayItem)
+}
+estadoDeContenedorDeOperaciones()
 
 let nuevasOperaciones = []
 guardarDeLStorage(nuevasOperaciones, "operaciones")
@@ -610,7 +614,6 @@ const obtenerMayorMontoPorMes = (elemento) => {
 }
 
 //Obtener categorías de mes con mayor ganancia y gasto 
-
 const reportesAHTML = () => {
 
   const arrayMap = operaciones.map((elemento, index) =>{
@@ -635,7 +638,3 @@ const reportesAHTML = () => {
 }
 
 reportesAHTML()
-
-
-  
-
