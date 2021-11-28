@@ -532,3 +532,24 @@ operaciones.forEach(operacion => {
   const mesNumero = new Date(operacion.fecha).getMonth()
   operacionesPorMeses[mesNumero] = [...operacionesPorMeses[mesNumero], operacion] 
 })
+operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
+  const sumasMesesGanancia = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "ganancia") {
+        return acc + parseInt(curr.monto)
+      }
+      return acc 
+  }, 0) 
+
+  const sumasMesesGasto = operacion.reduce((acc, curr) => {
+    if (curr.tipo === "gasto") {
+        return acc + parseInt(curr.monto)
+      }
+      return acc 
+  }, 0) 
+
+  return { 
+    nombre: meses[mesNumero],  
+    ganancia: sumasMesesGanancia,
+    gasto: sumasMesesGasto,
+  }
+})
