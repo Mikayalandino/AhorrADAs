@@ -553,3 +553,14 @@ operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
     gasto: sumasMesesGasto,
   }
 })
+const obtenerMayorMontoPorMes = (elemento) => {
+  const ordenado = [...operacionesPorMeses]
+  ordenado.sort((a, b) => {
+    return b[elemento] - a[elemento]
+  })
+  return ordenado[0]
+}
+categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
+categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
+categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
+categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
