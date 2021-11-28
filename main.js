@@ -1,9 +1,9 @@
 // ELEMENTOS DEL DOM
-// AhorrADAs página completa
+// AHORRADAS APARTADOS
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
-// Balance                  
+// BALANCE                 
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
@@ -19,7 +19,7 @@ const inputFechaoperaciones = document.querySelector("#input-fecha");
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados");
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones");
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
-// Categorías
+// CATEGORÍAS
 const seccionCategorias = document.getElementById("seccion-categorias");
 const listadoDeCategorias = document.getElementById("listado-categorias");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias");
@@ -32,12 +32,24 @@ const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
+const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias");
 
-// Reportes
+//SECCION REPORTES 
 const botonReportesNavbar = document.querySelector("#boton-nav-reportes");
 const sinReportes = document.querySelector("#sin-reportes");
 const seccionReportesInsuficientes = document.getElementById("seccion-reportes-insuficientes");
-// Filtros
+const categoriaMayorGanancia = document.getElementById("categoria-mayor-ganancia");
+const categoriaMayorGananciaMonto = document.getElementById("categoria-mayor-ganancia-monto");
+const categoriaMayorGasto = document.getElementById("categoria-mayor-gasto");
+const categoriaMayorGastoMonto = document.getElementById("categoria-mayor-gasto-monto");
+const categoriaMayorBalance = document.getElementById("categoria-mayor-balance");
+const categoriaMayorBalanceMonto = document.getElementById("categoria-mayor-balance-monto");
+const categoriaMesMayorGanancia= document.getElementById("mes-mayor-ganancia");
+const categoriaMesMayorGananciaMonto= document.getElementById("mes-mayor-ganancia-monto");
+const categoriaMesMayorGasto = document.getElementById("mes-mayor-gasto");
+const categoriaMesMayorGastoMonto = document.getElementById("mes-mayor-gasto-monto");
+
+// FILTROS
 const formularioFiltros = document.getElementById("formulario-filtros");
 const inputDateFiltro = document.querySelector("#input-date");
 const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");
