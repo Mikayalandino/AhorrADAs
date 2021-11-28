@@ -144,7 +144,8 @@ const pushCategoria = (arr) => {
   arr.push(inputSeccionCategoria.value)
 }
 
-botonInputSeccionCategoria.onclick = () => {
+botonInputSeccionCategoria.onclick = (event) => {
+  event.preventDefault();
   pushCategoria(categorias)
   aJSONYSubirAlLStorage(categorias, "categorias")
   agregarCategoriasAHTML()
@@ -264,8 +265,7 @@ const subirObjetoAArray = (array) => {
   array.push(nuevoObjeto)
 }
 
-botonAgregarOperacion.onclick = (event) => {
-  event.preventDefault();
+formularioOperaciones.onsubmit = () => {
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones")
@@ -615,3 +615,4 @@ categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
 categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
 categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
 categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto
+
