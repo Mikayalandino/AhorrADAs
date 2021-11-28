@@ -3,7 +3,7 @@
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
-// BALANCE                 
+// BALANCE Y OPERACIONES                
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
@@ -19,6 +19,14 @@ const inputFechaoperaciones = document.querySelector("#input-fecha");
 const operacionesSinResultados = document.querySelector(".operaciones-sin-resultados");
 const listadoOperaciones = document.getElementById("listado-nuevas-operaciones");
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
+const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion")
+const botonEditarOp = document.querySelector("#boton-edit-op")
+const botonCancelOp = document.querySelector("#boton-cancel-op")
+const inputEditDescripcion = document.querySelector("#edit-descripcion")
+const inputEditMonto = document.querySelector("#edit-monto")
+const inputEditTipo = document.querySelector("#edit-tipo-op")
+const selectEditCategoria = document.querySelector("#editar-categorias-op")
+const inputEditFecha = document.querySelector("#edit-fecha")
 // CATEGORÍAS
 const seccionCategorias = document.getElementById("seccion-categorias");
 const listadoDeCategorias = document.getElementById("listado-categorias");
@@ -449,62 +457,30 @@ sinReportes.style.display = "none"
 
 listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
 
-/**const eliminarCategoriasBoton = () => {
-  const bttnEliminarCategorias = document.querySelectorAll(".eliminar-categorias")
-
-  for (let i = 0; i < bttnEliminarCategorias.length; i++) {
-
-    bttnEliminarCategorias[i].onclick = () => {
-      const idRecortado = bttnEliminarCategorias[i].id.slice(20)
-      idNumerico = Number(idRecortado)
-      const filtradoCategorias = categorias.filter((elemento, index) => {
-        return index != idNumerico
-      })
-      categorias = filtradoCategorias
-      aJSONYSubirAlLStorage(categorias, "categorias")
-      agregarCategoriasAHTML(categorias)
-      editarCategoriasBoton()
-      eliminarCategoriasBoton()
-    }
-  }
-} */
-
-
 const botonesEliminarOperaciones = document.querySelectorAll(".delete-op")
 
 const eliminarOperacionesBotones = () => {  
 
-  for(let i = 0; i < botonesEliminarOperaciones.length; i++){
+  const botonesEliminarOperaciones = document.querySelectorAll(".delete-op")
+
+  for(let i = 0; i < botonesEliminarOperaciones.length; i++){    
 
     botonesEliminarOperaciones[i].onclick = () => {
       const idRecortado = botonesEliminarOperaciones[i].id.slice(12)
       idNumerico = Number (idRecortado)
-
       const filtrarOperaciones = operaciones.filter((elemento, index) => {
         return index != idNumerico
       })
       operaciones = filtrarOperaciones
-      aJSONYSubirAlLStorage(operaciones, "operaciones")
       listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones))
-      eliminarOperacionesBotones()
+      aJSONYSubirAlLStorage(operaciones, "operaciones")
       editarOperacionesBoton()      
+      eliminarOperacionesBotones()
     }  
   }
 }
 
-eliminarOperacionesBotones()
-
-
-const bttnsEditOp = document.querySelectorAll(".edit-op")
-
-const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion")
-const botonEditarOp = document.querySelector("#boton-edit-op")
-const botonCancelOp = document.querySelector("#boton-cancel-op")
-const inputEditDescripcion = document.querySelector("#edit-descripcion")
-const inputEditMonto = document.querySelector("#edit-monto")
-const inputEditTipo = document.querySelector("#edit-tipo-op")
-const selectEditCategoria = document.querySelector("#editar-categorias-op")
-const inputEditFecha = document.querySelector("#edit-fecha")
+const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
 
 const valorFormEditarOperaciones = (id) => {
   inputEditDescripcion.value = operaciones[id].descripcion
@@ -525,6 +501,7 @@ const formOperacionesAEditar = (id) => {
     operaciones[id].categoria = selectEditCategoria.value
     operaciones[id].fecha = inputEditFecha.value
     editarOperacionesBoton()
+    eliminarOperacionesBotones()
     aJSONYSubirAlLStorage(operaciones, "operaciones")  
     listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones)) 
     seccionEditarOperaciones.classList.add("is-hidden")
@@ -533,23 +510,23 @@ const formOperacionesAEditar = (id) => {
 }
 
 const editarOperacionesBoton = () => {
-  const bttnsEditOp = document.querySelectorAll(".edit-op")
+  const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
 
-  for (let i = 0; i < bttnsEditOp.length; i++) {
+  for (let i = 0; i < botonesEditarOperaciones.length; i++) {
 
-    bttnsEditOp[i].onclick = () => {
-      const idCortado = bttnsEditOp[i].id.slice(10)
+    botonesEditarOperaciones[i].onclick = () => {
+      const idCortado = botonesEditarOperaciones[i].id.slice(10)
       const idNumerico = Number(idCortado)
       selectEditCategoria.innerHTML = arrayReduc
       valorFormEditarOperaciones(idNumerico)
       formOperacionesAEditar(idNumerico)
-      editarOperacionesBoton()
-      listadoOperaciones.innerHTML = aHTML(ordenarMasRecientes(operaciones)) 
+      editarOperacionesBoton() 
       eliminarOperacionesBotones()
     }
   }
 }
 
 editarOperacionesBoton()
+eliminarOperacionesBotones()
 
 
