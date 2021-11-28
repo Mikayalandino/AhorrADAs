@@ -100,7 +100,8 @@ let operaciones = []
 
 // NAVEGACIÓN CON BOTONES
 
-botonCategoriasNavbar.onclick = () => {
+botonCategoriasNavbar.onclick = (event) => {
+  event.preventDefault();
   seccionCategorias.classList.remove("is-hidden");
   seccionEditarCategorias.classList.add("is-hidden");
   seccionBalance.classList.add("is-hidden");
@@ -222,7 +223,8 @@ const subirObjetoAArray = (array) => {
   array.push(nuevoObjeto)
 }
 
-botonAgregarOperacion.onclick = () => {
+botonAgregarOperacion.onclick = (event) => {
+  event.preventDefault();
   subirObjetoAArray(operaciones)
   blanquearFormularios(formularioOperaciones)
   aJSONYSubirAlLStorage(operaciones, "operaciones") 
