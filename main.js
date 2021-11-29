@@ -290,7 +290,7 @@ formularioOperaciones.onsubmit = () => {
   estadoDeContenedorDeOperaciones("operaciones")
   balancesActualizados()
   editarOperacionesBoton()
-eliminarOperacionesBotones()
+  eliminarOperacionesBotones()
 }
 
 const estadoDeContenedorDeOperaciones = () => {
@@ -486,6 +486,7 @@ const eliminarOperacionesBotones = () => {
       aJSONYSubirAlLStorage(operaciones, "operaciones")
       editarOperacionesBoton()      
       eliminarOperacionesBotones()
+      balancesActualizados()
     }  
   }
 }
@@ -533,6 +534,7 @@ const editarOperacionesBoton = () => {
       editarOperacionesBoton() 
       eliminarOperacionesBotones()
       estadoDeContenedorDeOperaciones()
+      balancesActualizados()
     }
   }
 }
