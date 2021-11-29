@@ -12,7 +12,8 @@ const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
 const botonNuevaOperacion = document.getElementById("boton-operacion");
-const botonCancelarOperacion = document.getElementById("boton-cancelar-operacion");
+const botonCancelarOperacion = document.getElementById("boton-cancelar-nueva-operacion");
+const botonCancelarEditarOperacion = document.getElementById("boton-cancelar-editar-operacion");
 const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion");
 const formularioOperaciones = document.querySelector("#formulario-operaciones");
 const inputDescripcionOperaciones = document.querySelector("#input-descripcion");
@@ -329,6 +330,14 @@ botonCancelarOperacion.onclick = () => {
   seccionNuevaOperacion.classList.add("is-hidden")
   seccionBalance.classList.remove("is-hidden")
 }
+
+// Botón edit op
+
+botonCancelarEditarOperacion.onclick = () => {
+  seccionEditarOperaciones.classList.add("is-hidden")
+  seccionBalance.classList.remove("is-hidden")
+}
+
 
  //////////////////////// FILTROS ////////////////////////
 
