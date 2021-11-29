@@ -318,6 +318,8 @@ const aHTML = (array) => {
     </div>
     </div>`
   }, "")
+  editarCategoriasBoton()
+  eliminarCategoriasBoton()
   return arrReduc
 }
 
@@ -678,6 +680,8 @@ reportesAHTML()
 
 // REPORTES POR CATEGORIA
 
+/**
+
 const sumarGastosGanancias = (array, tipo) => {
   const arrayFiltrado = array.filter((elemento) => {
     return elemento.tipo === tipo && elemento        
@@ -720,3 +724,4 @@ const dividirCategoriasDeOperaciones = () => {
 }
 
 dividirCategoriasDeOperaciones()
+ **/
