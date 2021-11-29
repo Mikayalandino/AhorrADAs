@@ -1,4 +1,5 @@
-// ELEMENTOS DEL DOM
+//////////////////////// ELEMENTOS DEL DOM ////////////////////////
+
 // AHORRADAS APARTADOS
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
@@ -7,8 +8,6 @@ const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
 const balanceGananciasTotales = document.getElementById("balance-ganancias-totales");
 const balanceGastosTotales = document.getElementById("balance-gastos-totales");
 const balanceTotalesOperables = document.getElementById("balance-totales-operables");  
-
-console.log(balanceGananciasTotales, balanceGastosTotales, balanceTotalesOperables)
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
@@ -48,7 +47,6 @@ const botonAgregarCategoria = document.getElementById("boton-agregar-categoria")
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias");
-
 //SECCION REPORTES 
 const botonReportesNavbar = document.querySelector("#boton-nav-reportes");
 const sinReportes = document.querySelector("#sin-reportes");
@@ -66,7 +64,6 @@ const categoriaMesMayorGastoMonto = document.getElementById("mes-mayor-gasto-mon
 const reportesResumen = document.querySelector("#reportes-resumen");
 const reportesTotalCategorias = document.querySelector("#reportes-totales-cat");
 const reportesTotalFecha = document.querySelector("#reportes-totales-mes");
-
 // FILTROS
 const formularioFiltros = document.getElementById("formulario-filtros");
 const inputDateFiltro = document.querySelector("#input-date");
@@ -75,28 +72,8 @@ const contenedorFiltros = document.getElementById("cambiar-filtros");
 const filtrosTipo = document.getElementById("filtros-tipo");
 const selectOrdenarPor = document.querySelector("#ordenar-por");
 
-// Botón AhorrADAs
-botonNavAhorradas.onclick = () => {
-  seccionBalance.classList.remove("is-hidden");
-  seccionCategorias.classList.add("is-hidden");
-  seccionReportesInsuficientes.classList.add("is-hidden");
-}
 
-// Botones balance
-botonBalanceNavbar.onclick = () => {
-  seccionBalance.classList.remove("is-hidden");
-  seccionCategorias.classList.add("is-hidden");
-  seccionReportesInsuficientes.classList.add("is-hidden");
-}
-
-// Botones reportes
-botonReportesNavbar.onclick = () => {
-  seccionReportesInsuficientes.classList.remove("is-hidden");
-  seccionBalance.classList.add("is-hidden");
-  seccionCategorias.classList.add("is-hidden")
-  seccionEditarCategorias.classList.add("is-hidden");
-}
-// FUNCIONES GENÉRICAS REUTILIZABLES
+//////////////////////// FUNCIONES GENÉRICAS REUTILIZABLES ////////////////////////
 
 const modificarClasesBotones = (boton, clase1, clase2) => {
   boton.onclick = () => {
@@ -123,15 +100,14 @@ const blanquearFormularios = (form) => {
   form.reset()
 }
 
-//  VARIABLES GLOBALES
+////////////////////////  VARIABLES GLOBALES ////////////////////////
 
 let categorias = ["Comida", "Servicios", "Salidas", "Educación", "Transporte", "Trabajo"]
 let operaciones = []
 
-// NAVEGACIÓN CON BOTONES
+//////////////////////// NAVEGACIÓN CON BOTONES ////////////////////////
 
-botonCategoriasNavbar.onclick = (event) => {
-  event.preventDefault();
+botonCategoriasNavbar.onclick = () => {
   seccionCategorias.classList.remove("is-hidden");
   seccionEditarCategorias.classList.add("is-hidden");
   seccionBalance.classList.add("is-hidden");
@@ -142,7 +118,29 @@ botonCategoriasNavbar.onclick = (event) => {
 modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacion);
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
-// CATEGORÍAS 
+// BOTON AHORRADAS
+botonNavAhorradas.onclick = () => {
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
+}
+
+// BOTON BALANCE
+botonBalanceNavbar.onclick = () => {
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
+}
+
+// BOTON REPORTES
+botonReportesNavbar.onclick = () => {
+  seccionReportesInsuficientes.classList.remove("is-hidden");
+  seccionBalance.classList.add("is-hidden");
+  seccionCategorias.classList.add("is-hidden")
+  seccionEditarCategorias.classList.add("is-hidden");
+}
+
+//////////////////////// CATEGORÍAS ////////////////////////
 
 const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave)
 
@@ -174,7 +172,6 @@ const arrayReduc = (array) => {
   return arrayReducido
 }
 
-
 selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc(categorias)}`
 
 const agregarCategoriasAHTML = () => {
@@ -193,9 +190,7 @@ const agregarCategoriasAHTML = () => {
   eliminarCategoriasBoton() 
 }
 
-
-
-// BOTONES EDITAR-ELIMINAR CATEGORÍAS
+//////////////////////// BOTONES EDITAR-ELIMINAR CATEGORÍAS ////////////////////////
 
 const bttnEliminarCategorias = document.querySelectorAll(".eliminar-categorias")
 
@@ -264,8 +259,7 @@ botonCancelarEditarCategoria.onclick = () => {
   seccionReportesInsuficientes.classList.add("is-hidden");
 }
 
-
-// OPERACIONES
+//////////////////////// OPERACIONES ////////////////////////
 
 selectCategoriasOperaciones.innerHTML = arrayReduc(categorias)
 
@@ -327,7 +321,7 @@ const aHTML = (array) => {
   return arrReduc
 }
 
-// FILTROS
+ //////////////////////// FILTROS ////////////////////////
 
 botonOcultarFiltros.onclick = () => {
   contenedorFiltros.classList.toggle("is-hidden");
@@ -382,7 +376,7 @@ const filtradoPorFecha = (array) => {
 }
 filtradoPorFecha(operaciones)
  
-// ORDENAR POR
+//////////////////////// ORDENAR POR ////////////////////////
 
 // MÁS Y MENOS RECIENTE
 
@@ -465,8 +459,7 @@ const selectOrdenarPorAHTML = () => {
 
 selectOrdenarPorAHTML()
 
-
-// EDITAR Y ELIMINAR OPERACIONES 
+//////////////////////// EDITAR Y ELIMINAR OPERACIONES ////////////////////////
 
 
 const eliminarOperacionesBotones = () => {  
@@ -542,8 +535,7 @@ const editarOperacionesBoton = () => {
 editarOperacionesBoton()
 eliminarOperacionesBotones()
 
-
-// BALANCE
+//////////////////////// BALANCE ////////////////////////
 
 const balanceGastosGanancias = (array, tipo) => {
 
@@ -560,8 +552,6 @@ const balanceGastosGanancias = (array, tipo) => {
 
 const balanceTotal = balanceGastosGanancias(operaciones, "ganancia") - balanceGastosGanancias(operaciones, "gasto")
 
-
-
 const balancesActualizados = () => {
   balanceGananciasTotales.innerHTML = `+$${balanceGastosGanancias(operaciones, "ganancia")}`
   balanceGastosTotales.innerHTML = `-$${balanceGastosGanancias(operaciones, "gasto")}`
@@ -575,12 +565,9 @@ const balanceEnCero = () => {
 }
 
 balanceTotalCondicion = () => localStorage.getItem("operaciones") === "[]" ? balanceEnCero() : balancesActualizados()
-
 balanceTotalCondicion()
 
-
-
-// REPORTES
+//////////////////////// REPORTES ////////////////////////
 
 //RESUMEN 
 
@@ -615,7 +602,7 @@ const calcularResumen = (elemento) => {
   return ordenado[0]
 }
 
-// Obtener categoria con mayor ganancia, gasto y balance 
+// OBTENER CATEGORÍA CON MAYOR GANANCIA, GASTO Y BALANCE
 
 categoriaMayorGanancia.innerHTML = calcularResumen("ganancia").nombre
 categoriaMayorGananciaMonto.innerHTML = "+$" + calcularResumen("ganancia").ganancia
@@ -624,7 +611,7 @@ categoriaMayorGastoMonto.innerHTML = "-$" + calcularResumen("gasto").gasto
 categoriaMayorBalance.innerHTML = calcularResumen("balance").nombre
 categoriaMayorBalanceMonto.innerHTML = "$" + calcularResumen("balance").balance 
 
-// Obtener mes con mayor ganancia y gasto 
+// OBTENER MES CON MAYOR GANANCIA Y GASTO 
 
 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -662,7 +649,8 @@ const obtenerMayorMontoPorMes = (elemento) => {
   return ordenado[0]
 }
 
-//Obtener categorías de mes con mayor ganancia y gasto 
+//OBTENER CATEGORÍAS DE MES CON MAYOR GANANCIA Y GASTO 
+
 const reportesAHTML = () => {
 
   const arrayMap = operaciones.map((elemento, index) =>{
