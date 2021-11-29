@@ -377,11 +377,15 @@ const filtrosPorTipoYCategoria = () => {
 filtrosTipo.onchange = () => {
   const arrayFiltradoTipo = filtrosPorTipoYCategoria()
   listadoOperaciones.innerHTML = aHTML(arrayFiltradoTipo)
+  editarOperacionesBoton()
+  eliminarOperacionesBotones()
 }
 
 selectCategoriasDeFiltros.onchange = () => {
   const arrayFiltradoCategoria = filtrosPorTipoYCategoria()
   listadoOperaciones.innerHTML = aHTML(arrayFiltradoCategoria)
+  editarOperacionesBoton()
+  eliminarOperacionesBotones()
 }
 
 // FILTRO POR FECHA
@@ -392,6 +396,8 @@ const filtradoPorFecha = (array) => {
       return new Date(elemento.fecha) > new Date(inputDateFiltro.value)
     })
     listadoOperaciones.innerHTML = aHTML(arrayFiltrado)
+    editarOperacionesBoton()
+    eliminarOperacionesBotones()
   }
 }
 filtradoPorFecha(operaciones)
@@ -440,9 +446,13 @@ const arrayOrdenadoMayorMonto = [...operaciones].sort((a, b) => {
 const mayorMenorMonto = () => {
   if (selectOrdenarPor.value === "mayor-monto") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMayorMonto)
+    editarOperacionesBoton()
+    eliminarOperacionesBotones()
   }
   else if (selectOrdenarPor.value === "menor-monto") {
     listadoOperaciones.innerHTML = aHTML(arrayOrdenadoMenorMonto)
+    editarOperacionesBoton()
+    eliminarOperacionesBotones()
   }
 }
 
@@ -474,6 +484,8 @@ const selectOrdenarPorAHTML = () => {
     masYMenosRecientes()
     mayorMenorMonto()
     ordenarAlfabeticamente()
+    editarOperacionesBoton()
+    eliminarOperacionesBotones()
   }
 }
 
