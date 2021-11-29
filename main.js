@@ -233,6 +233,8 @@ const editarCategoriaConInput = (id) => {
     selectCategoriasDeFiltros.innerHTML = ` <option value="todas" id="categoria-filtro-todas">Todas</option> ${arrayReduc(categorias)}`
     editarOperacionesBoton()
     eliminarOperacionesBotones()
+    seccionEditarCategorias.classList.add("is-hidden")
+    seccionCategorias.classList.remove("is-hidden")
   }
 }
 
