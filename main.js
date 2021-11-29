@@ -288,7 +288,7 @@ formularioOperaciones.onsubmit = () => {
   seccionNuevaOperacion.classList.add("is-hidden")
   seccionBalance.classList.remove("is-hidden")
   estadoDeContenedorDeOperaciones("operaciones")
-  balancesActualizados()
+  balanceTotalCondicion()
   editarOperacionesBoton()
   eliminarOperacionesBotones()
 }
@@ -486,7 +486,7 @@ const eliminarOperacionesBotones = () => {
       aJSONYSubirAlLStorage(operaciones, "operaciones")
       editarOperacionesBoton()      
       eliminarOperacionesBotones()
-      balancesActualizados()
+      balanceTotalCondicion()
     }  
   }
 }
@@ -534,7 +534,7 @@ const editarOperacionesBoton = () => {
       editarOperacionesBoton() 
       eliminarOperacionesBotones()
       estadoDeContenedorDeOperaciones()
-      balancesActualizados()
+      balanceTotalCondicion()
     }
   }
 }
@@ -560,13 +560,24 @@ const balanceGastosGanancias = (array, tipo) => {
 
 const balanceTotal = balanceGastosGanancias(operaciones, "ganancia") - balanceGastosGanancias(operaciones, "gasto")
 
+
+
 const balancesActualizados = () => {
   balanceGananciasTotales.innerHTML = `+$${balanceGastosGanancias(operaciones, "ganancia")}`
   balanceGastosTotales.innerHTML = `-$${balanceGastosGanancias(operaciones, "gasto")}`
   balanceTotalesOperables.innerHTML = `$${balanceTotal}`
 }
 
-balancesActualizados()
+const balanceEnCero = () => {
+  balanceGananciasTotales.innerHTML = `+$${0}`
+  balanceGastosTotales.innerHTML = `-$${0}`
+  balanceTotalesOperables.innerHTML = `$${0}`
+}
+
+balanceTotalCondicion = () => localStorage.getItem("operaciones") === "[]" ? balanceEnCero() : balancesActualizados()
+
+balanceTotalCondicion()
+
 
 
 // REPORTES
