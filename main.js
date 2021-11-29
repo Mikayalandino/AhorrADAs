@@ -4,6 +4,8 @@
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
+const menuHamburguesa = document.getElementById("menu-hamburguesa");
+const menuHamburguesaMobile = document.getElementById("menu-hamburguesa-mobile");               
 // BALANCE Y OPERACIONES    
 const balanceGananciasTotales = document.getElementById("balance-ganancias-totales");
 const balanceGastosTotales = document.getElementById("balance-gastos-totales");
@@ -72,6 +74,24 @@ const contenedorFiltros = document.getElementById("cambiar-filtros");
 const filtrosTipo = document.getElementById("filtros-tipo");
 const selectOrdenarPor = document.querySelector("#ordenar-por");
 
+// Botón AhorrADAs
+botonNavAhorradas.onclick = () => {
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
+}
+
+//Menu hamburguesa 
+menuHamburguesa.onclick = () => {
+  menuHamburguesa.classList.toggle("is-active");
+  menuHamburguesaMobile.classList.toggle("is-active");
+};
+// Botones balance
+botonBalanceNavbar.onclick = () => {
+  seccionBalance.classList.remove("is-hidden");
+  seccionCategorias.classList.add("is-hidden");
+  seccionReportesInsuficientes.classList.add("is-hidden");
+}
 
 //////////////////////// FUNCIONES GENÉRICAS REUTILIZABLES ////////////////////////
 
@@ -670,6 +690,7 @@ operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
     ganancia: sumasMesesGanancia,
     gasto: sumasMesesGasto,
   }
+
 })
 const obtenerMayorMontoPorMes = (elemento) => {
   const ordenado = [...operacionesPorMeses]
@@ -683,22 +704,35 @@ const obtenerMayorMontoPorMes = (elemento) => {
 
 const reportesAHTML = () => {
 
-  const arrayMap = operaciones.map((elemento, index) =>{
-    if( index > 1){
+  const arrayMap = operaciones.map((elemento, index) => {
+    if (index > 1) {
       sinReportes.classList.add("is-hidden")
       reportesResumen.classList.remove("is-hidden")
       reportesTotalCategorias.classList.remove("is-hidden")
       reportesTotalFecha.classList.remove("is-hidden")
-      categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
-      categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
-      categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
-      categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto      
+
+      const mayorMesGanancia = obtenerMayorMontoPorMes("ganancia")
+      if (mayorMesGanancia.ganancia > 0) {
+        categoriaMesMayorGanancia.innerHTML = mayorMesGanancia.nombre
+        categoriaMesMayorGananciaMonto.innerHTML = "+$" + mayorMesGanancia.ganancia
+      }
+      else {
+        categoriaMesMayorGanancia.innerHTML = "-"
+      }
+      const mayorMesGasto = obtenerMayorMontoPorMes("gasto")
+      if (mayorMesGasto.gasto > 0) {
+        categoriaMesMayorGasto.innerHTML = mayorMesGasto.nombre
+        categoriaMesMayorGastoMonto.innerHTML = "-$" + mayorMesGasto.gasto
+      }
+      else {
+        categoriaMesMayorGasto.innerHTML = "-"
+      }
     }
 
-    else{      
+    else {
       reportesResumen.classList.add("is-hidden")
       reportesTotalCategorias.classList.add("is-hidden")
-      reportesTotalFecha.classList.add("is-hidden") 
+      reportesTotalFecha.classList.add("is-hidden")
     }
   })
   return arrayMap
