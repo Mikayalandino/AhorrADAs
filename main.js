@@ -461,7 +461,6 @@ selectOrdenarPorAHTML()
 // EDITAR Y ELIMINAR OPERACIONES 
 
 
-
 const eliminarOperacionesBotones = () => {  
 
   const botonesEliminarOperaciones = document.querySelectorAll(".delete-op")
@@ -495,6 +494,7 @@ const formOperacionesAEditar = (id) => {
   const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
   seccionEditarOperaciones.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
+  console.log(botonEditarOp)
 
   botonEditarOp.onclick = () => {
     operaciones[id].descripcion = inputEditDescripcion.value
@@ -520,10 +520,11 @@ const editarOperacionesBoton = () => {
       const idCortado = botonesEditarOperaciones[i].id.slice(10)
       const idNumerico = Number(idCortado)
       selectEditCategoria.innerHTML = arrayReduc(categorias)
-      valorFormEditarOperaciones(idNumerico)
       formOperacionesAEditar(idNumerico)
+      valorFormEditarOperaciones(idNumerico)
       editarOperacionesBoton() 
       eliminarOperacionesBotones()
+      estadoDeContenedorDeOperaciones()
     }
   }
 }
@@ -638,3 +639,48 @@ const reportesAHTML = () => {
 }
 
 reportesAHTML()
+
+// REPORTES POR CATEGORIA
+
+const sumarGastosGanancias = (array, tipo) => {
+  const arrayFiltrado = array.filter((elemento) => {
+    return elemento.tipo === tipo && elemento        
+  })
+
+  return arrayFiltrado
+}
+
+const dividirCategoriasDeOperaciones = () => {
+
+  let arraysDeOp = []
+
+  categorias.map((elemento) => {
+    return arraysDeOp.push([])
+  })
+
+  operaciones.map((elemento) => {
+    const indexCategoria = categorias.indexOf(elemento.categoria)
+    arraysDeOp[indexCategoria].push(elemento)
+
+  })
+
+  let acc = 0
+
+  const resultadosPorCategoria = () => {
+    
+    for ( let i = 0; i < arraysDeOp.length; i++){
+
+      for ( let j = 0; j < arraysDeOp[i].length; j++){
+
+
+
+
+       
+      }      
+    }
+  }
+
+ resultadosPorCategoria()
+}
+
+dividirCategoriasDeOperaciones()
