@@ -3,7 +3,10 @@
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
-// BALANCE Y OPERACIONES                
+// BALANCE Y OPERACIONES    
+const balanceGananciasTotales = document.getElementById("balances-ganacias-totales");
+const balanceGastosTotales = document.getElementById("balance-gastos-totales");
+const balanceTotalesOperables = document.getElementById("balance-totales-operables");            
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
@@ -533,7 +536,23 @@ editarOperacionesBoton()
 eliminarOperacionesBotones()
 
 // REPORTES
+// BALANCE
 
+
+const balanceGastos = (array, tipo) => {
+
+  const filtroOp = array.filter((elemento) => {
+    return elemento.tipo === tipo && elemento
+  })
+  
+  const reduceGastos = filtroOp.reduce((acc, elemento) => {
+    return acc + Number(elemento.monto)
+  }, 0)
+  
+  return reduceGastos  
+}
+
+const balanceTotal = balanceGastos(operaciones, "ganancia") - balanceGastos(operaciones, "gasto")
 //RESUMEN 
 
 const categoriasConOperaciones = categorias.map(categoria => {
