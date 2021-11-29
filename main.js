@@ -4,9 +4,11 @@ const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
 // BALANCE Y OPERACIONES    
-const balanceGananciasTotales = document.getElementById("balances-ganacias-totales");
+const balanceGananciasTotales = document.getElementById("balance-ganancias-totales");
 const balanceGastosTotales = document.getElementById("balance-gastos-totales");
-const balanceTotalesOperables = document.getElementById("balance-totales-operables");            
+const balanceTotalesOperables = document.getElementById("balance-totales-operables");  
+
+console.log(balanceGananciasTotales, balanceGastosTotales, balanceTotalesOperables)
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const seccionBalance = document.getElementById("seccion-balance");
 const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion");
@@ -286,6 +288,7 @@ formularioOperaciones.onsubmit = () => {
   seccionNuevaOperacion.classList.add("is-hidden")
   seccionBalance.classList.remove("is-hidden")
   estadoDeContenedorDeOperaciones("operaciones")
+  balancesActualizados()
 }
 
 const estadoDeContenedorDeOperaciones = () => {
@@ -535,11 +538,10 @@ const editarOperacionesBoton = () => {
 editarOperacionesBoton()
 eliminarOperacionesBotones()
 
-// REPORTES
+
 // BALANCE
 
-
-const balanceGastos = (array, tipo) => {
+const balanceGastosGanancias = (array, tipo) => {
 
   const filtroOp = array.filter((elemento) => {
     return elemento.tipo === tipo && elemento
@@ -552,7 +554,19 @@ const balanceGastos = (array, tipo) => {
   return reduceGastos  
 }
 
-const balanceTotal = balanceGastos(operaciones, "ganancia") - balanceGastos(operaciones, "gasto")
+const balanceTotal = balanceGastosGanancias(operaciones, "ganancia") - balanceGastosGanancias(operaciones, "gasto")
+
+const balancesActualizados = () => {
+  balanceGananciasTotales.innerHTML = `+$${balanceGastosGanancias(operaciones, "ganancia")}`
+  balanceGastosTotales.innerHTML = `-$${balanceGastosGanancias(operaciones, "gasto")}`
+  balanceTotalesOperables.innerHTML = `$${balanceTotal}`
+}
+
+balancesActualizados()
+
+
+// REPORTES
+
 //RESUMEN 
 
 const categoriasConOperaciones = categorias.map(categoria => {
