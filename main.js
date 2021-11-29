@@ -498,8 +498,7 @@ const formOperacionesAEditar = (id) => {
   const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
   seccionEditarOperaciones.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
-  console.log(botonEditarOp)
-
+  
   botonEditarOp.onclick = () => {
     operaciones[id].descripcion = inputEditDescripcion.value
     operaciones[id].monto = inputEditMonto.value
@@ -677,51 +676,3 @@ const reportesAHTML = () => {
 }
 
 reportesAHTML()
-
-// REPORTES POR CATEGORIA
-
-/**
-
-const sumarGastosGanancias = (array, tipo) => {
-  const arrayFiltrado = array.filter((elemento) => {
-    return elemento.tipo === tipo && elemento        
-  })
-
-  return arrayFiltrado
-}
-
-const dividirCategoriasDeOperaciones = () => {
-
-  let arraysDeOp = []
-
-  categorias.map((elemento) => {
-    return arraysDeOp.push([])
-  })
-
-  operaciones.map((elemento) => {
-    const indexCategoria = categorias.indexOf(elemento.categoria)
-    arraysDeOp[indexCategoria].push(elemento)
-
-  })
-
-  let acc = 0
-
-  const resultadosPorCategoria = () => {
-    
-    for ( let i = 0; i < arraysDeOp.length; i++){
-
-      for ( let j = 0; j < arraysDeOp[i].length; j++){
-
-
-
-
-       
-      }      
-    }
-  }
-
- resultadosPorCategoria()
-}
-
-dividirCategoriasDeOperaciones()
- **/
