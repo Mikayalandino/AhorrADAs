@@ -3,6 +3,8 @@
 const paginaPrincipal = document.getElementById("pagina-completa");
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
+const menuHamburguesa = document.getElementById("menu-hamburguesa");
+const menuHamburguesaMobile = document.getElementById("menu-hamburguesa-mobile");
 // BALANCE Y OPERACIONES                
 const botonBalanceNavbar = document.getElementById("boton-nav-balance");
 const seccionBalance = document.getElementById("seccion-balance");
@@ -77,6 +79,11 @@ botonNavAhorradas.onclick = () => {
   seccionReportesInsuficientes.classList.add("is-hidden");
 }
 
+//Menu hamburguesa 
+menuHamburguesa.onclick = () => {
+  menuHamburguesa.classList.toggle("is-active");
+  menuHamburguesaMobile.classList.toggle("is-active");
+};
 // Botones balance
 botonBalanceNavbar.onclick = () => {
   seccionBalance.classList.remove("is-hidden");

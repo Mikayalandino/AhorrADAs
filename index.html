@@ -23,14 +23,14 @@
                     <i class="fas fa-wallet mr-4"></i>
                     <h1 class="is-size-2 has-text-weight-semibold">AhorrADAs</h1>
                 </button>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                <a role="button" id="menu-hamburguesa" class="navbar-burger" aria-label="menu" aria-expanded="false"
                     data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
             </div>
-            <div class="navbar-end mr-2">
+            <div class="navbar-menu navbar-end mr-2" id=menu-hamburguesa-mobile>
                 <div class="navbar-item">
                     <div class="buttons">
                         <button class="button is-primary mr-0" id="boton-nav-balance">
@@ -169,7 +169,7 @@
                                     <button class="button is-primary" id="boton-operacion">+ Nueva operación</button>
                                 </div>
                             </div>
-                            <div class="operaciones-sin-resultados">
+                            <div class="operaciones-sin-resultados is-hidden">
                                 <div class="colums">
                                     <div class="column is-offset-3 is-7 mt-5 mb-4">
                                         <div class="image 16x16px mt-6">
@@ -425,7 +425,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <section id="reportes-resumen">
+                            <section id="reportes-resumen" class="is-hidden">
                                 <!--
                                     Comienzo Resumen
                                 -->
@@ -498,7 +498,7 @@
                             <!-- 
                                 Totales por categorías
                             -->
-                            <section id="reportes-totales-cat">
+                            <section id="reportes-totales-cat" class="is-hidden">
                                 <div class="m-5 mt-6 pt-6">
                                     <div class="mb-4 pb-4">
                                         <h3 class="is-size-4 has-text-weight-medium">Totales por categoría</h3>
@@ -520,7 +520,7 @@
                             <!--
                                  Totales por mes
                                 -->
-                            <section id="reportes-totales-mes">
+                            <section id="reportes-totales-mes" class="is-hidden">
                                 <div class="m-5 mt-6 pt-6">
                                     <div class="mb-4 pb-4">
                                         <h3 class="is-size-4 has-text-weight-medium">Totales por mes</h3>
