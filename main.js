@@ -289,6 +289,8 @@ formularioOperaciones.onsubmit = () => {
   seccionBalance.classList.remove("is-hidden")
   estadoDeContenedorDeOperaciones("operaciones")
   balancesActualizados()
+  editarOperacionesBoton()
+eliminarOperacionesBotones()
 }
 
 const estadoDeContenedorDeOperaciones = () => {
