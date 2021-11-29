@@ -323,6 +323,13 @@ const aHTML = (array) => {
   return arrReduc
 }
 
+// Botón cancel op
+
+botonCancelarOperacion.onclick = () => {
+  seccionNuevaOperacion.classList.add("is-hidden")
+  seccionBalance.classList.remove("is-hidden")
+}
+
  //////////////////////// FILTROS ////////////////////////
 
 botonOcultarFiltros.onclick = () => {
