@@ -676,22 +676,35 @@ const obtenerMayorMontoPorMes = (elemento) => {
 
 const reportesAHTML = () => {
 
-  const arrayMap = operaciones.map((elemento, index) =>{
-    if( index > 1){
+  const arrayMap = operaciones.map((elemento, index) => {
+    if (index > 1) {
       sinReportes.classList.add("is-hidden")
       reportesResumen.classList.remove("is-hidden")
       reportesTotalCategorias.classList.remove("is-hidden")
       reportesTotalFecha.classList.remove("is-hidden")
-      categoriaMesMayorGanancia.innerHTML = obtenerMayorMontoPorMes("ganancia").nombre
-      categoriaMesMayorGananciaMonto.innerHTML = "+$" + obtenerMayorMontoPorMes("ganancia").ganancia
-      categoriaMesMayorGasto.innerHTML = obtenerMayorMontoPorMes("gasto").nombre
-      categoriaMesMayorGastoMonto.innerHTML = "-$" + obtenerMayorMontoPorMes("gasto").gasto      
+
+      const mayorMesGanancia = obtenerMayorMontoPorMes("ganancia")
+      if (mayorMesGanancia.ganancia > 0) {
+        categoriaMesMayorGanancia.innerHTML = mayorMesGanancia.nombre
+        categoriaMesMayorGananciaMonto.innerHTML = "+$" + mayorMesGanancia.ganancia
+      }
+      else {
+        categoriaMesMayorGanancia.innerHTML = "-"
+      }
+      const mayorMesGasto = obtenerMayorMontoPorMes("gasto")
+      if (mayorMesGasto.gasto > 0) {
+        categoriaMesMayorGasto.innerHTML = mayorMesGasto.nombre
+        categoriaMesMayorGastoMonto.innerHTML = "-$" + mayorMesGasto.gasto
+      }
+      else {
+        categoriaMesMayorGasto.innerHTML = "-"
+      }
     }
 
-    else{      
+    else {
       reportesResumen.classList.add("is-hidden")
       reportesTotalCategorias.classList.add("is-hidden")
-      reportesTotalFecha.classList.add("is-hidden") 
+      reportesTotalFecha.classList.add("is-hidden")
     }
   })
   return arrayMap
