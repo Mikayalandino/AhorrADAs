@@ -662,6 +662,7 @@ operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
     ganancia: sumasMesesGanancia,
     gasto: sumasMesesGasto,
   }
+
 })
 const obtenerMayorMontoPorMes = (elemento) => {
   const ordenado = [...operacionesPorMeses]
