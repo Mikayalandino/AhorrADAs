@@ -44,7 +44,6 @@ const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias");
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
 const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
-const botonAgregarCategoria = document.getElementById("boton-agregar-categoria");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
 const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias");
