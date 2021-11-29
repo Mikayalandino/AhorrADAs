@@ -39,7 +39,7 @@
 &nbsp;
 
 ``` 
-                                                         📝 Contenido
+                                              📝 Contenido
 ```
    
 &nbsp;
@@ -96,7 +96,7 @@
 &nbsp;
 
 ``` 
-                                                             ✔️
+                                                  ✔️
 ```
  
 &nbsp;
