@@ -1,7 +1,9 @@
 //////////////////////// ELEMENTOS DEL DOM ////////////////////////
 
 // AHORRADAS APARTADOS
+// declaran esta variable, pero nunca la usan. no deberia estar si no la vamos a usar. 
 const paginaPrincipal = document.getElementById("pagina-completa");
+// mismo problema aca
 const botonAhorradas = document.getElementById("boton-ahorradas");
 const botonNavAhorradas = document.getElementById("boton-nav-ahorradas");
 const menuHamburguesa = document.getElementById("menu-hamburguesa");
@@ -16,6 +18,7 @@ const seccionNuevaOperacion = document.getElementById("seccion-nueva-operacion")
 const botonNuevaOperacion = document.getElementById("boton-operacion");
 const botonCancelarOperacion = document.getElementById("boton-cancelar-nueva-operacion");
 const botonCancelarEditarOperacion = document.getElementById("boton-cancelar-editar-operacion");
+// mismo problema aca
 const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion");
 const formularioOperaciones = document.querySelector("#formulario-operaciones");
 const inputDescripcionOperaciones = document.querySelector("#input-descripcion");
@@ -28,8 +31,11 @@ const listadoOperaciones = document.getElementById("listado-nuevas-operaciones")
 const seccionListadoOperaciones = document.querySelector(".listado-operaciones");
 const seccionEditarOperaciones = document.getElementById("seccion-editar-operacion")
 const botonEditarOp = document.querySelector("#boton-edit-op")
+// mismo problema aca
 const botonCancelOp = document.querySelector("#boton-cancel-op")
+// mismo problema aca
 const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
+// mismo problema aca
 const botonesEliminarOperaciones = document.querySelectorAll(".delete-op")
 const inputEditDescripcion = document.querySelector("#edit-descripcion")
 const inputEditMonto = document.querySelector("#edit-monto")
@@ -42,12 +48,14 @@ const listadoDeCategorias = document.getElementById("listado-categorias");
 const seccionEditarCategorias = document.getElementById("seccion-editar-categorias");
 const botonCategoriasNavbar = document.getElementById("boton-nav-categorias");
 const inputEditarCategoria = document.querySelector("#input-edit-categorias");
+// mismo problema aca
 const botonDeleteCategoria = document.querySelectorAll(".eliminar-categorias");
 const inputSeccionCategoria = document.querySelector("#input-categoria");
 const botonInputSeccionCategoria = document.querySelector("#boton-agregar-categoria");
 const selectCategoriasDeFiltros = document.querySelector("#select-categorias");
 const botonCancelarEditarCategoria = document.getElementById("boton-cancelar-editar-categoria");
 const botonConfirmarEditarCategoria = document.getElementById("boton-confirmar-editar-categoria");
+// mismo problema aca
 const botonesEliminanCategorias = document.querySelectorAll(".eliminar-categorias");
 //SECCION REPORTES 
 const botonReportesNavbar = document.querySelector("#boton-nav-reportes");
@@ -67,6 +75,7 @@ const reportesResumen = document.querySelector("#reportes-resumen");
 const reportesTotalCategorias = document.querySelector("#reportes-totales-cat");
 const reportesTotalFecha = document.querySelector("#reportes-totales-mes");
 // FILTROS
+// mismo problema aca
 const formularioFiltros = document.getElementById("formulario-filtros");
 const inputDateFiltro = document.querySelector("#input-date");
 const botonOcultarFiltros = document.getElementById("boton-cambiar-filtros");
@@ -95,6 +104,7 @@ botonBalanceNavbar.onclick = () => {
 
 //////////////////////// FUNCIONES GENÉRICAS REUTILIZABLES ////////////////////////
 
+// ahhh, me encanta esta función!
 const modificarClasesBotones = (boton, clase1, clase2) => {
   boton.onclick = () => {
     clase1.classList.add("is-hidden");
@@ -138,6 +148,9 @@ botonCategoriasNavbar.onclick = () => {
 modificarClasesBotones(botonNuevaOperacion, seccionBalance, seccionNuevaOperacion);
 modificarClasesBotones(botonCancelarOperacion, seccionNuevaOperacion, seccionBalance);
 
+// Podriamos pensar una funcion como la de modificarClasesBotones para simplificar
+// mostrar y ocultar secciones. Por ejemplo, que la funcion reciba como parametro la seccion
+// que se quiere mostrar: a esa le quita la clase is-hidden. Al resto se las agrega 
 // BOTON AHORRADAS
 botonNavAhorradas.onclick = () => {
   seccionBalance.classList.remove("is-hidden");
@@ -164,6 +177,14 @@ botonReportesNavbar.onclick = () => {
 
 const subirCategoriasAlLs = (array, clave) => localStorage.getItem(clave) === null && aJSONYSubirAlLStorage(array, clave)
 
+// esto se ejecuta apenas cargo la pagina
+// esta algo perdido acá, es dificil encontrarlo
+// todo lo que se ejecuta apenas carga la web deberia estar en el mismo lugar, 
+// idealmente abajo de todo, asi se encuentra rapido
+
+// Haganse una seccion separada al final del codigo en donde estan todas estas
+// funciones que se ejecutan apenas carga la pagina. Va a hacer mucho mas facil de entender 
+// el flujo de ejecucion
 subirCategoriasAlLs(categorias, "categorias")
 
 const pushCategoria = (arr) => {
@@ -182,7 +203,8 @@ guardarDeLStorage(nuevasCategorias, "categorias")
 categorias = nuevasCategorias
 
 // CATEGORIAS A HTML
-
+// "arrayReduc" es un nombre muy poco claro. ¿Qué hace esta función? Esa es la respuesta 
+// que queremos dar con el nombre. 
 const arrayReduc = (array) => {
 
   const arrayReducido = array.reduce((acc, arr) => {
@@ -212,6 +234,7 @@ const agregarCategoriasAHTML = () => {
 
 //////////////////////// BOTONES EDITAR-ELIMINAR CATEGORÍAS ////////////////////////
 
+// selector repetido adentro de la funcion
 const bttnEliminarCategorias = document.querySelectorAll(".eliminar-categorias")
 
 const eliminarCategoriasBoton = () => {
@@ -221,6 +244,8 @@ const eliminarCategoriasBoton = () => {
 
     bttnEliminarCategorias[i].onclick = () => {
       const idRecortado = bttnEliminarCategorias[i].id.slice(20)
+      // Esta variable se declara pero sin const o let. En ese caso JS la toma como var, que tiene scope global
+      // Esto es un error
       idNumerico = Number(idRecortado)
       const filtradoCategorias = categorias.filter((elemento, index) => {
         return index != idNumerico
@@ -262,6 +287,7 @@ const editarCategoriasBoton = () => {
   for (let i = 0; i < btnEditarCategoria.length; i++) {
     btnEditarCategoria[i].onclick = () => {
       const idRecortado = btnEditarCategoria[i].id.slice(18)
+      // Mismo problema que les comenté más arriba: esto necesita estar declarado como let
       idNumerico = Number(idRecortado)
       inputEditarCategoria.value = categorias[idNumerico]     
       editarCategoriaConInput(idNumerico)
@@ -318,6 +344,13 @@ const estadoDeContenedorDeOperaciones = () => {
 }
 estadoDeContenedorDeOperaciones()
 
+// No entiendo qué hace este código aquí. Recuerden que se ejecuta apenas se carga la pagina. 
+// De acuerdo a la linea 136, apenas carga el codigo declaramos operaciones como un array
+// vacio. Luego, aqui, declaramos nuevasOperaciones como un array vacio. Luego le cambiamos
+// el valor a nuevasOperaciones. Luego le cambiamos el valor a operaciones. No suena muy rebuscado?
+// Por qué no inicial el valor de operaciones con lo que obtenemos de guardarDeLStorage y listo?
+// "Operaciones comienza "
+
 let nuevasOperaciones = []
 guardarDeLStorage(nuevasOperaciones, "operaciones")
 operaciones = nuevasOperaciones
@@ -373,9 +406,18 @@ botonOcultarFiltros.onclick = () => {
 
 // FILTRO POR TIPO Y CATEGORÍA 
 
+// nunca usan este array: noten que lo vuelven a definir dentro del scope de una funcion mas abajo
 let arrayFiltrado = [...operaciones]
 
 const filtrosPorTipoYCategoria = () => {
+  // Esta funcion hace exactamente lo que dice: filtrar por tipo y categoría. No incluye el 
+  // filtro por fecha, ni el sort. 
+  // Lo que implica que si elijo filtrar por una categoria, por ejemplo comida, y luego
+  // quiero ver las operaciones a partir de cierta fecha, no voy a ver las operaciones de comida a 
+  // partir de cierta fecha: voy a ver todas las operaciones de cualquier categoria a partir de cierta fecha 
+  // a pesar de que el filtro de categoria esta seleccionado. 
+  // Ocurre lo mismo si elijo categoria o tipo y luego ordenar A/Z por ejemplo. 
+  // Esta funcion debe incluir *todos* los filtros a la vez. 
   const filtroTipo = filtrosTipo.value
   const filtracionPorTipo = operaciones.filter((operacion) => {
     if (filtroTipo === "todos") {
@@ -521,6 +563,7 @@ const eliminarOperacionesBotones = () => {
 
     botonesEliminarOperaciones[i].onclick = () => {
       const idRecortado = botonesEliminarOperaciones[i].id.slice(12)
+      // Le falta estar declarado como let 
       idNumerico = Number (idRecortado)
       const filtrarOperaciones = operaciones.filter((elemento, index) => {
         return index != idNumerico
@@ -544,6 +587,7 @@ const valorFormEditarOperaciones = (id) => {
 }
 
 const formOperacionesAEditar = (id) => {
+  // esta variable se declara pero nunca se usa
   const botonesEditarOperaciones = document.querySelectorAll(".edit-op")
   seccionEditarOperaciones.classList.remove("is-hidden");
   seccionBalance.classList.add("is-hidden");
@@ -614,6 +658,8 @@ const balanceEnCero = () => {
   balanceTotalesOperables.innerHTML = `$${0}`
 }
 
+// esta funcion debe estar declarada con un const delante, si no se toma como var 
+// estan usando return implicito acá, algo que aún no vimos… Saben bien lo que estan haciendo?
 balanceTotalCondicion = () => localStorage.getItem("operaciones") === "[]" ? balanceEnCero() : balancesActualizados()
 balanceTotalCondicion()
 
@@ -693,6 +739,15 @@ operacionesPorMeses = operacionesPorMeses.map((operacion, mesNumero) => {
 
 })
 const obtenerMayorMontoPorMes = (elemento) => {
+  // muy bien esta funcion! tambien podriamos usar un reduce:
+  // return operaciones.reduce((acc, curr) => {
+  //   if (acc.monto > curr.monto) {
+  //     return acc
+  //   }
+  //   else {
+  //     return curr
+  //   }
+  // })
   const ordenado = [...operacionesPorMeses]
   ordenado.sort((a, b) => {
     return b[elemento] - a[elemento]

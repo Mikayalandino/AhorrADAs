@@ -60,6 +60,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Este div de cierre está de más -->
             </div>
         </nav>
     </header>
@@ -134,6 +135,7 @@
                                         </div>
                                     </div>
                                     <div class="field">
+                                        <!-- El for del label debe equivaler al id del input: en este caso, input-date -->
                                         <label class="label mt-2" for="date">Desde</label>
                                         <div class="control">
                                             <input class="input" id="input-date" type="date">
@@ -173,6 +175,7 @@
                                 <div class="colums">
                                     <div class="column is-offset-3 is-7 mt-5 mb-4">
                                         <div class="image 16x16px mt-6">
+                                            <!-- Acá falta un alt para la imagen -->
                                             <img src="./img/billetera.png">
                                         </div>
                                     </div>
@@ -198,6 +201,8 @@
                         </div>
                     </article>
                 </div>
+
+                <!-- El div con la clase container nunca cierra: deberia cerrar acá -->
         </section>
 
         <!-- Nueva Operación-->
@@ -243,6 +248,7 @@
                                     </div>
                                 </div>
                                 <div class="field">
+                                    <!-- El for del label debe ser igual al id del input -->
                                     <label class="label mt-3" for="date">Fecha</label>
                                     <div class="control">
                                         <input id="input-fecha" class="input" type="date" required>
@@ -256,6 +262,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Mismo problema acá, hay un div que nunca cierra. El tabulado es una buena guia acá -->
         </section>
 
         <!-- Editar Operación-->
@@ -300,6 +307,7 @@
                                     </div>
                                 </div>
                                 <div class="field">
+                                    <!-- El for del label debe ser igual al id del input -->
                                     <label class="label mt-3" for="date">Fecha</label>
                                     <div class="control">
                                         <input id="edit-fecha" class="input" type="date">
@@ -313,6 +321,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Container nunca cierra aqui -->
         </section>
 
         <!-- Sección Categorías -->
@@ -342,6 +351,7 @@
 
         <!-- Seccion editar categorías -->
 
+        <!-- Esta seccion se repite mas abajo!! Ojo! -->
         <section class="section mt-5 is-hidden" id="seccion-editar-categorias">
             <div class="container">
                 <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
@@ -539,6 +549,8 @@
                                     </div>
                                 </div>
                                </div>
+
+                               <!-- Aqui falta el cierre de tres divs, y section cierra dos veces -->
                             </section>
         </section>
 
